@@ -16,3 +16,7 @@ mono_crash.*.json
 
 .idea/
 .vscode/
+
+jre-amd64/
+.gradle/
+build/
