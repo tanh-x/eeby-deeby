@@ -6,3 +6,7 @@ plugins {
 repositories {
 	mavenCentral()
 }
+
+sourceSets.main {
+	java.srcDirs("scripts/java", "scripts/kotlin")
+}
