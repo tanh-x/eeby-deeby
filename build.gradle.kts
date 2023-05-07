@@ -8,5 +8,5 @@ repositories {
 }
 
 sourceSets.main {
-	java.srcDirs("scripts/java", "scripts/kotlin")
+	java.srcDirs("scripts/", "scripts/")
 }
