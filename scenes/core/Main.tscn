@@ -9,6 +9,9 @@
 [node name="PregameMenu" parent="CanvasLayer" instance=ExtResource( 1 )]
 
 [node name="ConfigTextBox" parent="CanvasLayer/PregameMenu/Margin/HBoxContainer/RightContainer" index="0"]
-unique_name_in_owner = false
+text = "{
+	\"stage_name\": \"debug\"
+	\"opponents\": [0]
+}"
 
 [editable path="CanvasLayer/PregameMenu"]

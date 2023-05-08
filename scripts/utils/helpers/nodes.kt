@@ -20,7 +20,7 @@ internal operator fun godot.Object.set(param: String, value: Any?) {
 }
 
 internal fun <T : Node> instantiateScene(path: String, noCache: Boolean = false): T {
-	val sceneResource: PackedScene = load(path)
+	val sceneResource: PackedScene = load(path, noCache = noCache)
 		?: throw FileNotFoundException("Resource path $path doesn't exist")
 	return sceneResource.instance() as T? ?: throw UnknownError("Failed to instantiate $path")
 }

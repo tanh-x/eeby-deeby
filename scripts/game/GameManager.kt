@@ -1,16 +1,13 @@
 package game
 
-import battle.BattleManager
 import battle.BattleParams
 import battle.BattleScene
 import godot.Node
-import godot.TextEdit
 import godot.Viewport
 import godot.annotation.RegisterClass
 import godot.annotation.RegisterFunction
 import godot.global.GD
 import utils.helpers.instantiateScene
-import utils.helpers.node
 
 @RegisterClass
 class GameManager : Node() {
@@ -45,10 +42,10 @@ class GameManager : Node() {
 	@RegisterFunction
 	fun switchSceneSafely(path: String): Unit = callDeferred("switch_scene", path)
 
-
 	@RegisterFunction
 	fun switchScene(path: String) {
 		currentScene.free()
+
 		currentScene = instantiateScene<BattleScene>(path)
 		root.addChild(currentScene)
 		getTree()?.currentScene = currentScene

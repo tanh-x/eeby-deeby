@@ -19,8 +19,8 @@ class PregameMenu : Control() {
 
 	@RegisterFunction
 	override fun _ready() {
-		configTextBox = node("%/ConfigTextBox")
-		startButton = node("%/ConfigTextBox")
+		configTextBox = node("Margin/HBoxContainer/RightContainer/ConfigTextBox")
+		startButton = node("Margin/HBoxContainer/RightContainer/HBoxContainer/StartButton")
 	}
 
 	@RegisterFunction
