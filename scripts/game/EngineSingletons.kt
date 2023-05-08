@@ -1,8 +1,6 @@
+
 import godot.Node
-import godot.core.NodePath
-import godot.global.GD
 import utils.helpers.node
-import java.lang.NullPointerException
 
 internal object EngineSingletons {
 	private val singletons: HashMap<String, Node> = hashMapOf()
