@@ -1,4 +1,4 @@
-package game
+package graphics
 
 import godot.Camera2D
 import godot.Node2D

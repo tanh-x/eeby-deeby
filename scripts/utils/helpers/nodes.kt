@@ -5,6 +5,7 @@ import godot.PackedScene
 import godot.core.NodePath
 import godot.global.GD.load
 import java.io.FileNotFoundException
+import kotlin.reflect.KClass
 
 internal fun <T> Node.node(path: String): T = getNode(NodePath(path)) as T
 	?: throw NullPointerException("Node path $path not found")
@@ -13,8 +14,8 @@ internal operator fun <T> godot.Object.get(property: String): T = this.get(prope
 	?: throw NullPointerException("Property $property doesn't exist on node $this")
 
 internal operator fun godot.Object.set(param: String, value: Any?) {
-//	val clazz: KClass<*> = this.get(param)?.let { it::class } ?: throw NullPointerException("Property $param not found")
-//	if (!clazz.isInstance(value)) throw IllegalArgumentException("$value is incompatible type $clazz of property $param")
+	val clazz: KClass<*> = this.get(param)?.let { it::class } ?: throw NullPointerException("Property $param not found")
+	if (!clazz.isInstance(value)) throw IllegalArgumentException("$value is incompatible type $clazz of property $param")
 	this.set(param, value)
 }
 

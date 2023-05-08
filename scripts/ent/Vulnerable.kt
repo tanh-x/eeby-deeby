@@ -1,0 +1,4 @@
+package ent
+
+interface Vulnerable {
+}
