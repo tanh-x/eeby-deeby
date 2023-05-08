@@ -6,6 +6,7 @@ import godot.Node
 import godot.Viewport
 import godot.annotation.RegisterClass
 import godot.annotation.RegisterFunction
+import godot.extensions.callDeferred
 import godot.global.GD
 import utils.helpers.instantiateScene
 
@@ -14,6 +15,11 @@ class GameManager : Node() {
 	private lateinit var currentScene: Node
 
 	private lateinit var root: Viewport
+
+	/**
+	 * For communication with [BattleScene]
+	 */
+	internal lateinit var battleParams: BattleParams
 
 	@RegisterFunction
 	override fun _ready() {
@@ -34,9 +40,17 @@ class GameManager : Node() {
 	}
 
 	fun switchToBattle(battleParams: BattleParams) {
-		println("switching")
+		this.battleParams = battleParams
 		if (currentScene.name != "Main") throw IllegalStateException("Invalid call source")  // TODO: Dangerous
-		switchSceneSafely("res://scenes/core/BattleScene.tscn")
+		callDeferred("initialize_battle_scene")
+	}
+
+	@RegisterFunction
+	fun initializeBattleScene() {
+		currentScene.free()
+		currentScene = instantiateScene<BattleScene>("res://scenes/core/BattleScene.tscn")
+		root.addChild(currentScene)
+		getTree()?.currentScene = currentScene
 	}
 
 	@RegisterFunction
@@ -45,8 +59,7 @@ class GameManager : Node() {
 	@RegisterFunction
 	fun switchScene(path: String) {
 		currentScene.free()
-
-		currentScene = instantiateScene<BattleScene>(path)
+		currentScene = instantiateScene(path)
 		root.addChild(currentScene)
 		getTree()?.currentScene = currentScene
 	}

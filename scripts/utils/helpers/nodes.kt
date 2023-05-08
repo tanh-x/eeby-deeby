@@ -24,3 +24,9 @@ internal fun <T : Node> instantiateScene(path: String, noCache: Boolean = false)
 		?: throw FileNotFoundException("Resource path $path doesn't exist")
 	return sceneResource.instance() as T? ?: throw UnknownError("Failed to instantiate $path")
 }
+
+internal fun <T : Node> instantiateScene(path: String, noCache: Boolean = false, vararg args: Any?): T {
+	val sceneResource: PackedScene = load(path, noCache = noCache)
+		?: throw FileNotFoundException("Resource path $path doesn't exist")
+	return sceneResource.instance() as T? ?: throw UnknownError("Failed to instantiate $path")
+}
