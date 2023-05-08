@@ -6,7 +6,6 @@ import godot.Node
 import godot.Viewport
 import godot.annotation.RegisterClass
 import godot.annotation.RegisterFunction
-import godot.extensions.callDeferred
 import godot.global.GD
 import utils.helpers.instantiateScene
 

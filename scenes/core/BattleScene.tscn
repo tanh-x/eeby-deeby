@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://scripts/battle/BattleScene.kt" type="Script" id=1]
+[ext_resource path="res://assets/background/natty_gym.png" type="Texture" id=2]
+[ext_resource path="res://scripts/graphics/BattleCamera.kt" type="Script" id=3]
 
 [node name="BattleScene" type="Node2D"]
 script = ExtResource( 1 )
@@ -9,3 +11,15 @@ script = ExtResource( 1 )
 margin_right = 40.0
 margin_bottom = 40.0
 color = Color( 0.996078, 0.247059, 0.247059, 1 )
+
+[node name="Background" type="Node2D" parent="."]
+
+[node name="Sprite" type="Sprite" parent="Background"]
+texture = ExtResource( 2 )
+
+[node name="BattleCamera" type="Camera2D" parent="."]
+scale = Vector2( 1.00347, 1.00399 )
+current = true
+script = ExtResource( 3 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
