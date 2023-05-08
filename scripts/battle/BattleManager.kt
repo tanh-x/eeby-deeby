@@ -4,6 +4,6 @@ import godot.Node
 import godot.annotation.RegisterClass
 
 @RegisterClass
-class Battle: Node() {
+class BattleManager: Node() {
 
 }

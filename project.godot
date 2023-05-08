@@ -10,6 +10,11 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Node",
+"class": "battle_BattleManager",
+"language": "Kotlin",
+"path": "res://scripts/battle/BattleManager.kt"
+}, {
+"base": "Node",
 "class": "game_GameManager",
 "language": "Kotlin",
 "path": "res://scripts/game/GameManager.kt"
@@ -20,6 +25,7 @@ _global_script_classes=[ {
 "path": "res://scripts/graphics/SmoothCamera.kt"
 } ]
 _global_script_class_icons={
+"battle_BattleManager": "",
 "game_GameManager": "",
 "graphics_SmoothCamera": ""
 }
@@ -41,8 +47,8 @@ settings/fps/force_fps=60
 
 [display]
 
-window/size/width=1280
-window/size/height=720
+window/size/width=1920
+window/size/height=1080
 window/size/test_width=1280
 window/size/test_height=720
 window/vsync/use_vsync=false

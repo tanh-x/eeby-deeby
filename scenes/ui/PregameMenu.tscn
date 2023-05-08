@@ -1,8 +1,12 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://assets/theme/PerformanceLabel.tres" type="Theme" id=1]
+[ext_resource path="res://assets/theme/Default.tres" type="Theme" id=1]
 [ext_resource path="res://assets/characters/aj/aj.png" type="Texture" id=2]
 [ext_resource path="res://scenes/ui/CharacterSlot.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/ttf/JetBrainsMono_Medium.ttf" type="DynamicFontData" id=4]
+
+[sub_resource type="DynamicFont" id=1]
+font_data = ExtResource( 4 )
 
 [node name="PregameMenu" type="Control"]
 anchor_right = 1.0
@@ -18,12 +22,10 @@ margin_bottom = -64.0
 theme = ExtResource( 1 )
 
 [node name="ReferenceRect" type="ReferenceRect" parent="Margin"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 border_color = Color( 0.6, 0.611765, 0.615686, 1 )
 border_width = 2.0
-editor_only = false
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Margin"]
 anchor_right = 1.0
@@ -31,14 +33,14 @@ anchor_bottom = 1.0
 custom_constants/separation = 32
 
 [node name="LeftContainer" type="VBoxContainer" parent="Margin/HBoxContainer"]
-margin_right = 448.0
-margin_bottom = 592.0
+margin_right = 704.0
+margin_bottom = 952.0
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Margin/HBoxContainer/LeftContainer"]
-margin_right = 448.0
-margin_bottom = 117.0
+margin_right = 704.0
+margin_bottom = 189.0
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.25
 custom_constants/separation = 8
@@ -47,80 +49,84 @@ alignment = 1
 [node name="CharacterSlot" parent="Margin/HBoxContainer/LeftContainer/HBoxContainer" instance=ExtResource( 3 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 83.0
-margin_bottom = 117.0
+margin_right = 134.0
+margin_bottom = 189.0
 
 [node name="CharacterSlot2" parent="Margin/HBoxContainer/LeftContainer/HBoxContainer" instance=ExtResource( 3 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 91.0
-margin_right = 174.0
-margin_bottom = 117.0
+margin_left = 142.0
+margin_right = 276.0
+margin_bottom = 189.0
 
 [node name="CharacterSlot3" parent="Margin/HBoxContainer/LeftContainer/HBoxContainer" instance=ExtResource( 3 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 182.0
-margin_right = 265.0
-margin_bottom = 117.0
+margin_left = 284.0
+margin_right = 419.0
+margin_bottom = 189.0
 
 [node name="CharacterSlot4" parent="Margin/HBoxContainer/LeftContainer/HBoxContainer" instance=ExtResource( 3 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 273.0
-margin_right = 356.0
-margin_bottom = 117.0
+margin_left = 427.0
+margin_right = 561.0
+margin_bottom = 189.0
 
 [node name="CharacterSlot5" parent="Margin/HBoxContainer/LeftContainer/HBoxContainer" instance=ExtResource( 3 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 364.0
-margin_right = 448.0
-margin_bottom = 117.0
+margin_left = 569.0
+margin_right = 704.0
+margin_bottom = 189.0
 
 [node name="TextureRect" type="TextureRect" parent="Margin/HBoxContainer/LeftContainer"]
-margin_top = 121.0
-margin_right = 448.0
-margin_bottom = 592.0
+margin_top = 193.0
+margin_right = 704.0
+margin_bottom = 952.0
 size_flags_vertical = 3
 texture = ExtResource( 2 )
 expand = true
 stretch_mode = 6
 
 [node name="RightContainer" type="VBoxContainer" parent="Margin/HBoxContainer"]
-margin_left = 480.0
-margin_right = 1152.0
-margin_bottom = 592.0
+margin_left = 736.0
+margin_right = 1792.0
+margin_bottom = 952.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 3.0
 
-[node name="TextEdit" type="TextEdit" parent="Margin/HBoxContainer/RightContainer"]
-margin_right = 672.0
-margin_bottom = 389.0
+[node name="ConfigTextBox" type="TextEdit" parent="Margin/HBoxContainer/RightContainer"]
+unique_name_in_owner = true
+margin_right = 1056.0
+margin_bottom = 629.0
 size_flags_vertical = 3
 size_flags_stretch_ratio = 4.0
+custom_fonts/font = SubResource( 1 )
 
 [node name="Control" type="Control" parent="Margin/HBoxContainer/RightContainer"]
-margin_top = 393.0
-margin_right = 672.0
-margin_bottom = 490.0
+margin_top = 633.0
+margin_right = 1056.0
+margin_bottom = 790.0
 size_flags_vertical = 3
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Margin/HBoxContainer/RightContainer"]
-margin_top = 494.0
-margin_right = 672.0
-margin_bottom = 592.0
+margin_top = 794.0
+margin_right = 1056.0
+margin_bottom = 952.0
 size_flags_vertical = 3
 custom_constants/separation = 64
 
 [node name="Button" type="Button" parent="Margin/HBoxContainer/RightContainer/HBoxContainer"]
-margin_right = 304.0
-margin_bottom = 98.0
+margin_right = 496.0
+margin_bottom = 158.0
 size_flags_horizontal = 3
 
-[node name="Button2" type="Button" parent="Margin/HBoxContainer/RightContainer/HBoxContainer"]
-margin_left = 368.0
-margin_right = 672.0
-margin_bottom = 98.0
+[node name="StartButton" type="Button" parent="Margin/HBoxContainer/RightContainer/HBoxContainer"]
+unique_name_in_owner = true
+margin_left = 560.0
+margin_right = 1056.0
+margin_bottom = 158.0
 size_flags_horizontal = 3
+text = "gaming time"
