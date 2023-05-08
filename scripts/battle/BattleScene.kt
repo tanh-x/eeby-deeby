@@ -1,9 +1,9 @@
 package battle
 
 import EngineSingletons.singleton
-import entity.AbstractEntity
-import entity.AbstractEntityNode
-import entity.Entity
+import battle.entity.AbstractEntity
+import battle.entity.AbstractEntityNode
+import battle.entity.Entity
 import game.GameManager
 import godot.Node2D
 import godot.Timer
@@ -42,6 +42,9 @@ class BattleScene() : Node2D() {
 	}
 
 	private fun generateBattle() {
+		
+
+		// We are complete with the initialization.
 		initialTimer.start()
 	}
 

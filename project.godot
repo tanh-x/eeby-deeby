@@ -9,19 +9,37 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Node2D",
+"class": "battle_BattleScene",
+"language": "Kotlin",
+"path": "res://scripts/battle/BattleScene.kt"
+}, {
 "base": "Node",
 "class": "game_GameManager",
 "language": "Kotlin",
 "path": "res://scripts/game/GameManager.kt"
 }, {
 "base": "Camera2D",
+"class": "graphics_BattleCamera",
+"language": "Kotlin",
+"path": "res://scripts/graphics/BattleCamera.kt"
+}, {
+"base": "Camera2D",
 "class": "graphics_SmoothCamera",
 "language": "Kotlin",
 "path": "res://scripts/graphics/SmoothCamera.kt"
+}, {
+"base": "Control",
+"class": "ui_PregameMenu",
+"language": "Kotlin",
+"path": "res://scripts/ui/PregameMenu.kt"
 } ]
 _global_script_class_icons={
+"battle_BattleScene": "",
 "game_GameManager": "",
-"graphics_SmoothCamera": ""
+"graphics_BattleCamera": "",
+"graphics_SmoothCamera": "",
+"ui_PregameMenu": ""
 }
 
 [application]
