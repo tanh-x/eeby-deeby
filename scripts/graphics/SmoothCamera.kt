@@ -9,15 +9,13 @@ import utils.Constants.PLAYER_REF_PATH
 import utils.helpers.math.lerpTo
 import utils.helpers.node
 
+/**
+ * Custom camera that smoothly interpolates to a target position and zoom
+ */
 @RegisterClass
 open class SmoothCamera : Camera2D() {
 	protected var target: Node2D? = null
 	internal var targetZoom: Vector2 = Vector2.ONE
-
-	@RegisterFunction
-	override fun _ready() {
-
-	}
 
 	@RegisterFunction
 	override fun _physicsProcess(delta: Double) {
@@ -29,7 +27,15 @@ open class SmoothCamera : Camera2D() {
 	}
 
 	companion object {
+		/**
+		 * The interpolation factor for moving to a target position. The difference curve with respect
+		 * to time will decay at most as fast as the function exp(-at), where "a" is the factor.
+		 */
 		const val INTERP_FACTOR: Double = 0.082
+
+		/**
+		 * Same as above, but for zooming.
+		 */
 		const val ZOOM_INTERP_FACTOR: Double = 0.100
 	}
 }

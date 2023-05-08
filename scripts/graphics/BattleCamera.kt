@@ -4,6 +4,9 @@ import godot.annotation.RegisterClass
 import godot.annotation.RegisterFunction
 import godot.core.Vector2
 
+/**
+ * Custom camera for [battle.BattleScene]
+ */
 @RegisterClass
 class BattleCamera: SmoothCamera() {
 

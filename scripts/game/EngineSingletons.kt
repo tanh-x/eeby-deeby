@@ -2,6 +2,9 @@
 import godot.Node
 import utils.helpers.node
 
+/**
+ * Memoization for fetching global singletons.
+ */
 internal object EngineSingletons {
 	private val singletons: HashMap<String, Node> = hashMapOf()
 

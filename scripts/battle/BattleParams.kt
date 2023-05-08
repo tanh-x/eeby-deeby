@@ -3,6 +3,11 @@ package battle
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
+/**
+ * Every parameter needed to completely communicate the initial state of the battle.
+ *
+ * @see [BattleScene.generateBattle]
+ */
 @Serializable
 data class BattleParams(
 	@SerialName("stage_name") val stageName: String,
