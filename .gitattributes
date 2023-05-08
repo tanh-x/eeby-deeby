@@ -1,2 +1,5 @@
 *.gd linguist-language=GDScript
-
+*.gdshader linguist-language=GDScript
+*.tscn linguist-language=GDScript
+*.tres linguist-language=GDScript
+*.godot linguist-language=GDScript
