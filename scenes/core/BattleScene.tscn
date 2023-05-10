@@ -1,8 +1,15 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scripts/battle/BattleScene.kt" type="Script" id=1]
 [ext_resource path="res://assets/background/natty_gym.png" type="Texture" id=2]
 [ext_resource path="res://scenes/camera/BattleCamera.tscn" type="PackedScene" id=3]
+[ext_resource path="res://shader/Vignette.gdshader" type="Shader" id=4]
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = ExtResource( 4 )
+shader_param/center = Vector2( 0.5, 0.5 )
+shader_param/vignette_radius = 0.85
+shader_param/vignette_scalar = 0.5
 
 [node name="BattleScene" type="Node2D"]
 script = ExtResource( 1 )
@@ -15,3 +22,8 @@ texture = ExtResource( 2 )
 [node name="BattleCamera" parent="." instance=ExtResource( 3 )]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+material = SubResource( 2 )
+anchor_right = 1.0
+anchor_bottom = 1.0
