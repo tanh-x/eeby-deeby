@@ -3,7 +3,11 @@ package battle
 import EngineSingletons.singleton
 import battle.entity.AbstractEntity
 import battle.entity.AbstractEntityNode
-import battle.entity.Entity
+import battle.entity.character.AbstractCharacter
+import battle.entity.character.AbstractCharacterNode
+import battle.entity.character.Aj
+import battle.entity.enemy.AbstractEnemy
+import battle.entity.enemy.EnemiesEnum
 import game.GameManager
 import godot.Node2D
 import godot.Timer
@@ -23,13 +27,13 @@ class BattleScene() : Node2D() {
 
 	private lateinit var camera: BattleCamera
 
-	internal lateinit var params: BattleParams
+	internal var params: BattleParams? = null
 
 	private lateinit var manager: BattleManager
 
-	private val characters: HashMap<Entity<out AbstractEntityNode>, Node2D> = hashMapOf()
+	private val characters: LinkedHashSet<AbstractCharacter<out AbstractCharacterNode>> = linkedSetOf()
 
-	private val opponents: HashMap<AbstractEntity<out AbstractEntityNode>, Node2D> = hashMapOf()
+	private val opponents: LinkedHashSet<AbstractEntity<out AbstractEntityNode>> = linkedSetOf()
 
 	private val initialTimer: Timer = Timer().apply {
 		connect("timeout", this@BattleScene, "play_starting_animation")
@@ -53,13 +57,30 @@ class BattleScene() : Node2D() {
 	 * [playStartingAnimation] after a certain amount of time upon completion
 	 */
 	private fun generateBattle() {
+		// Constant to shadow the instance variable to prevent any trouble from multiple threads
+		val params: BattleParams = this.params ?: throw NullPointerException("Battle parameters was not instantiated")
+
+		params.characters.toSet().forEach { characterID: Int ->
+			val character: AbstractCharacter<*> = when (characterID) {
+				0    -> Aj()
+				else -> throw IllegalArgumentException("Illegal argument: $characterID does not match with any character")
+			}
+			characters.add(character)
+			addChild(character.node)
+		}
+
+//		params.opponents.forEach { enemyID: Int ->
+//			val opponent: AbstractEnemy<*> = EnemiesEnum[enemyID].instantiate()
+//		}
 
 		// We are complete with the initialization.
-		manager = BattleManager(
+		manager = BattleManager()
 
-		)
 		// Start the timer for the animation
 		initialTimer.start()
+
+		// Reset the battle parameters back to null to prevent it from interfering with other things
+		this.params = null
 	}
 
 	/**

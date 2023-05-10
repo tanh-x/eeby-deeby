@@ -14,6 +14,8 @@ data class BattleParams(
 	@SerialName("characters") val characters: Array<Int>,
 	@SerialName("opponents") val opponents: Array<Int>,
 ) {
+	fun isValid(): Boolean = true
+
 	override fun equals(other: Any?): Boolean {
 		if (this === other) return true
 		if (javaClass != other?.javaClass) return false

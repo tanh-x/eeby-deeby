@@ -1,8 +1,9 @@
 package battle.entity.character
 
-import battle.entity.Entity
+import battle.entity.AbstractEntity
+import battle.entity.Vulnerable
 
 
-sealed class AbstractCharacter<N: AbstractCharacterNode>: Entity<N>() {
+abstract class AbstractCharacter<N: AbstractCharacterNode>: AbstractEntity<N>(), Vulnerable {
 
 }
