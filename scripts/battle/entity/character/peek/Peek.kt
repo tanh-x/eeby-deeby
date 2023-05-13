@@ -1,4 +1,6 @@
-package battle.entity.character
+package battle.entity.character.peek
+
+import battle.entity.character.AbstractCharacter
 
 class Peek : AbstractCharacter<PeekNode>(PeekNode()) {
 	override var maxHealth: Int = 62

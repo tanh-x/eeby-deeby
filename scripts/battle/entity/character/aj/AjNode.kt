@@ -1,10 +1,8 @@
-package battle.entity.character
+package battle.entity.character.aj
 
-import godot.Sprite
-import godot.Texture
+import battle.entity.character.AbstractCharacterNode
 import godot.annotation.RegisterClass
 import godot.annotation.RegisterFunction
-import godot.global.GD
 
 @RegisterClass
 class AjNode : AbstractCharacterNode(entityName = "AJ") {

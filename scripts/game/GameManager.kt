@@ -107,13 +107,14 @@ class GameManager : Node() {
 		 */
 		@JvmStatic
 		private fun initialPrint() {
+			GD.print("\n\n\n\n")
 			val status: String = if (godot.OS.isDebugBuild()) " [-] DEVELOPMENT" else " [-] PRODUCTION    "
 			GD.print(
-				"┌───────────────────┬────────────────────┐\n" +
-				"│ EEBY DEEBY v0.0   │${status.padEnd(20)}│\n" +
-				"├───────────────────┴────────────────────┤\n" +
-				"│ Global game manager instantiated       │\n" +
-				"└────────────────────────────────────────┘"
+				"┌──────────────────────┬────────────────────┐\n" +
+				"│ EEBY DEEBY v0.00.05  │ build 2023-05-13   │\n" +
+				"├──────────────────────┴────────────────────┤\n" +
+				"│ ${status.padEnd(20)}                      │\n" +
+				"└───────────────────────────────────────────┘"
 			)
 		}
 	}

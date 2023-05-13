@@ -1,4 +1,6 @@
-package battle.entity.character
+package battle.entity.character.aj
+
+import battle.entity.character.AbstractCharacter
 
 /**
  *

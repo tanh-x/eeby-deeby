@@ -1,5 +1,6 @@
-package battle.entity.character
+package battle.entity.character.dogman
 
+import battle.entity.character.AbstractCharacterNode
 import godot.annotation.RegisterClass
 import godot.annotation.RegisterFunction
 

@@ -20,6 +20,7 @@ abstract class AbstractEntityNode() : Node2D() {
 	override fun _ready() {
 		name = entityName
 		sprite = createSprite().apply {
+			name = "Sprite"
 			scale = DEFAULT_SCALE
 			this@AbstractEntityNode.addChild(this)
 		}

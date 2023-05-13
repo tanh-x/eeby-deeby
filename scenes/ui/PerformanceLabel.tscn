@@ -22,5 +22,6 @@ margin_right = 40.0
 margin_bottom = 11.0
 grow_vertical = 2
 theme = ExtResource( 2 )
+custom_colors/font_color = Color( 0.933333, 0.933333, 0.933333, 0.501961 )
 custom_fonts/font = SubResource( 1 )
 script = ExtResource( 1 )

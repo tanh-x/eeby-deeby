@@ -23,6 +23,6 @@ class BattleCamera: SmoothCamera() {
 	}
 
 	internal fun playStartingAnimation() {
-		targetZoom = Vector2(0.8, 0.8)
+		targetZoom = Vector2(0.85, 0.85)
 	}
 }

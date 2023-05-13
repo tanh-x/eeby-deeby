@@ -1,4 +1,6 @@
-package battle.entity.character
+package battle.entity.character.jad
+
+import battle.entity.character.AbstractCharacter
 
 class Jad : AbstractCharacter<JadNode>(JadNode()) {
 	override var maxHealth: Int = 40

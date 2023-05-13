@@ -1,4 +1,6 @@
-package battle.entity.character
+package battle.entity.character.kew
+
+import battle.entity.character.AbstractCharacter
 
 class Kew : AbstractCharacter<KewNode>(KewNode()) {
 	override var maxHealth: Int = 33

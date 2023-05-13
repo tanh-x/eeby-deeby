@@ -14,11 +14,6 @@ _global_script_classes=[ {
 "language": "Kotlin",
 "path": "res://scripts/battle/BattleScene.kt"
 }, {
-"base": "Node2D",
-"class": "battle_entity_character_AjNode",
-"language": "Kotlin",
-"path": "res://scripts/battle/entity/character/AjNode.kt"
-}, {
 "base": "Node",
 "class": "game_GameManager",
 "language": "Kotlin",
@@ -41,7 +36,6 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "battle_BattleScene": "",
-"battle_entity_character_AjNode": "",
 "game_GameManager": "",
 "graphics_BattleCamera": "",
 "graphics_SmoothCamera": "",

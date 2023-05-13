@@ -5,11 +5,11 @@ import battle.entity.AbstractEntity
 import battle.entity.AbstractEntityNode
 import battle.entity.character.AbstractCharacter
 import battle.entity.character.AbstractCharacterNode
-import battle.entity.character.Aj
-import battle.entity.character.Dogman
-import battle.entity.character.Jad
-import battle.entity.character.Peek
-import battle.entity.character.Wiewior
+import battle.entity.character.aj.Aj
+import battle.entity.character.dogman.Dogman
+import battle.entity.character.jad.Jad
+import battle.entity.character.peek.Peek
+import battle.entity.character.wiewior.Wiewior
 import game.GameManager
 import godot.Node2D
 import godot.Timer
@@ -112,17 +112,21 @@ class BattleScene() : Node2D() {
 		initialTimer.queueFree()
 	}
 
+	private fun distributePlacement(ents: List<AbstractEntityNode>) {
+
+	}
+
 
 	companion object {
 		@JvmStatic
-		val DEFAULT_CHARACTER_SCALE: Vector2 = Vector2(0.2455, 0.2455)
+		val DEFAULT_CHARACTER_SCALE: Vector2 = Vector2(0.26, 0.26)
 
 		@JvmStatic
 		val characterPlacements: Array<Array<Vector2>> = arrayOf(
 			/* For 0 characters:*/ arrayOf(),
 			/* 1: */ arrayOf(Vector2(-0.22, 0)),
-			/* 2: */ arrayOf(Vector2(-0.26, 0.1), Vector2(-0.18, -0.1)),
-			/* 3: */ arrayOf(Vector2(-0.195, 0.13), Vector2(-0.27, 0.0), Vector2(-0.17, -0.12))
+			/* 2: */ arrayOf(Vector2(-0.18, -0.1), Vector2(-0.26, 0.1)),
+			/* 3: */ arrayOf(Vector2(-0.17, -0.12), Vector2(-0.27, 0.0), Vector2(-0.195, 0.13))
 		)
 	}
 }

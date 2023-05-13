@@ -1,4 +1,6 @@
-package battle.entity.character
+package battle.entity.character.wiewior
+
+import battle.entity.character.AbstractCharacter
 
 class Wiewior: AbstractCharacter<WiewiorNode>(WiewiorNode()) {
 	override var maxHealth: Int = 40

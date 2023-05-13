@@ -1,5 +1,6 @@
-package battle.entity.character
+package battle.entity.character.wiewior
 
+import battle.entity.character.AbstractCharacterNode
 import godot.annotation.RegisterClass
 import godot.annotation.RegisterFunction
 
