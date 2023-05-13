@@ -6,7 +6,6 @@
 [node name="PrimaryUI" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-rect_pivot_offset = Vector2( -112, -24 )
 script = ExtResource( 2 )
 
 [node name="EscapeButton" type="Button" parent="."]

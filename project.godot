@@ -33,13 +33,19 @@ _global_script_classes=[ {
 "class": "ui_PregameMenu",
 "language": "Kotlin",
 "path": "res://scripts/ui/PregameMenu.kt"
+}, {
+"base": "Control",
+"class": "ui_PrimaryUI",
+"language": "Kotlin",
+"path": "res://scripts/ui/PrimaryUI.kt"
 } ]
 _global_script_class_icons={
 "battle_BattleScene": "",
 "game_GameManager": "",
 "graphics_BattleCamera": "",
 "graphics_SmoothCamera": "",
-"ui_PregameMenu": ""
+"ui_PregameMenu": "",
+"ui_PrimaryUI": ""
 }
 
 [application]

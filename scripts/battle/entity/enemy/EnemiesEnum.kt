@@ -17,7 +17,7 @@ internal enum class EnemiesEnum(
 		override fun instantiate(): AbstractEnemy<out AbstractEnemyNode> = instantiateBasicEnemy()
 		override fun applyOnInit(ent: AbstractEnemy<out AbstractEnemyNode>) {
 			ent as BasicEnemy
-			ent.node.sprite.position = Vector2(0, -100)  // Grapeman texture needs to be offset by this amount
+			ent.node.sprite.offset = Vector2(0, -200)  // Grapeman texture needs to be offset by this amount
 		}
 	};
 

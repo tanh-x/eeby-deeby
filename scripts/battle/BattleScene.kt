@@ -93,6 +93,9 @@ class BattleScene : Node2D() {
 					sprite.scale = DEFAULT_CHARACTER_SCALE
 					position = characterPlacements[characterIDs.size][idx].toScreenSpace()
 				}
+
+				// Supply the overlay with information needed
+				character.node.overlay.attachCharacter(character)
 			})
 		}
 
@@ -148,9 +151,9 @@ class BattleScene : Node2D() {
 		@JvmStatic
 		val characterPlacements: Array<Array<Vector2>> = arrayOf(
 			/* For 0 characters:*/ arrayOf(),
-			/* 1: */ arrayOf(Vector2(-0.22, 0)),
-			/* 2: */ arrayOf(Vector2(-0.18, -0.1), Vector2(-0.26, 0.1)),
-			/* 3: */ arrayOf(Vector2(-0.17, -0.12), Vector2(-0.27, 0.0), Vector2(-0.195, 0.13))
+			/* 1: */ arrayOf(Vector2(-0.22, 0.2)),
+			/* 2: */ arrayOf(Vector2(-0.18, 0.1), Vector2(-0.26, 0.3)),
+			/* 3: */ arrayOf(Vector2(-0.17, 0.08), Vector2(-0.27, 0.2), Vector2(-0.195, 0.33))
 		)
 	}
 }
