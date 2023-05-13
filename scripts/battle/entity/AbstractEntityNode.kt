@@ -19,7 +19,7 @@ abstract class AbstractEntityNode : Node2D() {
 			this@AbstractEntityNode.addChild(this)
 		}
 
-		println("AbstractEntNode")
+		println("AbstractEntNode $entityName ready")
 	}
 
 	protected abstract fun createSprite(): Sprite

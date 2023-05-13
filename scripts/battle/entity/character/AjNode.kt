@@ -13,10 +13,6 @@ class AjNode : AbstractCharacterNode() {
 	@RegisterFunction
 	override fun _ready() {
 		super._ready()
-		GD.print("Instantiated new Aj at ./$name")
-	}
-
-	override fun createSprite(): Sprite = Sprite().apply {
-		texture = GD.load("res://assets/characters/aj/aj.png")
+		println("AjNode ready")
 	}
 }
