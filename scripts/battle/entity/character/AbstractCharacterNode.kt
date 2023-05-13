@@ -27,7 +27,7 @@ abstract class AbstractCharacterNode : AbstractEntityNode {
 
 	override fun createSprite(): Sprite = Sprite().apply {
 		val identifier: String = entityName.lowercase()
-		val assetDir: String = "$CHARACTER_ASSET_DIR$identifier"
+		val assetDir: String = CHARACTER_ASSET_DIR + identifier
 		texture = GD.load("$assetDir/default.png")
 	}
 }

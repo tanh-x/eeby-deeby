@@ -1,10 +1,10 @@
 package battle.entity
 
 internal interface Vulnerable {
-	var maxHealth: Int
-	var health: Int
-	var maxShield: Int
-	var shield: Int
+	var maxHealth: Double
+	var health: Double
+	var maxShield: Double
+	var shield: Double
 
 	fun sustainDamage(damage: Double): Double
 }

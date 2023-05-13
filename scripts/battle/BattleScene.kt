@@ -10,6 +10,8 @@ import battle.entity.character.dogman.Dogman
 import battle.entity.character.jad.Jad
 import battle.entity.character.peek.Peek
 import battle.entity.character.wiewior.Wiewior
+import battle.entity.enemy.AbstractEnemy
+import battle.entity.enemy.EnemiesEnum
 import game.GameManager
 import godot.Node2D
 import godot.Timer
@@ -26,7 +28,7 @@ import utils.helpers.toScreenSpace
  * the solver engine later on)
  */
 @RegisterClass
-class BattleScene() : Node2D() {
+class BattleScene : Node2D() {
 	private lateinit var gameManager: GameManager
 
 	private lateinit var camera: BattleCamera
@@ -44,6 +46,10 @@ class BattleScene() : Node2D() {
 		waitTime = 1.0
 		oneShot = true
 		autostart = false
+	}
+
+	init {
+		System.gc()
 	}
 
 	@RegisterFunction
@@ -74,17 +80,24 @@ class BattleScene() : Node2D() {
 				9 -> Dogman()
 				else -> throw IllegalArgumentException("Illegal argument: $characterID does not match with any character")
 			}.also { character: AbstractCharacter<*> ->
-				addChild(character.node)  // Add the child to the scene immediately so _ready() is called
-				with(character.node.sprite) {
-					scale = DEFAULT_CHARACTER_SCALE
+				// Add the child to the scene immediately so _ready() is called before we adjust the node
+				addChild(character.node)
+
+				// Modify the scale and position of the character and distribute them to equally spaced positions
+				with(character.node) {
+					sprite.scale = DEFAULT_CHARACTER_SCALE
 					position = characterPlacements[characterIDs.size][idx].toScreenSpace()
 				}
 			})
 		}
 
-//		params.opponents.forEach { enemyID: Int ->
-//			val opponent: AbstractEnemy<*> = EnemiesEnum[enemyID].instantiate()
-//		}
+		params.opponents.forEach { enemyID: Int ->
+			opponents.add(EnemiesEnum[enemyID].instantiate().also { enemy: AbstractEnemy<*> ->
+				addChild(enemy.node)
+			})
+		}
+
+		distributePlacement(opponents.map { it.node })
 
 		// Add everything as a child of the scene.
 		// Comment out cause already done this in @forEachIndexed/@AbstractCharacter<*>.also lambda above
@@ -95,11 +108,11 @@ class BattleScene() : Node2D() {
 		// We are complete with the initialization.
 		manager = BattleManager()
 
-		// Start the timer for the animation
-		initialTimer.start()
-
 		// Reset the battle parameters back to null to prevent it from interfering with other things
 		this.params = null
+
+		// Start the timer for the animation
+		initialTimer.start()
 	}
 
 	/**
@@ -113,7 +126,9 @@ class BattleScene() : Node2D() {
 	}
 
 	private fun distributePlacement(ents: List<AbstractEntityNode>) {
-
+		ents.forEach {
+			it.position = Vector2(0.21, 0).toScreenSpace()
+		}
 	}
 
 
