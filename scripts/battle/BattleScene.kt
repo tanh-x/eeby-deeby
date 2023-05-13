@@ -11,6 +11,7 @@ import battle.entity.character.jad.Jad
 import battle.entity.character.peek.Peek
 import battle.entity.character.wiewior.Wiewior
 import battle.entity.enemy.AbstractEnemy
+import battle.entity.enemy.AbstractEnemyNode
 import battle.entity.enemy.EnemiesEnum
 import game.GameManager
 import godot.Node2D
@@ -19,6 +20,7 @@ import godot.annotation.RegisterClass
 import godot.annotation.RegisterFunction
 import godot.core.Vector2
 import graphics.BattleCamera
+import ui.PrimaryUI
 import utils.helpers.node
 import utils.helpers.toScreenSpace
 
@@ -32,6 +34,8 @@ class BattleScene : Node2D() {
 	private lateinit var gameManager: GameManager
 
 	private lateinit var camera: BattleCamera
+
+	private lateinit var ui: PrimaryUI
 
 	internal var params: BattleParams? = null
 
@@ -54,9 +58,10 @@ class BattleScene : Node2D() {
 
 	@RegisterFunction
 	override fun _ready() {
-		this.gameManager = singleton("GameManager")
-		this.params = gameManager.battleParams
-		this.camera = node("BattleCamera")
+		gameManager = singleton("GameManager")
+		params = gameManager.battleParams
+		camera = node("BattleCamera")
+		ui = node("CanvasLayer/PrimaryUI")
 		addChild(initialTimer)
 
 		generateBattle()
@@ -79,7 +84,7 @@ class BattleScene : Node2D() {
 				7 -> Wiewior()
 				9 -> Dogman()
 				else -> throw IllegalArgumentException("Illegal argument: $characterID does not match with any character")
-			}.also { character: AbstractCharacter<*> ->
+			}.also { character: AbstractCharacter<out AbstractCharacterNode> ->
 				// Add the child to the scene immediately so _ready() is called before we adjust the node
 				addChild(character.node)
 
@@ -92,9 +97,13 @@ class BattleScene : Node2D() {
 		}
 
 		params.opponents.forEach { enemyID: Int ->
-			opponents.add(EnemiesEnum[enemyID].instantiate().also { enemy: AbstractEnemy<*> ->
-				addChild(enemy.node)
-			})
+			val e: EnemiesEnum = EnemiesEnum[enemyID]
+			val ent: AbstractEnemy<out AbstractEnemyNode> = e.instantiate()
+			opponents.add(ent)
+			addChild(ent.node)
+
+			// Does whatever operation needed after initialization
+			e.applyOnInit(ent)
 		}
 
 		distributePlacement(opponents.map { it.node })

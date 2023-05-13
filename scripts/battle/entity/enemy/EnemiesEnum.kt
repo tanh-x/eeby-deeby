@@ -1,5 +1,7 @@
 package battle.entity.enemy
 
+import godot.core.Vector2
+
 internal enum class EnemiesEnum(
 	val enemyName: String,
 	val health: Double,
@@ -13,9 +15,14 @@ internal enum class EnemiesEnum(
 		shield = 2.0
 	) {
 		override fun instantiate(): AbstractEnemy<out AbstractEnemyNode> = instantiateBasicEnemy()
+		override fun applyOnInit(ent: AbstractEnemy<out AbstractEnemyNode>) {
+			ent as BasicEnemy
+			ent.node.sprite.position = Vector2(0, -100)  // Grapeman texture needs to be offset by this amount
+		}
 	};
 
 	internal abstract fun instantiate(): AbstractEnemy<out AbstractEnemyNode>
+	internal open fun applyOnInit(ent: AbstractEnemy<out AbstractEnemyNode>) {}
 
 	protected fun instantiateBasicEnemy(): BasicEnemy = BasicEnemy(enemyName, health, shield)
 

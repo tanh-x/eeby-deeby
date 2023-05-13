@@ -5,7 +5,6 @@
 [ext_resource path="res://assets/ttf/JetBrainsMono_Medium.ttf" type="DynamicFontData" id=3]
 
 [sub_resource type="DynamicFont" id=1]
-size = 18
 use_mipmaps = true
 use_filter = true
 extra_spacing_bottom = -7

@@ -55,7 +55,7 @@ PerformanceLabel="*res://scenes/ui/PerformanceLabel.tscn"
 
 [debug]
 
-settings/fps/force_fps=60
+settings/fps/force_fps=144
 
 [display]
 
