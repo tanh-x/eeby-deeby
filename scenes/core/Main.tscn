@@ -11,7 +11,7 @@
 [node name="ConfigTextBox" parent="CanvasLayer/PregameMenu/Margin/HBoxContainer/RightContainer" index="0"]
 text = "{
 	\"stage_name\": \"debug\",
-	\"characters\": [0],
+	\"characters\": [1],
 	\"opponents\": [0]
 }"
 

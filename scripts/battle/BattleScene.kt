@@ -6,6 +6,10 @@ import battle.entity.AbstractEntityNode
 import battle.entity.character.AbstractCharacter
 import battle.entity.character.AbstractCharacterNode
 import battle.entity.character.Aj
+import battle.entity.character.Dogman
+import battle.entity.character.Jad
+import battle.entity.character.Peek
+import battle.entity.character.Wiewior
 import game.GameManager
 import godot.Node2D
 import godot.Timer
@@ -63,7 +67,11 @@ class BattleScene() : Node2D() {
 		val characterIDs: Collection<Int> = params.characters.toList()
 		characterIDs.forEachIndexed { idx: Int, characterID: Int ->
 			characters.add(when (characterID) {
-				0 -> Aj()
+				1 -> Aj()
+				3 -> Peek()
+				5 -> Jad()
+				7 -> Wiewior()
+				9 -> Dogman()
 				else -> throw IllegalArgumentException("Illegal argument: $characterID does not match with any character")
 			}.also { character: AbstractCharacter<*> ->
 				addChild(character.node)  // Add the child to the scene immediately so _ready() is called

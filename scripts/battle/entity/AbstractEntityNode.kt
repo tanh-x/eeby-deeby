@@ -7,9 +7,14 @@ import godot.annotation.RegisterFunction
 import godot.core.Vector2
 
 @RegisterClass
-abstract class AbstractEntityNode : Node2D() {
-	internal abstract val entityName: String
+abstract class AbstractEntityNode() : Node2D() {
+	internal var entityName: String = "default"
+		private set
 	internal lateinit var sprite: Sprite
+
+	protected constructor(entityName: String) : this() {
+		this.entityName = entityName
+	}
 
 	@RegisterFunction
 	override fun _ready() {
@@ -18,8 +23,6 @@ abstract class AbstractEntityNode : Node2D() {
 			scale = DEFAULT_SCALE
 			this@AbstractEntityNode.addChild(this)
 		}
-
-		println("AbstractEntNode $entityName ready")
 	}
 
 	protected abstract fun createSprite(): Sprite

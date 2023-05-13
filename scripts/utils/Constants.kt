@@ -1,5 +1,5 @@
 package utils
 
 object Constants {
-	const val PLAYER_REF_PATH: String = "/root/World/YSort/Player"
+	const val CHARACTER_ASSET_DIR: String = "res://assets/characters/"
 }

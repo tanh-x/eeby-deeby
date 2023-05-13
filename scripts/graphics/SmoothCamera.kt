@@ -5,9 +5,6 @@ import godot.Node2D
 import godot.annotation.RegisterClass
 import godot.annotation.RegisterFunction
 import godot.core.Vector2
-import utils.Constants.PLAYER_REF_PATH
-import utils.helpers.math.lerpTo
-import utils.helpers.node
 
 /**
  * Custom camera that smoothly interpolates to a target position and zoom

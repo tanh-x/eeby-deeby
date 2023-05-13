@@ -4,14 +4,11 @@ package battle.entity.character
  *
  *
  */
-class Aj() : AbstractCharacter<AjNode>() {
-	internal var maxHealth: Int = 32
-	internal var health: Int = 32
-
-	init {
-		super.node = AjNode()
-	}
-
+class Aj : AbstractCharacter<AjNode>(AjNode()) {
+	override var maxHealth: Int = 20
+	override var health: Int = 20
+	override var maxShield: Int = 62
+	override var shield: Int = 62
 
 	override fun sustainDamage(damage: Double): Double {
 		TODO("Not yet implemented")
