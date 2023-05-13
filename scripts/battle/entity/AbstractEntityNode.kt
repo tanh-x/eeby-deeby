@@ -10,6 +10,7 @@ import godot.core.Vector2
 abstract class AbstractEntityNode() : Node2D() {
 	internal var entityName: String = "default"
 		private set
+
 	internal lateinit var sprite: Sprite
 
 	protected constructor(entityName: String) : this() {

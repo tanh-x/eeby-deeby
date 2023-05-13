@@ -38,6 +38,6 @@ abstract class AbstractCharacterNode : AbstractEntityNode {
 		val assetDir: String = CHARACTER_ASSET_DIR + identifier
 		texture = GD.load("$assetDir/default.png")
 
-		offset = Vector2(0, -700.0)  // Place the feet of the sprite at the node's center
+		offset = Vector2(0, -650.0)  // Place the feet of the sprite at the node's center
 	}
 }

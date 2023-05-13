@@ -1,8 +1,8 @@
 package battle
 
 import EngineSingletons.singleton
-import battle.entity.AbstractEntity
 import battle.entity.AbstractEntityNode
+import battle.entity.Vulnerable
 import battle.entity.character.AbstractCharacter
 import battle.entity.character.AbstractCharacterNode
 import battle.entity.character.aj.Aj
@@ -43,7 +43,7 @@ class BattleScene : Node2D() {
 
 	private val characters: LinkedHashSet<AbstractCharacter<out AbstractCharacterNode>> = linkedSetOf()
 
-	private val opponents: LinkedHashSet<AbstractEntity<out AbstractEntityNode>> = linkedSetOf()
+	private val opponents: LinkedHashSet<AbstractEnemy<out AbstractEnemyNode>> = linkedSetOf()
 
 	private val initialTimer: Timer = Timer().apply {
 		connect("timeout", this@BattleScene, "play_starting_animation")
@@ -93,9 +93,6 @@ class BattleScene : Node2D() {
 					sprite.scale = DEFAULT_CHARACTER_SCALE
 					position = characterPlacements[characterIDs.size][idx].toScreenSpace()
 				}
-
-				// Supply the overlay with information needed
-				character.node.overlay.attachCharacter(character)
 			})
 		}
 
@@ -115,6 +112,9 @@ class BattleScene : Node2D() {
 		// Comment out cause already done this in @forEachIndexed/@AbstractCharacter<*>.also lambda above
 //		characters.forEach { ent -> addChild(ent.node) }
 //		opponents.forEach { ent -> addChild(ent.node) }
+
+		characters.forEach { ent -> ent.node.overlay.attachEntity(ent) }
+		opponents.forEach { ent -> if (ent is Vulnerable) ent.node.overlay.attachEntity(ent) }
 
 
 		// We are complete with the initialization.
@@ -138,15 +138,15 @@ class BattleScene : Node2D() {
 	}
 
 	private fun distributePlacement(ents: List<AbstractEntityNode>) {
-		ents.forEach {
-			it.position = Vector2(0.21, 0).toScreenSpace()
+		ents.forEach { n: AbstractEntityNode ->
+			n.position = Vector2(0.21, 0.2).toScreenSpace()
 		}
 	}
 
 
 	companion object {
 		@JvmStatic
-		val DEFAULT_CHARACTER_SCALE: Vector2 = Vector2(0.26, 0.26)
+		val DEFAULT_CHARACTER_SCALE: Vector2 = Vector2(0.285, 0.285)
 
 		@JvmStatic
 		val characterPlacements: Array<Array<Vector2>> = arrayOf(

@@ -5,10 +5,14 @@ import godot.Sprite
 import godot.annotation.RegisterClass
 import godot.annotation.RegisterFunction
 import godot.global.GD
+import ui.battle.EntityOverlay
 import utils.Constants.ENEMY_ASSET_DIR
+import utils.helpers.instantiateScene
 
 @RegisterClass
 abstract class AbstractEnemyNode : AbstractEntityNode {
+	internal lateinit var overlay: EntityOverlay
+
 	/**
 	 * Default constructor for Godot-Kotlin/
 	 */
@@ -23,7 +27,9 @@ abstract class AbstractEnemyNode : AbstractEntityNode {
 	@RegisterFunction
 	override fun _ready() {
 		super._ready()
-		println("AbstractEnemyNode ready")
+
+		overlay = instantiateScene("res://scenes/ui/EntityOverlay.tscn")
+		addChild(overlay)
 	}
 
 	override fun createSprite(): Sprite = Sprite().apply {

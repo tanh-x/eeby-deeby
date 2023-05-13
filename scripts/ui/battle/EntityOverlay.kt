@@ -1,27 +1,31 @@
 package ui.battle
 
 import battle.entity.AbstractEntity
-import battle.entity.AbstractEntityNode
 import godot.Control
 import godot.annotation.RegisterClass
 import godot.annotation.RegisterFunction
+import utils.helpers.node
 
 @RegisterClass
-class EntityOverlay : Control() {
-	private lateinit var entity: AbstractEntity<out AbstractEntityNode>
+open class EntityOverlay : Control() {
+	internal lateinit var entity: AbstractEntity<*>
+
+	private lateinit var healthbar: Healthbar
 
 	@RegisterFunction
 	override fun _ready() {
+		healthbar = node<Healthbar>("Healthbar").apply {
 
+		}
 	}
 
-	internal fun attachEntity(entity: AbstractEntity<out AbstractEntityNode>) {
+	internal open fun attachEntity(entity: AbstractEntity<*>) {
 		this.entity = entity
-		updateOverlay()
+		updateAll()
 	}
 
 	@RegisterFunction
-	fun updateOverlay() {
+	open fun updateAll() {
 
 	}
 }

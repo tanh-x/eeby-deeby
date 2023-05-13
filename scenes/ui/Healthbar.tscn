@@ -1,0 +1,24 @@
+[gd_scene format=2]
+
+[node name="Healthbar" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_left = -32.0
+margin_top = -5.0
+margin_right = 32.0
+margin_bottom = 5.0
+color = Color( 0.109804, 0.0352941, 0.0352941, 1 )
+
+[node name="ReferenceRect" type="ReferenceRect" parent="ColorRect"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+border_color = Color( 0.403922, 0.196078, 0.196078, 0.470588 )
+border_width = 1.5
+editor_only = false
+
+[node name="ColorRect" type="ColorRect" parent="ColorRect"]
+anchor_bottom = 1.0
+margin_right = 64.0
+color = Color( 0.972549, 0.247059, 0.247059, 1 )
