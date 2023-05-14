@@ -27,11 +27,11 @@ class Healthbar : Control() {
 	@RegisterFunction
 	fun rerender() {
 		println(entity.health)
+
 		getTree()?.createTween()!!.tweenProperty(
 			_object = healthRect,
 			property = NodePath("margin_right"),
 			finalVal = entity.health / entity.maxHealth * healthBarWidth,
-
 			duration = 1.0
 		)?.let { tweener: PropertyTweener ->
 			tweener.setTrans(Tween.TransitionType.TRANS_CUBIC.id)

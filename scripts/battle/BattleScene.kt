@@ -8,6 +8,7 @@ import battle.entity.character.AbstractCharacterNode
 import battle.entity.character.aj.Aj
 import battle.entity.character.dogman.Dogman
 import battle.entity.character.jad.Jad
+import battle.entity.character.kew.Kew
 import battle.entity.character.peek.Peek
 import battle.entity.character.wiewior.Wiewior
 import battle.entity.enemy.AbstractEnemy
@@ -81,6 +82,7 @@ class BattleScene : Node2D() {
 				1 -> Aj()
 				3 -> Peek()
 				5 -> Jad()
+				6 -> Kew()
 				7 -> Wiewior()
 				9 -> Dogman()
 				else -> throw IllegalArgumentException("Illegal argument: $characterID does not match with any character")
