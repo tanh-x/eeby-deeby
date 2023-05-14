@@ -14,6 +14,6 @@ class Wiewior : AbstractCharacter<WiewiorNode>(WiewiorNode()) {
 	}
 
 	override fun sustainDamage(damage: Double): Double {
-		TODO("Not yet implemented")
+		return super.sustainDamage(damage)
 	}
 }

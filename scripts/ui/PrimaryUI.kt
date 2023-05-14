@@ -43,6 +43,6 @@ class PrimaryUI : Control() {
 
 	@RegisterFunction
 	fun onFn3Pressed() {
-
+		battleScene.characters.first().sustainDamage(Random.nextDouble() * 5)
 	}
 }

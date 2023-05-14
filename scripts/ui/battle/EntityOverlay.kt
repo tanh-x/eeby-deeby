@@ -5,7 +5,9 @@ import battle.entity.Vulnerable
 import godot.Control
 import godot.annotation.RegisterClass
 import godot.annotation.RegisterFunction
+import utils.helpers.instantiateScene
 import utils.helpers.node
+import kotlin.random.Random
 
 @RegisterClass
 open class EntityOverlay : Control() {
@@ -34,5 +36,12 @@ open class EntityOverlay : Control() {
 	@RegisterFunction
 	open fun updateAll() {
 		if (entIsVulnerable) healthbar.rerender()
+	}
+
+	internal fun spawnDamageNumber(number: Double) {
+		val label: DamageNumber = instantiateScene("res://scenes/ui/DamageNumber.tscn")
+		label.text = number.toInt().toString()
+		label.rectRotation = Random.nextDouble() * 60 - 30
+		addChild(label)
 	}
 }

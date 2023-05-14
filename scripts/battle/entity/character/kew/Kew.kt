@@ -14,6 +14,6 @@ class Kew : AbstractCharacter<KewNode>(KewNode()) {
 	}
 
 	override fun sustainDamage(damage: Double): Double {
-		TODO("Not yet implemented")
+		return super.sustainDamage(damage)
 	}
 }

@@ -39,7 +39,7 @@ class Healthbar : Control() {
 
 	@RegisterFunction
 	fun rerender() {
-		val newWidth: Double = entity.health / entity.maxHealth * healthBarWidth
+		val newWidth: Double = (entity.health / entity.maxHealth * healthBarWidth).coerceAtLeast(0.0)
 
 		healthRect["margin_right"] = newWidth
 

@@ -48,7 +48,7 @@ class BattleScene : Node2D() {
 
 	private val initialTimer: Timer = Timer().apply {
 		connect("timeout", this@BattleScene, "play_starting_animation")
-		waitTime = 1.0
+		waitTime = 0.5
 		oneShot = true
 		autostart = false
 	}
