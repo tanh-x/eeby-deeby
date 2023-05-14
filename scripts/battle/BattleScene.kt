@@ -41,9 +41,9 @@ class BattleScene : Node2D() {
 
 	private lateinit var manager: BattleManager
 
-	private val characters: LinkedHashSet<AbstractCharacter<out AbstractCharacterNode>> = linkedSetOf()
+	internal val characters: LinkedHashSet<AbstractCharacter<out AbstractCharacterNode>> = linkedSetOf()
 
-	private val opponents: LinkedHashSet<AbstractEnemy<out AbstractEnemyNode>> = linkedSetOf()
+	internal val enemies: LinkedHashSet<AbstractEnemy<out AbstractEnemyNode>> = linkedSetOf()
 
 	private val initialTimer: Timer = Timer().apply {
 		connect("timeout", this@BattleScene, "play_starting_animation")
@@ -99,14 +99,14 @@ class BattleScene : Node2D() {
 		params.opponents.forEach { enemyID: Int ->
 			val e: EnemiesEnum = EnemiesEnum[enemyID]
 			val ent: AbstractEnemy<out AbstractEnemyNode> = e.instantiate()
-			opponents.add(ent)
+			enemies.add(ent)
 			addChild(ent.node)
 
 			// Does whatever operation needed after initialization
 			e.applyOnInit(ent)
 		}
 
-		distributePlacement(opponents.map { it.node })
+		distributePlacement(enemies.map { it.node })
 
 		// Add everything as a child of the scene.
 		// Comment out cause already done this in @forEachIndexed/@AbstractCharacter<*>.also lambda above
@@ -114,7 +114,7 @@ class BattleScene : Node2D() {
 //		opponents.forEach { ent -> addChild(ent.node) }
 
 		characters.forEach { ent -> ent.node.overlay.attachEntity(ent) }
-		opponents.forEach { ent -> if (ent is Vulnerable) ent.node.overlay.attachEntity(ent) }
+		enemies.forEach { ent -> if (ent is Vulnerable) ent.node.overlay.attachEntity(ent) }
 
 
 		// We are complete with the initialization.

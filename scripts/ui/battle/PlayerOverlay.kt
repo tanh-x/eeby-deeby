@@ -12,7 +12,7 @@ class PlayerOverlay : EntityOverlay() {
 
 	@RegisterFunction
 	override fun _ready() {
-
+		super._ready()
 	}
 
 	override fun attachEntity(entity: AbstractEntity<*>) {

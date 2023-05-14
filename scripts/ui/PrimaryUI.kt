@@ -21,11 +21,28 @@ class PrimaryUI : Control() {
 	override fun _ready() {
 		gameManager = singleton("GameManager")
 		battleScene = node("/root/BattleScene")
-		escapeButton = node("EscapeButton")
+		escapeButton = node("VBoxContainer/EscapeButton")
 	}
 
 	@RegisterFunction
 	fun onEscapeButtonPressed() {
 		gameManager.switchSceneSafely("res://scenes/core/Main.tscn")
+	}
+
+	@RegisterFunction
+	fun onFn1Pressed() {
+		println("Fn 1")
+		battleScene.characters.forEach { it.node.overlay.updateAll() }
+		battleScene.enemies.forEach { it.node.overlay.updateAll() }
+	}
+
+	@RegisterFunction
+	fun onFn2Pressed() {
+		println("Fn 2")
+	}
+
+	@RegisterFunction
+	fun onFn3Pressed() {
+		println("Fn 3")
 	}
 }
