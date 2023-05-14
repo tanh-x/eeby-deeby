@@ -4,7 +4,6 @@ import godot.Node
 import godot.PackedScene
 import godot.ResourceLoader
 import godot.core.NodePath
-import godot.global.GD.load
 import java.io.FileNotFoundException
 import kotlin.reflect.KClass
 
@@ -50,7 +49,7 @@ internal operator fun <T> godot.Object.get(property: String): T = this.get(prope
  */
 internal operator fun godot.Object.set(param: String, value: Any?) {
 	val clazz: KClass<*> = this.get(param)?.let { it::class } ?: throw NullPointerException("Property $param not found")
-	if (!clazz.isInstance(value)) throw IllegalArgumentException("$value is incompatible type $clazz of property $param")
+	if (!clazz.isInstance(value)) throw IllegalArgumentException("$value is incompatible to type $clazz of property $param")
 	this.set(param, value)
 }
 

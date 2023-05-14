@@ -9,7 +9,7 @@ import battle.entity.character.AbstractCharacter
 class Aj : AbstractCharacter<AjNode>(AjNode()) {
 	init {
 		maxHealth = 20.0
-		health = 16.0
+		health = 20.0
 		maxShield = 62.0
 		shield = 62.0
 	}
