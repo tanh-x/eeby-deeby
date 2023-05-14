@@ -40,6 +40,7 @@ class GameManager : Node() {
 		root = getTree()!!.root ?: throw UnknownError("Root not found")
 
 		currentScene = root.getChild(root.getChildCount() - 1) ?: throw NullPointerException("Root has no children")
+
 		initialPrint()
 	}
 
@@ -75,9 +76,7 @@ class GameManager : Node() {
 	@RegisterFunction
 	fun initializeBattleScene() {
 		currentScene.free()
-		currentScene = instantiateScene<BattleScene>("res://scenes/core/BattleScene.tscn")
-		root.addChild(currentScene)
-		getTree()?.currentScene = currentScene
+		updateCurrentScene(instantiateScene<BattleScene>("res://scenes/core/BattleScene.tscn"))
 	}
 
 	/**
@@ -96,9 +95,13 @@ class GameManager : Node() {
 	@RegisterFunction
 	fun switchScene(path: String) {
 		currentScene.free()
-		currentScene = instantiateScene(path)
-		root.addChild(currentScene)
-		getTree()?.currentScene = currentScene
+		updateCurrentScene(instantiateScene(path))
+	}
+
+	private fun updateCurrentScene(newScene: Node) {
+		currentScene = newScene
+		root.addChild(newScene)
+		getTree()?.currentScene = newScene
 	}
 
 	companion object {

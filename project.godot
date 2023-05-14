@@ -38,6 +38,21 @@ _global_script_classes=[ {
 "class": "ui_PrimaryUI",
 "language": "Kotlin",
 "path": "res://scripts/ui/PrimaryUI.kt"
+}, {
+"base": "Control",
+"class": "ui_battle_EntityOverlay",
+"language": "Kotlin",
+"path": "res://scripts/ui/battle/EntityOverlay.kt"
+}, {
+"base": "Control",
+"class": "ui_battle_Healthbar",
+"language": "Kotlin",
+"path": "res://scripts/ui/battle/Healthbar.kt"
+}, {
+"base": "Control",
+"class": "ui_battle_PlayerOverlay",
+"language": "Kotlin",
+"path": "res://scripts/ui/battle/PlayerOverlay.kt"
 } ]
 _global_script_class_icons={
 "battle_BattleScene": "",
@@ -45,7 +60,10 @@ _global_script_class_icons={
 "graphics_BattleCamera": "",
 "graphics_SmoothCamera": "",
 "ui_PregameMenu": "",
-"ui_PrimaryUI": ""
+"ui_PrimaryUI": "",
+"ui_battle_EntityOverlay": "",
+"ui_battle_Healthbar": "",
+"ui_battle_PlayerOverlay": ""
 }
 
 [application]

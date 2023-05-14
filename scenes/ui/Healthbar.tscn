@@ -23,7 +23,6 @@ editor_only = false
 
 [node name="HealthColorRect" type="ColorRect" parent="BarColorRect"]
 anchor_bottom = 1.0
-margin_right = 64.0
 color = Color( 0.972549, 0.247059, 0.247059, 1 )
 
 [node name="Tween" type="Tween" parent="BarColorRect/HealthColorRect"]

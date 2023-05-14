@@ -8,6 +8,7 @@ import godot.Control
 import godot.annotation.RegisterClass
 import godot.annotation.RegisterFunction
 import utils.helpers.node
+import kotlin.random.Random
 
 @RegisterClass
 class PrimaryUI : Control() {
@@ -31,18 +32,17 @@ class PrimaryUI : Control() {
 
 	@RegisterFunction
 	fun onFn1Pressed() {
-		println("Fn 1")
 		battleScene.characters.forEach { it.node.overlay.updateAll() }
 		battleScene.enemies.forEach { it.node.overlay.updateAll() }
 	}
 
 	@RegisterFunction
 	fun onFn2Pressed() {
-		println("Fn 2")
+		battleScene.characters.forEach { it.health = Random.nextDouble() * it.maxHealth }
 	}
 
 	@RegisterFunction
 	fun onFn3Pressed() {
-		println("Fn 3")
+
 	}
 }

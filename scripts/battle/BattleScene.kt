@@ -35,7 +35,7 @@ class BattleScene : Node2D() {
 
 	private lateinit var camera: BattleCamera
 
-	private lateinit var ui: PrimaryUI
+	internal lateinit var ui: PrimaryUI
 
 	internal var params: BattleParams? = null
 

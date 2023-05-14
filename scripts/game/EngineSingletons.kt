@@ -10,5 +10,4 @@ internal object EngineSingletons {
 
 	@Suppress("UNCHECKED_CAST")
 	internal fun <T : Node> Node.singleton(path: String): T = singletons.getOrPut(path) { node("/root/$path") } as T
-
 }

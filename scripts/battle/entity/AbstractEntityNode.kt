@@ -17,6 +17,8 @@ abstract class AbstractEntityNode() : Node2D() {
 		this.entityName = entityName
 	}
 
+	internal var isReady: Boolean = false
+
 	@RegisterFunction
 	override fun _ready() {
 		name = entityName
@@ -24,6 +26,8 @@ abstract class AbstractEntityNode() : Node2D() {
 			name = "Sprite"
 			this@AbstractEntityNode.addChild(this)
 		}
+
+		isReady = true
 	}
 
 	protected abstract fun createSprite(): Sprite
