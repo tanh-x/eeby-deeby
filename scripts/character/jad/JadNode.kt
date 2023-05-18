@@ -11,5 +11,4 @@ class JadNode : AbstractCharacterNode(entityName = "Jad") {
 		super._ready()
 		println("JadNode ready")
 	}
-
 }
