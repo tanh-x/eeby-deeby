@@ -1,18 +1,12 @@
 package character.peek
 
 import character.AbstractCharacter
+import character.MemberCharacter
 
 /**
  *
  */
-class Peek : AbstractCharacter<PeekNode>(PeekNode()) {
-	init {
-		maxHealth = 62.0
-		health = 62.0
-		maxShield = 17.0
-		shield = 17.0
-	}
-
+class Peek : AbstractCharacter<PeekNode>(MemberCharacter.PEEK, PeekNode()) {
 	override fun sustainDamage(damage: Double): Double {
 		return super.sustainDamage(damage)
 	}

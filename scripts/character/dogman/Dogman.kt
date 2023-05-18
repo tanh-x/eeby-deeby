@@ -1,18 +1,12 @@
 package character.dogman
 
 import character.AbstractCharacter
+import character.MemberCharacter
 
 /**
  *
  */
-class Dogman : AbstractCharacter<DogmanNode>(DogmanNode()) {
-	init {
-		maxHealth = 36.0
-		health = 36.0
-		maxShield = 15.0
-		shield = 15.0
-	}
-
+class Dogman : AbstractCharacter<DogmanNode>(MemberCharacter.DOGMAN, DogmanNode()) {
 	override fun sustainDamage(damage: Double): Double {
 		return super.sustainDamage(damage)
 	}

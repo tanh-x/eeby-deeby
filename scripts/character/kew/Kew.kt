@@ -1,19 +1,13 @@
 package character.kew
 
 import character.AbstractCharacter
+import character.MemberCharacter
 
 /**
  *
  */
-class Kew : AbstractCharacter<KewNode>(KewNode()) {
-	init {
-		maxHealth = 33.0
-		health = 33.0
-		maxShield = 17.0
-		shield = 17.0
-	}
-
-	override fun sustainDamage(damage: Double): Double {
-		return super.sustainDamage(damage)
-	}
+class Kew : AbstractCharacter<KewNode>(MemberCharacter.KEW, KewNode()) {
+    override fun sustainDamage(damage: Double): Double {
+        return super.sustainDamage(damage)
+    }
 }

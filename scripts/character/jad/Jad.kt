@@ -1,18 +1,12 @@
 package character.jad
 
 import character.AbstractCharacter
+import character.MemberCharacter
 
 /**
  *
  */
-class Jad : AbstractCharacter<JadNode>(JadNode()) {
-	init {
-		maxHealth = 40.0
-		health = 40.0
-		maxShield = 12.0
-		shield = 12.0
-	}
-
+class Jad : AbstractCharacter<JadNode>(MemberCharacter.JAD, JadNode()) {
 	override fun sustainDamage(damage: Double): Double {
 		return super.sustainDamage(damage)
 	}
