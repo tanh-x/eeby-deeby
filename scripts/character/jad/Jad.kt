@@ -1,6 +1,6 @@
-package battle.entity.character.jad
+package character.jad
 
-import battle.entity.character.AbstractCharacter
+import character.AbstractCharacter
 
 /**
  *

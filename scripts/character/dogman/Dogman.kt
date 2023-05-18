@@ -1,6 +1,6 @@
-package battle.entity.character.dogman
+package character.dogman
 
-import battle.entity.character.AbstractCharacter
+import character.AbstractCharacter
 
 /**
  *

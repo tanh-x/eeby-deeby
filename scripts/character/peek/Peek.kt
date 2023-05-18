@@ -1,6 +1,6 @@
-package battle.entity.character.peek
+package character.peek
 
-import battle.entity.character.AbstractCharacter
+import character.AbstractCharacter
 
 /**
  *

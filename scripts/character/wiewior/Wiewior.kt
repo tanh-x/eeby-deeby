@@ -1,6 +1,6 @@
-package battle.entity.character.wiewior
+package character.wiewior
 
-import battle.entity.character.AbstractCharacter
+import character.AbstractCharacter
 
 /**
  *

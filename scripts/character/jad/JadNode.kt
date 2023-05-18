@@ -1,6 +1,6 @@
-package battle.entity.character.jad
+package character.jad
 
-import battle.entity.character.AbstractCharacterNode
+import character.AbstractCharacterNode
 import godot.annotation.RegisterClass
 import godot.annotation.RegisterFunction
 

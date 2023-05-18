@@ -1,4 +1,4 @@
-package battle.entity.character
+package character
 
 import battle.entity.AbstractEntityNode
 import godot.Sprite

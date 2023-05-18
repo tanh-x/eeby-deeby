@@ -3,17 +3,12 @@ package battle
 import EngineSingletons.singleton
 import battle.entity.AbstractEntityNode
 import battle.entity.Vulnerable
-import battle.entity.character.AbstractCharacter
-import battle.entity.character.AbstractCharacterNode
-import battle.entity.character.aj.Aj
-import battle.entity.character.dogman.Dogman
-import battle.entity.character.jad.Jad
-import battle.entity.character.kew.Kew
-import battle.entity.character.peek.Peek
-import battle.entity.character.wiewior.Wiewior
 import battle.entity.enemy.AbstractEnemy
 import battle.entity.enemy.AbstractEnemyNode
 import battle.entity.enemy.EnemiesEnum
+import character.AbstractCharacter
+import character.AbstractCharacterNode
+import character.MemberCharacter
 import game.GameManager
 import godot.Node2D
 import godot.Timer
@@ -78,15 +73,7 @@ class BattleScene : Node2D() {
 
 		val characterIDs: Collection<Int> = params.characters.toList()
 		characterIDs.forEachIndexed { idx: Int, characterID: Int ->
-			characters.add(when (characterID) {
-				1 -> Aj()
-				3 -> Peek()
-				5 -> Jad()
-				6 -> Kew()
-				7 -> Wiewior()
-				9 -> Dogman()
-				else -> throw IllegalArgumentException("Illegal argument: $characterID does not match with any character")
-			}.also { character: AbstractCharacter<out AbstractCharacterNode> ->
+			MemberCharacter[characterID].instantiate().also { character: AbstractCharacter<out AbstractCharacterNode> ->
 				// Add the child to the scene immediately so _ready() is called before we adjust the node
 				addChild(character.node)
 
@@ -95,7 +82,17 @@ class BattleScene : Node2D() {
 					sprite.scale = DEFAULT_CHARACTER_SCALE
 					position = characterPlacements[characterIDs.size][idx].toScreenSpace()
 				}
-			})
+			}
+//			characters.add(when (characterID) {
+//				1 -> Aj()
+//				3 -> Peek()
+//				5 -> Jad()
+//				6 -> Kew()
+//				7 -> Wiewior()
+//				9 -> Dogman()
+//				else ->
+////				else -> throw IllegalArgumentException("Illegal argument: $characterID does not match with any character")
+//			}
 		}
 
 		params.opponents.forEach { enemyID: Int ->

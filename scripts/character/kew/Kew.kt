@@ -1,6 +1,6 @@
-package battle.entity.character.kew
+package character.kew
 
-import battle.entity.character.AbstractCharacter
+import character.AbstractCharacter
 
 /**
  *
