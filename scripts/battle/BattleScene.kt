@@ -27,132 +27,155 @@ import utils.helpers.toScreenSpace
  */
 @RegisterClass
 class BattleScene : Node2D() {
-	private lateinit var gameManager: GameManager
+    /**
+     * The [GameManager] global singleton
+     */
+    private lateinit var gameManager: GameManager
 
-	private lateinit var camera: BattleCamera
+    /**
+     * The main camera that runs during a battle
+     */
+    private lateinit var camera: BattleCamera
 
-	internal lateinit var ui: PrimaryUI
+    /**
+     * The UI that is displayed during the battle by default.
+     */
+    internal lateinit var ui: PrimaryUI
 
-	internal var params: BattleParams? = null
+    /**
+     * The parameter to generate the battle to.
+     * TODO: Refactor this into constructor call and pass as argument to [generateBattle].
+     */
+    internal var params: BattleParams? = null
 
-	private lateinit var manager: BattleManager
+    /**
+     * The [BattleManager] object that handles the core gameplay functionality of the battle.
+     */
+    private lateinit var manager: BattleManager
 
-	internal val characters: LinkedHashSet<AbstractCharacter<out AbstractCharacterNode>> = linkedSetOf()
+    /**
+     * The set of characters present during battle.
+     */
+    internal val characters: LinkedHashSet<AbstractCharacter<out AbstractCharacterNode>> = linkedSetOf()
 
-	internal val enemies: LinkedHashSet<AbstractEnemy<out AbstractEnemyNode>> = linkedSetOf()
+    /**
+     * The set of enemies present during battle.
+     */
+    internal val enemies: LinkedHashSet<AbstractEnemy<out AbstractEnemyNode>> = linkedSetOf()
 
-	private val initialTimer: Timer = Timer().apply {
-		connect("timeout", this@BattleScene, "play_starting_animation")
-		waitTime = 0.5
-		oneShot = true
-		autostart = false
-	}
+    /**
+     * The timer that runs when the generation is complete
+     */
+    private val initialTimer: Timer = Timer().apply {
+        connect("timeout", this@BattleScene, "play_starting_animation")
+        waitTime = 0.5
+        oneShot = true
+        autostart = false
+    }
 
-	init {
-		System.gc()
-	}
+    init {
+        System.gc()  // Suggests a garbage collection when we first instantiate a new battle.
+    }
 
-	@RegisterFunction
-	override fun _ready() {
-		gameManager = singleton("GameManager")
-		params = gameManager.battleParams
-		camera = node("BattleCamera")
-		ui = node("CanvasLayer/PrimaryUI")
-		addChild(initialTimer)
+    @RegisterFunction
+    override fun _ready() {
+        // Loads instance variables that holds a godot Node
+        gameManager = singleton("GameManager")
+        params = gameManager.battleParams
+        camera = node("BattleCamera")
+        ui = node("CanvasLayer/PrimaryUI")
 
-		generateBattle()
-	}
+        // Adds the timer into the scene. The timer will be started when the generateBattle() call completes
+        addChild(initialTimer)
 
-	/**
-	 * Generates the battle based on the [params] instance variable. Will start a timer to call
-	 * [playStartingAnimation] after a certain amount of time upon completion
-	 */
-	private fun generateBattle() {
-		// Constant to shadow the instance variable to prevent any trouble from multiple threads
-		val params: BattleParams = this.params ?: throw NullPointerException("Battle parameters was not instantiated")
+        // Starts the initialization
+        generateBattle()
 
-		val characterIDs: Collection<Int> = params.characters.toList()
-		characterIDs.forEachIndexed { idx: Int, characterID: Int ->
-			MemberCharacter[characterID].instantiate().also { character: AbstractCharacter<out AbstractCharacterNode> ->
-				// Add the child to the scene immediately so _ready() is called before we adjust the node
-				addChild(character.node)
+        // We are complete with the initialization.
+        manager = BattleManager()
 
-				// Modify the scale and position of the character and distribute them to equally spaced positions
-				with(character.node) {
-					sprite.scale = DEFAULT_CHARACTER_SCALE
-					position = characterPlacements[characterIDs.size][idx].toScreenSpace()
-				}
-			}
-//			characters.add(when (characterID) {
-//				1 -> Aj()
-//				3 -> Peek()
-//				5 -> Jad()
-//				6 -> Kew()
-//				7 -> Wiewior()
-//				9 -> Dogman()
-//				else ->
-////				else -> throw IllegalArgumentException("Illegal argument: $characterID does not match with any character")
-//			}
-		}
+        // Reset the battle parameters back to null to prevent it from interfering with other things
+        this.params = null
 
-		params.opponents.forEach { enemyID: Int ->
-			val e: EnemiesEnum = EnemiesEnum[enemyID]
-			val ent: AbstractEnemy<out AbstractEnemyNode> = e.instantiate()
-			enemies.add(ent)
-			addChild(ent.node)
+        // Start the timer for the animation
+        initialTimer.start()
+    }
 
-			// Does whatever operation needed after initialization
-			e.applyOnInit(ent)
-		}
+    /**
+     * Generates the battle based on the [params] instance variable. Will start a timer to call
+     * [playStartingAnimation] after a certain amount of time upon completion
+     */
+    private fun generateBattle() {
+        // Constant to shadow the instance variable to prevent any trouble from multiple threads
+        val params: BattleParams = this.params ?: throw NullPointerException("Battle parameters was not instantiated")
 
-		distributePlacement(enemies.map { it.node })
+        val characterIDs: Collection<Int> = params.characters.toList()
+        characterIDs.forEachIndexed { idx: Int, characterID: Int ->
+            MemberCharacter[characterID].instantiate().also { character: AbstractCharacter<out AbstractCharacterNode> ->
+                // Add the child to the scene immediately so _ready() is called before we adjust the node
+                addChild(character.node)
 
-		// Add everything as a child of the scene.
-		// Comment out cause already done this in @forEachIndexed/@AbstractCharacter<*>.also lambda above
+                // Modify the scale and position of the character and distribute them to equally spaced positions
+                with(character.node) {
+                    sprite.scale = DEFAULT_CHARACTER_SCALE
+                    position = characterPlacements[characterIDs.size][idx].toScreenSpace()
+                }
+            }
+        }
+
+        params.opponents.forEach { enemyID: Int ->
+            val e: EnemiesEnum = EnemiesEnum[enemyID]
+            val ent: AbstractEnemy<out AbstractEnemyNode> = e.instantiate()
+            enemies.add(ent)
+            addChild(ent.node)
+
+            // Does whatever operation needed after initialization
+            e.applyOnInit(ent)
+        }
+
+        // Takes out the list of nodes from the set of enemies, then distribute them.
+        distributePlacement(enemies.map { it.node })
+
+        // Add everything as a child of the scene.
+        // Comment out cause already done this in @forEachIndexed/@AbstractCharacter<*>.also lambda above
 //		characters.forEach { ent -> addChild(ent.node) }
 //		opponents.forEach { ent -> addChild(ent.node) }
 
-		characters.forEach { ent -> ent.node.overlay.attachEntity(ent) }
-		enemies.forEach { ent -> if (ent is Vulnerable) ent.node.overlay.attachEntity(ent) }
+        characters.forEach { ent -> ent.node.overlay.attachEntity(ent) }
+        enemies.forEach { ent -> if (ent is Vulnerable) ent.node.overlay.attachEntity(ent) }
+    }
 
+    /**
+     * Carries out everything needed to indicate the start of the battle.
+     * Also enables controls to the player.
+     */
+    @RegisterFunction
+    fun playStartingAnimation() {
+        camera.playStartingAnimation()
+        initialTimer.queueFree()
+    }
 
-		// We are complete with the initialization.
-		manager = BattleManager()
+    /**
+     * Automatically distributes the placement of enemies so that they are evenly spaced.
+     *
+     * @param ents The list of entities to distribute.
+     */
+    private fun distributePlacement(ents: List<AbstractEntityNode>) {
+        ents.forEach { n: AbstractEntityNode ->
+            n.position = Vector2(0.21, 0.2).toScreenSpace()
+        }
+    }
 
-		// Reset the battle parameters back to null to prevent it from interfering with other things
-		this.params = null
+    companion object {
+        @JvmStatic
+        val DEFAULT_CHARACTER_SCALE: Vector2 = Vector2(0.285, 0.285)
 
-		// Start the timer for the animation
-		initialTimer.start()
-	}
-
-	/**
-	 * Carries out everything needed to indicate the start of the battle.
-	 * Also enables controls to the player.
-	 */
-	@RegisterFunction
-	fun playStartingAnimation() {
-		camera.playStartingAnimation()
-		initialTimer.queueFree()
-	}
-
-	private fun distributePlacement(ents: List<AbstractEntityNode>) {
-		ents.forEach { n: AbstractEntityNode ->
-			n.position = Vector2(0.21, 0.2).toScreenSpace()
-		}
-	}
-
-
-	companion object {
-		@JvmStatic
-		val DEFAULT_CHARACTER_SCALE: Vector2 = Vector2(0.285, 0.285)
-
-		@JvmStatic
-		val characterPlacements: Array<Array<Vector2>> = arrayOf(
-			/* For 0 characters:*/ arrayOf(),
-			/* 1: */ arrayOf(Vector2(-0.22, 0.2)),
-			/* 2: */ arrayOf(Vector2(-0.18, 0.1), Vector2(-0.26, 0.3)),
-			/* 3: */ arrayOf(Vector2(-0.17, 0.08), Vector2(-0.27, 0.2), Vector2(-0.195, 0.33))
-		)
-	}
+        @JvmStatic
+        val characterPlacements: Array<Array<Vector2>> = arrayOf(
+            /* For 0 characters:*/ arrayOf(),
+            /* 1: */ arrayOf(Vector2(-0.22, 0.2)),
+            /* 2: */ arrayOf(Vector2(-0.18, 0.1), Vector2(-0.26, 0.3)),
+            /* 3: */ arrayOf(Vector2(-0.17, 0.08), Vector2(-0.27, 0.2), Vector2(-0.195, 0.33))
+        )
+    }
 }
