@@ -14,3 +14,9 @@ margin_top = 32.0
 margin_bottom = 32.0
 
 [node name="Sprite" type="Sprite" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_left = -20.0
+margin_top = -40.0
+margin_right = 20.0
+color = Color( 0.905882, 0.996078, 1, 0.137255 )
