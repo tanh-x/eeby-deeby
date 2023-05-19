@@ -6,6 +6,7 @@ import character.dogman.Dogman
 import character.jad.Jad
 import character.kew.Kew
 import character.maves.Maves
+import character.ober.Ober
 import character.peek.Peek
 import character.wiewior.Wiewior
 import kotlin.Double.Companion.NaN
@@ -52,7 +53,7 @@ internal enum class MemberCharacter(
 
     /**
      * How often can psiju actions be used. Can be used to facilitate other character's psiju actions.
-     * Average is around 15-20, high variance.
+     * Average is around 15-20, high variance. Inversely proportional to potency
      */
     internal var psijuEfficacy: Double = NaN,
 
@@ -163,7 +164,17 @@ internal enum class MemberCharacter(
     },
 
     // Ordinal 8
-    CH8,
+    OBER(
+        label = "Ober",
+        health = 35.0,
+        shield = 35.0,
+        power = 9.0,
+        agility = 4.0,
+        psijuPotency = 167.0,
+        psijuEfficacy = 18.0,
+    ) {
+        override fun instantiate() = Ober()
+    },
 
     // Ordinal 9
     DOGMAN(

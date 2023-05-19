@@ -39,6 +39,11 @@ _global_script_classes=[ {
 "language": "Kotlin",
 "path": "res://scripts/ui/PrimaryUI.kt"
 }, {
+"base": "Label",
+"class": "ui_battle_DamageNumber",
+"language": "Kotlin",
+"path": "res://scripts/ui/battle/DamageNumber.kt"
+}, {
 "base": "Control",
 "class": "ui_battle_EntityOverlay",
 "language": "Kotlin",
@@ -61,6 +66,7 @@ _global_script_class_icons={
 "graphics_SmoothCamera": "",
 "ui_PregameMenu": "",
 "ui_PrimaryUI": "",
+"ui_battle_DamageNumber": "",
 "ui_battle_EntityOverlay": "",
 "ui_battle_Healthbar": "",
 "ui_battle_PlayerOverlay": ""

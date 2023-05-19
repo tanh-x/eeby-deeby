@@ -92,7 +92,7 @@ class BattleScene : Node2D() {
         generateBattle()
 
         // We are complete with the initialization.
-        manager = BattleManager()
+        manager = BattleManager(this, characters, enemies)
 
         // Reset the battle parameters back to null to prevent it from interfering with other things
         this.params = null
@@ -111,17 +111,20 @@ class BattleScene : Node2D() {
 
         val characterIDs: Collection<Int> = params.characters.toList()
         characterIDs.forEachIndexed { idx: Int, characterID: Int ->
-            MemberCharacter[characterID].instantiate().also { character: AbstractCharacter<out AbstractCharacterNode> ->
-                // Add the child to the scene immediately so _ready() is called before we adjust the node
-                addChild(character.node)
+            val newCharacter: AbstractCharacter<out AbstractCharacterNode> = MemberCharacter[characterID].instantiate()
 
-                // Modify the scale and position of the character and distribute them to equally spaced positions
-                with(character.node) {
-                    sprite.scale = DEFAULT_CHARACTER_SCALE
-                    position = characterPlacements[characterIDs.size][idx].toScreenSpace()
-                }
+            // Add the child to the scene immediately so _ready() is called before we adjust the node
+            addChild(newCharacter.node)
+
+            // Modify the scale and position of the character and distribute them to equally spaced positions
+            with(newCharacter.node) {
+                sprite.scale = DEFAULT_CHARACTER_SCALE
+                position = characterPlacements[characterIDs.size][idx].toScreenSpace()
             }
+
+            characters.add(newCharacter)
         }
+
 
         params.opponents.forEach { enemyID: Int ->
             val e: EnemiesEnum = EnemiesEnum[enemyID]
