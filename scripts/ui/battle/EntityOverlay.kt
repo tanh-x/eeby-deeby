@@ -7,12 +7,13 @@ import godot.annotation.RegisterClass
 import godot.annotation.RegisterFunction
 import godot.core.Vector2
 import godot.global.GD
+import gds.DragDrop
 import utils.helpers.instantiateScene
 import utils.helpers.node
 import kotlin.random.Random
 
 @RegisterClass
-open class EntityOverlay : Control() {
+open class EntityOverlay : Control(), DragDrop {
     internal lateinit var entity: AbstractEntity<*>
 
     private var entIsVulnerable: Boolean = false
@@ -25,13 +26,22 @@ open class EntityOverlay : Control() {
     }
 
     @RegisterFunction
-    fun canDropData(position: Vector2, data: Any?): Boolean {
-        return data == "attack"
+    override fun gdGetDragData(position: Vector2): Any? {
+        GD.print("#dragging")
+        setDragPreview(TextureRect().apply {
+            texture = GD.load("res://assets/test.png")
+        })
+        return "attack"
     }
 
     @RegisterFunction
-    fun dropData(position: Vector2, data: Any?) {
-        GD.print("successful attack")
+    override fun gdCanDropData(position: Vector2, data: Any?): Boolean {
+        return true
+    }
+
+    @RegisterFunction
+    override fun gdDropData(position: Vector2, data: Any?) {
+        GD.print("#dropped")
     }
 
     internal open fun attachEntity(entity: AbstractEntity<*>) {

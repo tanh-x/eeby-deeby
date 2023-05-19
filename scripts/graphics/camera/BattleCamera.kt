@@ -1,4 +1,4 @@
-package graphics
+package graphics.camera
 
 import godot.annotation.RegisterClass
 import godot.annotation.RegisterFunction

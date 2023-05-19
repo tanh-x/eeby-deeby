@@ -23,15 +23,6 @@ class PlayerOverlay : EntityOverlay() {
         super._ready()
     }
 
-    @RegisterFunction
-    fun getDragData(position: Vector2): Any? {
-        GD.print("start drag")
-        setDragPreview(TextureRect().apply {
-            texture = load("res://assets/test.png")
-        })
-        return "attack"
-    }
-
     override fun attachEntity(entity: AbstractEntity<*>) {
         super.attachEntity(entity)
         this.character = entity as AbstractCharacter<out AbstractCharacterNode>

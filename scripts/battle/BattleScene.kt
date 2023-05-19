@@ -15,7 +15,7 @@ import godot.Timer
 import godot.annotation.RegisterClass
 import godot.annotation.RegisterFunction
 import godot.core.Vector2
-import graphics.BattleCamera
+import graphics.camera.BattleCamera
 import ui.PrimaryUI
 import utils.helpers.node
 import utils.helpers.toScreenSpace
@@ -170,7 +170,7 @@ class BattleScene : Node2D() {
      */
     private fun distributePlacement(ents: List<AbstractEntityNode>) {
         ents.forEach { n: AbstractEntityNode ->
-            n.position = Vector2(0.21, 0.2).toScreenSpace()
+            n.position = Vector2(0.7, 0.7).toScreenSpace()
         }
     }
 

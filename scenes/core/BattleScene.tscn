@@ -21,9 +21,6 @@ script = ExtResource( 1 )
 position = Vector2( 960, 540 )
 texture = ExtResource( 2 )
 
-[node name="BattleCamera" parent="." instance=ExtResource( 3 )]
-position = Vector2( 960, 540 )
-
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
@@ -40,3 +37,6 @@ mouse_filter = 2
 __meta__ = {
 "_edit_lock_": true
 }
+
+[node name="BattleCamera" parent="." instance=ExtResource( 3 )]
+position = Vector2( 960, 540 )
