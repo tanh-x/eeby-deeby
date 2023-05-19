@@ -1,6 +1,7 @@
 package character
 
 import character.aj.Aj
+import character.cyg.Cyg
 import character.dogman.Dogman
 import character.jad.Jad
 import character.kew.Kew
@@ -34,13 +35,13 @@ internal enum class MemberCharacter(
 
     // Ordinal 1
     AJ(
-        label = "Aj",
+        label = "AJ",
         health = 15.0,
         shield = 64.0,
         power = 15.0,
         agility = 3.0,
         psijuPotency = 325.0,
-        psijuEfficacy = 8.0,
+        psijuEfficacy = 6.0,
     ) {
         override fun instantiate() = Aj()
     },
@@ -53,7 +54,7 @@ internal enum class MemberCharacter(
         power = 13.0,
         agility = 3.5,
         psijuPotency = 200.0,
-        psijuEfficacy = 29.0,
+        psijuEfficacy = 25.0,
     ) {
         override fun instantiate() = Maves()
     },
@@ -66,13 +67,24 @@ internal enum class MemberCharacter(
         power = 25.0,
         agility = 5.5,
         psijuPotency = 50.0,
-        psijuEfficacy = 16.0
+        psijuEfficacy = 15.0
     ) {
         override fun instantiate() = Peek()
     },
 
     // Ordinal 4
-    CH4,
+    CYG(
+        label = "Cyg",
+        health = 43.0,
+        shield = 22.0,
+        power = 12.0,
+        agility = 10.0,
+        psijuPotency = 80.0,
+        psijuEfficacy = 27.0,
+
+        ) {
+        override fun instantiate() = Cyg()
+    },
 
     // Ordinal 5
     JAD(
@@ -82,7 +94,7 @@ internal enum class MemberCharacter(
         power = 22.0,
         agility = 4.0,
         psijuPotency = 140.0,
-        psijuEfficacy = 25.0,
+        psijuEfficacy = 20.0,
     ) {
         override fun instantiate() = Jad()
     },
@@ -108,7 +120,7 @@ internal enum class MemberCharacter(
         power = 16.0,
         agility = 6.0,
         psijuPotency = 100.0,
-        psijuEfficacy = 23.0,
+        psijuEfficacy = 21.0,
     ) {
         override fun instantiate() = Wiewior()
     },
@@ -124,7 +136,7 @@ internal enum class MemberCharacter(
         power = 17.0,
         agility = 5.0,
         psijuPotency = 112.0,
-        psijuEfficacy = 27.0,
+        psijuEfficacy = 24.0,
     ) {
         override fun instantiate() = Dogman()
     };
