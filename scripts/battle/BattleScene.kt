@@ -158,6 +158,11 @@ class BattleScene : Node2D() {
         initialTimer.queueFree()
     }
 
+    @RegisterFunction
+    fun onAreaMouseEntered() {
+        println("mouse entereds")
+    }
+
     /**
      * Automatically distributes the placement of enemies so that they are evenly spaced.
      *
@@ -176,9 +181,9 @@ class BattleScene : Node2D() {
         @JvmStatic
         val characterPlacements: Array<Array<Vector2>> = arrayOf(
             /* For 0 characters:*/ arrayOf(),
-            /* 1: */ arrayOf(Vector2(-0.22, 0.2)),
-            /* 2: */ arrayOf(Vector2(-0.18, 0.1), Vector2(-0.26, 0.3)),
-            /* 3: */ arrayOf(Vector2(-0.17, 0.08), Vector2(-0.27, 0.2), Vector2(-0.195, 0.33))
+            /* 1: */ arrayOf(Vector2(0.28, 0.7)),
+            /* 2: */ arrayOf(Vector2(0.32, 0.6), Vector2(0.24, 0.8)),
+            /* 3: */ arrayOf(Vector2(0.33, 0.58), Vector2(0.23, 0.7), Vector2(0.305, 0.83))
         )
     }
 }

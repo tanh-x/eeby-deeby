@@ -2,7 +2,7 @@ package ui.battle
 
 import battle.entity.AbstractEntity
 import battle.entity.Vulnerable
-import godot.Control
+import godot.*
 import godot.annotation.RegisterClass
 import godot.annotation.RegisterFunction
 import godot.core.Vector2
@@ -25,10 +25,12 @@ open class EntityOverlay : Control() {
     }
 
     @RegisterFunction
-    override fun _canDropData(position: Vector2, data: Any?): Boolean = (data == "attack")
+    fun canDropData(position: Vector2, data: Any?): Boolean {
+        return data == "attack"
+    }
 
     @RegisterFunction
-    override fun _dropData(position: Vector2, data: Any?) {
+    fun dropData(position: Vector2, data: Any?) {
         GD.print("successful attack")
     }
 

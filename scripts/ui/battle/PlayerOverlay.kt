@@ -3,17 +3,20 @@ package ui.battle
 import battle.entity.AbstractEntity
 import character.AbstractCharacter
 import character.AbstractCharacterNode
-import godot.GlobalConstants.BUTTON_LEFT
-import godot.InputEvent
-import godot.InputEventMouseButton
+import godot.ColorRect
+import godot.Texture
+import godot.TextureRect
 import godot.annotation.RegisterClass
 import godot.annotation.RegisterFunction
 import godot.core.Vector2
+import godot.global.GD
+import godot.global.GD.load
+import utils.helpers.instantiateScene
+import utils.helpers.set
 
 @RegisterClass
 class PlayerOverlay : EntityOverlay() {
     private lateinit var character: AbstractCharacter<out AbstractCharacterNode>
-    private var isDragging: Boolean = false
 
     @RegisterFunction
     override fun _ready() {
@@ -21,10 +24,12 @@ class PlayerOverlay : EntityOverlay() {
     }
 
     @RegisterFunction
-    override fun _getDragData(position: Vector2): Any? {
-        println("hello")
-        if (getRect().hasPoint(position)) return "attack"
-        return null
+    fun getDragData(position: Vector2): Any? {
+        GD.print("start drag")
+        setDragPreview(TextureRect().apply {
+            texture = load("res://assets/test.png")
+        })
+        return "attack"
     }
 
     override fun attachEntity(entity: AbstractEntity<*>) {
