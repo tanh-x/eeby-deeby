@@ -1,7 +1,6 @@
 package battle
 
 import EngineSingletons.getManager
-import EngineSingletons.singleton
 import battle.entity.AbstractEntityNode
 import battle.entity.Vulnerable
 import battle.entity.enemy.AbstractEnemy
@@ -10,7 +9,6 @@ import battle.entity.enemy.EnemiesEnum
 import character.AbstractCharacter
 import character.AbstractCharacterNode
 import character.MemberCharacter
-import game.GameManager
 import godot.Node2D
 import godot.Timer
 import godot.annotation.RegisterClass

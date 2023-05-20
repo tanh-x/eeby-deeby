@@ -1,9 +1,7 @@
 package ui.battle
 
-import godot.ColorRect
-import godot.Control
-import godot.Node2D
-import godot.TextureRect
+import godot.*
+import godot.GlobalConstants.BUTTON_LEFT
 import godot.annotation.RegisterClass
 import godot.annotation.RegisterFunction
 import godot.global.GD
@@ -23,5 +21,12 @@ class ActionArrow : Node2D() {
     @RegisterFunction
     override fun _process(delta: Double) {
         globalPosition = getGlobalMousePosition()
+    }
+
+    @RegisterFunction
+    override fun _input(event: InputEvent) {
+        if (event is InputEventMouseButton && event.buttonIndex == BUTTON_LEFT && event.pressed == false) {
+            queueFree()
+        }
     }
 }

@@ -44,7 +44,6 @@ open class EntityOverlay : Control(), DragDrop {
     @RegisterFunction
     override fun gdDropData(position: Vector2, data: Any?) {
         GD.print("#dropped")
-        getManager().currentRoot.node<ActionArrow>("ActionArrow").queueFree()
     }
 
     internal open fun attachEntity(entity: AbstractEntity<*>) {
