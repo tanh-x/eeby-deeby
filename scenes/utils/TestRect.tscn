@@ -1,0 +1,16 @@
+[gd_scene format=2]
+
+[node name="TestRect" type="ColorRect"]
+margin_left = -30.0
+margin_top = -30.0
+margin_right = 30.0
+margin_bottom = 30.0
+mouse_filter = 2
+color = Color( 0.776471, 0.454902, 1, 0.188235 )
+
+[node name="ReferenceRect" type="ReferenceRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+border_color = Color( 0.380392, 0.301961, 0.4, 1 )
+editor_only = false

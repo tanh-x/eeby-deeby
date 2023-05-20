@@ -1,5 +1,6 @@
 package ui
 
+import EngineSingletons.getManager
 import EngineSingletons.singleton
 import battle.BattleScene
 import game.GameManager
@@ -16,18 +17,15 @@ class PrimaryUI : Control() {
 
     private lateinit var escapeButton: Button
 
-    private lateinit var gameManager: GameManager
-
     @RegisterFunction
     override fun _ready() {
-        gameManager = singleton("GameManager")
         battleScene = node("/root/BattleScene")
         escapeButton = node("VBoxContainer/EscapeButton")
     }
 
     @RegisterFunction
     fun onEscapeButtonPressed() {
-        gameManager.switchSceneSafely("res://scenes/core/Main.tscn")
+        getManager().switchSceneSafely("res://scenes/core/Main.tscn")
     }
 
     @RegisterFunction

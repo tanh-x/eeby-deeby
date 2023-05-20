@@ -1,5 +1,6 @@
 package battle
 
+import EngineSingletons.getManager
 import EngineSingletons.singleton
 import battle.entity.AbstractEntityNode
 import battle.entity.Vulnerable
@@ -27,11 +28,6 @@ import utils.helpers.toScreenSpace
  */
 @RegisterClass
 class BattleScene : Node2D() {
-    /**
-     * The [GameManager] global singleton
-     */
-    private lateinit var gameManager: GameManager
-
     /**
      * The main camera that runs during a battle
      */
@@ -80,8 +76,7 @@ class BattleScene : Node2D() {
     @RegisterFunction
     override fun _ready() {
         // Loads instance variables that holds a godot Node
-        gameManager = singleton("GameManager")
-        params = gameManager.battleParams
+        params = getManager().battleParams
         camera = node("BattleCamera")
         ui = node("CanvasLayer/PrimaryUI")
 

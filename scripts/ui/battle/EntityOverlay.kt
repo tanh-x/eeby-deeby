@@ -1,5 +1,7 @@
 package ui.battle
 
+import EngineSingletons.getManager
+import battle.BattleScene
 import battle.entity.AbstractEntity
 import battle.entity.Vulnerable
 import godot.*
@@ -16,6 +18,8 @@ import kotlin.random.Random
 open class EntityOverlay : Control(), DragDrop {
     internal lateinit var entity: AbstractEntity<*>
 
+    private lateinit var battleScene: BattleScene
+
     private var entIsVulnerable: Boolean = false
 
     private lateinit var healthbar: Healthbar
@@ -28,9 +32,7 @@ open class EntityOverlay : Control(), DragDrop {
     @RegisterFunction
     override fun gdGetDragData(position: Vector2): Any? {
         GD.print("#dragging")
-        setDragPreview(TextureRect().apply {
-            texture = GD.load("res://assets/test.png")
-        })
+        getManager().currentRoot.addChild(ActionArrow())
         return "attack"
     }
 
@@ -42,6 +44,7 @@ open class EntityOverlay : Control(), DragDrop {
     @RegisterFunction
     override fun gdDropData(position: Vector2, data: Any?) {
         GD.print("#dropped")
+        getManager().currentRoot.node<ActionArrow>("ActionArrow").queueFree()
     }
 
     internal open fun attachEntity(entity: AbstractEntity<*>) {
