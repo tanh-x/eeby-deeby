@@ -1,27 +1,43 @@
 package ui.battle
 
-import godot.*
+import godot.ColorRect
 import godot.GlobalConstants.BUTTON_LEFT
+import godot.InputEvent
+import godot.InputEventMouseButton
+import godot.Path2D
 import godot.annotation.RegisterClass
 import godot.annotation.RegisterFunction
-import godot.global.GD
+import godot.core.Color
+import godot.core.Vector2
 import utils.helpers.instantiateScene
+import utils.helpers.toScreenSpace
 
 @RegisterClass
-class ActionArrow : Node2D() {
+class ActionArrow : Path2D() {
+    private lateinit var testRect: ColorRect
+
     init {
         name = "ActionArrow"
     }
 
     @RegisterFunction
     override fun _ready() {
-        addChild(instantiateScene<ColorRect>("res://scenes/utils/TestRect.tscn"))
+        testRect = instantiateScene<ColorRect>("res://scenes/utils/TestRect.tscn")
+        addChild(testRect)
     }
 
     @RegisterFunction
     override fun _process(delta: Double) {
-        globalPosition = getGlobalMousePosition()
+        testRect.setGlobalPosition(getGlobalMousePosition())
     }
+
+    @RegisterFunction
+    override fun _draw() {
+        drawLine(Vector2(520.0, 800.0), Vector2(760.0, 600.0), Color.aqua, 5.0)
+        drawLine(Vector2(760.0, 600.0), Vector2(900.0, 760.0), Color.aqua, 5.0)
+        drawLine(Vector2(900.0, 760.0), Vector2(1200.0, 460.0), Color.aqua, 5.0)
+    }
+
 
     @RegisterFunction
     override fun _input(event: InputEvent) {
