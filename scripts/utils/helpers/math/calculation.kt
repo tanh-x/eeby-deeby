@@ -8,14 +8,19 @@ import kotlin.math.sin
 /**
  * Converts a radian value to its corresponding unit vector
  */
-fun Double.radianToVector2(): Vector2 = Vector2(cos(this), sin(this))
+internal fun Double.radianToVector2(): Vector2 = Vector2(cos(this), sin(this))
 
 /**
  * Coerces a number to be nonnegative
  */
-fun ramp(x: Double): Double = max(0.0, x)
+internal fun ramp(x: Double): Double = max(0.0, x)
 
-fun linspace(start: Double, stop: Double, num: Int): List<Double> {
+internal fun linspace(start: Double, stop: Double, num: Int): List<Double> {
     val d: Double = (stop - start) / (num - 1)
     return (0 until num).map { i -> i * d + start }
 }
+
+/**
+ * @return Whether the given number is within the range (exclusive on both ends)
+ */
+internal fun Double.isWithin(lowerBound: Double, upperBound: Double): Boolean = this > lowerBound && this < upperBound

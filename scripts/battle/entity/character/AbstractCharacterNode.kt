@@ -6,13 +6,14 @@ import godot.annotation.RegisterClass
 import godot.annotation.RegisterFunction
 import godot.core.Vector2
 import godot.global.GD
+import ui.battle.EntityOverlay
 import ui.battle.PlayerOverlay
 import utils.Constants.CHARACTER_ASSET_DIR
 import utils.helpers.instantiateScene
 
 @RegisterClass
 abstract class AbstractCharacterNode : AbstractEntityNode {
-    internal lateinit var overlay: PlayerOverlay
+    override lateinit var overlay: EntityOverlay
 
     /**
      * Default constructor for Godot-Kotlin/

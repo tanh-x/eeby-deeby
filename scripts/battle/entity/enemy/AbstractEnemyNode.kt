@@ -11,7 +11,7 @@ import utils.helpers.instantiateScene
 
 @RegisterClass
 abstract class AbstractEnemyNode : AbstractEntityNode {
-	internal lateinit var overlay: EntityOverlay
+	override lateinit var overlay: EntityOverlay
 
 	/**
 	 * Default constructor for Godot-Kotlin/

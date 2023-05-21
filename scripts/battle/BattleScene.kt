@@ -3,11 +3,11 @@ package battle
 import EngineSingletons.getManager
 import battle.entity.AbstractEntityNode
 import battle.entity.Vulnerable
+import battle.entity.character.AbstractCharacter
+import battle.entity.character.AbstractCharacterNode
 import battle.entity.enemy.AbstractEnemy
 import battle.entity.enemy.AbstractEnemyNode
 import battle.entity.enemy.EnemiesEnum
-import battle.entity.character.AbstractCharacter
-import battle.entity.character.AbstractCharacterNode
 import core.MemberCharacter
 import godot.Node2D
 import godot.Timer
@@ -115,21 +115,22 @@ class BattleScene : Node2D() {
 				position = characterPlacements[characterIds.size][idx].toScreenSpace()
 			}
 
+			// Add them to the battle
 			addCharacter(character)
 		}
 
 		params.opponents.map(EnemiesEnum::get).forEach(::addEnemy)
 
 		// Takes out the list of nodes from the set of enemies, then distribute them.
-		distributePlacement(enemies.values.map { it.node })
+		distributePlacement(enemies.map { it.value.node })
 
 		// Add everything as a child of the scene.
 		// Comment out cause already done this in @forEachIndexed/@AbstractCharacter<*>.also lambda above
-//		characters.forEach { ent -> addChild(ent.node) }
-//		opponents.forEach { ent -> addChild(ent.node) }
+		// characters.forEach { ent -> addChild(ent.node) }
+		// opponents.forEach { ent -> addChild(ent.node) }
 
-		characters.values.forEach { ent -> ent.node.overlay.attachEntity(ent) }
-		enemies.values.forEach { ent -> if (ent is Vulnerable) ent.node.overlay.attachEntity(ent) }
+		characters.forEach { (_: Int, ent: AbstractCharacter<*>) -> ent.node.overlay.attachEntity(ent) }
+		enemies.forEach { (_: Int, ent: AbstractEnemy<*>) -> if (ent is Vulnerable) ent.node.overlay.attachEntity(ent) }
 	}
 
 	/**

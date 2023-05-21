@@ -1,6 +1,7 @@
 package ui.battle
 
 import battle.entity.AbstractEntity
+import battle.entity.AbstractEntityNode
 import battle.entity.character.AbstractCharacter
 import battle.entity.character.AbstractCharacterNode
 import godot.annotation.RegisterClass
@@ -15,7 +16,7 @@ class PlayerOverlay : EntityOverlay() {
         super._ready()
     }
 
-    override fun attachEntity(entity: AbstractEntity<*>) {
+    override fun attachEntity(entity: AbstractEntity<out AbstractEntityNode>) {
         super.attachEntity(entity)
         this.character = entity as AbstractCharacter<out AbstractCharacterNode>
     }

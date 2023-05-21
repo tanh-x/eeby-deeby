@@ -1,9 +1,8 @@
 package utils.helpers
 
-import godot.Node
-import godot.PackedScene
-import godot.ResourceLoader
+import godot.*
 import godot.core.NodePath
+import godot.core.Vector2
 import java.io.FileNotFoundException
 import kotlin.reflect.KClass
 
@@ -19,7 +18,7 @@ import kotlin.reflect.KClass
  */
 @Suppress("UNCHECKED_CAST")
 internal fun <T> Node.node(path: String): T = getNode(NodePath(path)) as T
-	?: throw NullPointerException("Node path $path not found")
+    ?: throw NullPointerException("Node path $path not found")
 
 /**
  * Gets an object's property and casts it into the type parameter [T]
@@ -33,7 +32,7 @@ internal fun <T> Node.node(path: String): T = getNode(NodePath(path)) as T
  */
 @Suppress("UNCHECKED_CAST")
 internal operator fun <T> godot.Object.get(property: String): T = this.get(property) as T
-	?: throw NullPointerException("Property $property doesn't exist on node $this")
+    ?: throw NullPointerException("Property $property doesn't exist on node $this")
 
 
 /**
@@ -48,9 +47,9 @@ internal operator fun <T> godot.Object.get(property: String): T = this.get(prope
  * @throws NullPointerException if the property doesn't exist
  */
 internal operator fun godot.Object.set(param: String, value: Any?) {
-	val clazz: KClass<*> = this.get(param)?.let { it::class } ?: throw NullPointerException("Property $param not found")
-	if (!clazz.isInstance(value)) throw IllegalArgumentException("$value is incompatible to type $clazz of property $param")
-	this.set(param, value)
+    val clazz: KClass<*> = this.get(param)?.let { it::class } ?: throw NullPointerException("Property $param not found")
+    if (!clazz.isInstance(value)) throw IllegalArgumentException("$value is incompatible to type $clazz of property $param")
+    this.set(param, value)
 }
 
 /**
@@ -65,7 +64,14 @@ internal operator fun godot.Object.set(param: String, value: Any?) {
  */
 @Suppress("UNCHECKED_CAST")
 internal fun <T : Node> instantiateScene(path: String, noCache: Boolean = false): T {
-	val sceneResource: PackedScene = ResourceLoader.load(path, noCache = noCache) as PackedScene?
-		?: throw FileNotFoundException("Resource path $path doesn't exist")
-	return sceneResource.instance() as T? ?: throw InstantiationError("Failed to instantiate $path")
+    val sceneResource: PackedScene = ResourceLoader.load(path, noCache = noCache) as PackedScene?
+        ?: throw FileNotFoundException("Resource path $path doesn't exist")
+    return sceneResource.instance() as T? ?: throw InstantiationError("Failed to instantiate $path")
 }
+
+/**
+ * Calculates the global position of the center of a [Control] node.
+ *
+ * @return The Vector2 representing the position of the centroid
+ */
+internal fun Control.centroidGlobalPosition(): Vector2 = rectGlobalPosition + rectSize * 0.5

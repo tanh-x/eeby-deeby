@@ -1,8 +1,10 @@
 package ui.battle
 
 import EngineSingletons.getManager
+import EngineSingletons.singleton
 import battle.BattleScene
 import battle.entity.AbstractEntity
+import battle.entity.AbstractEntityNode
 import battle.entity.Vulnerable
 import godot.*
 import godot.annotation.RegisterClass
@@ -11,12 +13,13 @@ import godot.core.Vector2
 import godot.global.GD
 import gds.DragDrop
 import utils.helpers.instantiateScene
+import utils.helpers.math.isWithin
 import utils.helpers.node
 import kotlin.random.Random
 
 @RegisterClass
 open class EntityOverlay : Control(), DragDrop {
-    internal lateinit var entity: AbstractEntity<*>
+    internal lateinit var entity: AbstractEntity<out AbstractEntityNode>
 
     private lateinit var battleScene: BattleScene
 
@@ -27,12 +30,21 @@ open class EntityOverlay : Control(), DragDrop {
     @RegisterFunction
     override fun _ready() {
         healthbar = node("Healthbar")
+        battleScene = singleton("BattleScene")
+    }
+
+    @RegisterFunction
+    override fun _hasPoint(point: Vector2): Boolean {
+        val localPosition: Vector2 = point - rectGlobalPosition
+        val rect: Vector2 = rectSize
+
+        // May have problems if the Control node is scaled
+        return localPosition.x.isWithin(0.0, rect.x) && localPosition.y.isWithin(0.0, rect.y)
     }
 
     @RegisterFunction
     override fun gdGetDragData(position: Vector2): Any? {
-        GD.print("#dragging")
-        getManager().currentRoot.addChild(ActionArrow())
+        getManager().currentRoot.addChild(ActionArrowPreview(entity, battleScene.enemies.values))
         return "attack"
     }
 
@@ -46,7 +58,7 @@ open class EntityOverlay : Control(), DragDrop {
         GD.print("#dropped")
     }
 
-    internal open fun attachEntity(entity: AbstractEntity<*>) {
+    internal open fun attachEntity(entity: AbstractEntity<out AbstractEntityNode>) {
         this.entity = entity
         if (entity is Vulnerable) {
             healthbar.entity = entity
