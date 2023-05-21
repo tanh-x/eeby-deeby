@@ -40,7 +40,7 @@ class BattleScene : Node2D() {
      * The parameter to generate the battle to.
      * TODO: Refactor this into constructor call and pass as argument to [generateBattle].
      */
-    internal var params: BattleParams? = null
+    private var params: BattleParams? = null
 
     /**
      * The [BattleManager] object that handles the core gameplay functionality of the battle.

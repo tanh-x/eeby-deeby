@@ -9,45 +9,45 @@ import utils.helpers.math.ramp
 
 abstract class AbstractCharacter<N : AbstractCharacterNode>
 internal constructor(
-    associatedCharacter: MemberCharacter, node: N
+    factory: MemberCharacter, node: N
 ) : AbstractEntity<N>(node), Vulnerable, Attacking {
-    override var maxHealth: Double = associatedCharacter.health
+    override var maxHealth: Double = factory.health
         set(value) {
             field = ramp(value)
             if (node.isReady) node.overlay.updateAll()
         }
 
-    override var health: Double = associatedCharacter.health
+    override var health: Double = factory.health
         set(value) {
             field = ramp(value)
             if (node.isReady) node.overlay.updateAll()
         }
 
-    override var shield: Double = associatedCharacter.shield
+    override var shield: Double = factory.shield
         set(value) {
             field = ramp(value)
             if (node.isReady) node.overlay.updateAll()
     }
 
-    override var maxShield: Double = associatedCharacter.shield
+    override var maxShield: Double = factory.shield
         set(value) {
             field = ramp(value)
             if (node.isReady) node.overlay.updateAll()
         }
 
-    override var power: Double = associatedCharacter.power
+    override var power: Double = factory.power
         set(value) {
             field = ramp(value)
         }
 
-    override var agility: Double = associatedCharacter.agility
+    override var agility: Double = factory.agility
         set(value) {
             field = ramp(value)
         }
 
-    internal var psijuPotency: Double = associatedCharacter.psijuPotency
+    internal var psijuPotency: Double = factory.psijuPotency
 
-    internal var psijuEfficacy: Double = associatedCharacter.psijuEfficacy
+    internal var psijuEfficacy: Double = factory.psijuEfficacy
 
     override var isDisabled: Boolean = false
 
