@@ -10,11 +10,6 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Node2D",
-"class": "battle_BattleScene",
-"language": "Kotlin",
-"path": "res://scripts/battle/BattleScene.kt"
-}, {
-"base": "Node2D",
 "class": "battle_entity_character_aj_AjNode",
 "language": "Kotlin",
 "path": "res://scripts/battle/entity/character/aj/AjNode.kt"
@@ -84,6 +79,11 @@ _global_script_classes=[ {
 "language": "Kotlin",
 "path": "res://scripts/ui/PrimaryUI.kt"
 }, {
+"base": "Path2D",
+"class": "ui_battle_ActionArrowPreview",
+"language": "Kotlin",
+"path": "res://scripts/ui/battle/ActionArrowPreview.kt"
+}, {
 "base": "Label",
 "class": "ui_battle_DamageNumber",
 "language": "Kotlin",
@@ -105,7 +105,6 @@ _global_script_classes=[ {
 "path": "res://scripts/ui/battle/PlayerOverlay.kt"
 } ]
 _global_script_class_icons={
-"battle_BattleScene": "",
 "battle_entity_character_aj_AjNode": "",
 "battle_entity_character_cyg_CygNode": "",
 "battle_entity_character_dogman_DogmanNode": "",
@@ -120,6 +119,7 @@ _global_script_class_icons={
 "graphics_camera_SmoothCamera": "",
 "ui_PregameMenu": "",
 "ui_PrimaryUI": "",
+"ui_battle_ActionArrowPreview": "",
 "ui_battle_DamageNumber": "",
 "ui_battle_EntityOverlay": "",
 "ui_battle_Healthbar": "",

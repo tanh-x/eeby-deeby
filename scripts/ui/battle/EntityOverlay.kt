@@ -2,7 +2,7 @@ package ui.battle
 
 import EngineSingletons.getManager
 import EngineSingletons.singleton
-import battle.BattleScene
+import battle.core.BattleScene
 import battle.entity.AbstractEntity
 import battle.entity.AbstractEntityNode
 import battle.entity.Vulnerable

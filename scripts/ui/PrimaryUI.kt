@@ -1,7 +1,7 @@
 package ui
 
 import EngineSingletons.getManager
-import battle.BattleScene
+import battle.core.BattleScene
 import godot.Button
 import godot.Control
 import godot.annotation.RegisterClass

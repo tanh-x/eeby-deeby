@@ -1,7 +1,7 @@
 package ui
 
 import EngineSingletons.singleton
-import battle.BattleParams
+import battle.core.BattleParams
 import core.GameManager
 import godot.Button
 import godot.Control

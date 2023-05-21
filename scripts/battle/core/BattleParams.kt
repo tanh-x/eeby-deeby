@@ -1,4 +1,4 @@
-package battle
+package battle.core
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

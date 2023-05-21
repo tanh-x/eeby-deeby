@@ -1,7 +1,7 @@
 package core
 
-import battle.BattleParams
-import battle.BattleScene
+import battle.core.BattleParams
+import battle.core.BattleScene
 import godot.Node
 import godot.Viewport
 import godot.annotation.RegisterClass
