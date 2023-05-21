@@ -6,9 +6,9 @@ import battle.entity.Vulnerable
 import battle.entity.enemy.AbstractEnemy
 import battle.entity.enemy.AbstractEnemyNode
 import battle.entity.enemy.EnemiesEnum
-import character.AbstractCharacter
-import character.AbstractCharacterNode
-import character.MemberCharacter
+import battle.entity.character.AbstractCharacter
+import battle.entity.character.AbstractCharacterNode
+import core.MemberCharacter
 import godot.Node2D
 import godot.Timer
 import godot.annotation.RegisterClass
@@ -50,12 +50,12 @@ class BattleScene : Node2D() {
     /**
      * The set of characters present during battle.
      */
-    internal val characters: LinkedHashSet<AbstractCharacter<out AbstractCharacterNode>> = linkedSetOf()
+    internal val characters: LinkedHashMap<Int, AbstractCharacter<out AbstractCharacterNode>> = LinkedHashMap()
 
     /**
      * The set of enemies present during battle.
      */
-    internal val enemies: LinkedHashSet<AbstractEnemy<out AbstractEnemyNode>> = linkedSetOf()
+    internal val enemies: LinkedHashMap<Int, AbstractEnemy<out AbstractEnemyNode>> = LinkedHashMap()
 
     /**
      * The timer that runs when the generation is complete
@@ -102,43 +102,34 @@ class BattleScene : Node2D() {
         // Constant to shadow the instance variable to prevent any trouble from multiple threads
         val params: BattleParams = this.params ?: throw NullPointerException("Battle parameters was not instantiated")
 
-        val characterIDs: Collection<Int> = params.characters.toList()
-        characterIDs.forEachIndexed { idx: Int, characterID: Int ->
-            val newCharacter: AbstractCharacter<out AbstractCharacterNode> = MemberCharacter[characterID].instantiate()
+        val characterIds: Collection<Int> = params.characters.toList()
+        characterIds.forEachIndexed { idx: Int, characterId: Int ->
+            val character: AbstractCharacter<out AbstractCharacterNode> = MemberCharacter.createCharacter(characterId)
 
             // Add the child to the scene immediately so _ready() is called before we adjust the node
-            addChild(newCharacter.node)
+            addChild(character.node)
 
-            // Modify the scale and position of the character and distribute them to equally spaced positions
-            with(newCharacter.node) {
+            // Modify the scale and position of the battle.entity.character and distribute them to equally spaced positions
+            with(character.node) {
                 sprite.scale = DEFAULT_CHARACTER_SCALE
-                position = characterPlacements[characterIDs.size][idx].toScreenSpace()
+                position = characterPlacements[characterIds.size][idx].toScreenSpace()
             }
 
-            characters.add(newCharacter)
+            addCharacter(character)
         }
 
-
-        params.opponents.forEach { enemyID: Int ->
-            val e: EnemiesEnum = EnemiesEnum[enemyID]
-            val ent: AbstractEnemy<out AbstractEnemyNode> = e.instantiate()
-            enemies.add(ent)
-            addChild(ent.node)
-
-            // Does whatever operation needed after initialization
-            e.applyOnInit(ent)
-        }
+        params.opponents.map(EnemiesEnum::get).forEach(::addEnemy)
 
         // Takes out the list of nodes from the set of enemies, then distribute them.
-        distributePlacement(enemies.map { it.node })
+        distributePlacement(enemies.values.map { it.node })
 
         // Add everything as a child of the scene.
         // Comment out cause already done this in @forEachIndexed/@AbstractCharacter<*>.also lambda above
 //		characters.forEach { ent -> addChild(ent.node) }
 //		opponents.forEach { ent -> addChild(ent.node) }
 
-        characters.forEach { ent -> ent.node.overlay.attachEntity(ent) }
-        enemies.forEach { ent -> if (ent is Vulnerable) ent.node.overlay.attachEntity(ent) }
+        characters.values.forEach { ent -> ent.node.overlay.attachEntity(ent) }
+        enemies.values.forEach { ent -> if (ent is Vulnerable) ent.node.overlay.attachEntity(ent) }
     }
 
     /**
@@ -151,9 +142,16 @@ class BattleScene : Node2D() {
         initialTimer.queueFree()
     }
 
-    @RegisterFunction
-    fun onAreaMouseEntered() {
-        println("mouse entereds")
+    private fun addCharacter(character: AbstractCharacter<*>) {
+        characters[characters.size] = character
+    }
+
+    private fun addEnemy(enemyEnum: EnemiesEnum) {
+        val enemy: AbstractEnemy<out AbstractEnemyNode> = enemyEnum.instantiate()
+        enemies[enemies.size] = enemy
+        addChild(enemy.node)
+        // Does whatever operation needed after initialization
+        enemyEnum.applyOnInit(enemy)
     }
 
     /**

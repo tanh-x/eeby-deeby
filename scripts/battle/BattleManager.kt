@@ -2,8 +2,8 @@ package battle
 
 import battle.entity.enemy.AbstractEnemy
 import battle.entity.enemy.AbstractEnemyNode
-import character.AbstractCharacter
-import character.AbstractCharacterNode
+import battle.entity.character.AbstractCharacter
+import battle.entity.character.AbstractCharacterNode
 
 /**
  * Internally computes and manages everything related to the battle. Including stats calculations,
@@ -14,8 +14,8 @@ import character.AbstractCharacterNode
  */
 internal class BattleManager(
     internal val scene: BattleScene,
-    internal val characters: LinkedHashSet<AbstractCharacter<out AbstractCharacterNode>>,
-    internal val enemies: LinkedHashSet<AbstractEnemy<out AbstractEnemyNode>>
+    internal val characters: LinkedHashMap<Int, AbstractCharacter<out AbstractCharacterNode>>,
+    internal val enemies: LinkedHashMap<Int, AbstractEnemy<out AbstractEnemyNode>>,
 ) {
 
 }

@@ -27,7 +27,6 @@ internal enum class EnemiesEnum(
 
 	protected fun instantiateBasicEnemy(): BasicEnemy = BasicEnemy(enemyName, health, shield)
 
-
 	companion object {
 		@JvmStatic
 		val enemies: Array<EnemiesEnum> = EnemiesEnum.values()

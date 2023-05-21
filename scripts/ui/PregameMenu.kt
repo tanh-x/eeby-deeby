@@ -2,7 +2,7 @@ package ui
 
 import EngineSingletons.singleton
 import battle.BattleParams
-import game.GameManager
+import core.GameManager
 import godot.Button
 import godot.Control
 import godot.TextEdit

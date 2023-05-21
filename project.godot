@@ -14,16 +14,6 @@ _global_script_classes=[ {
 "language": "Kotlin",
 "path": "res://scripts/battle/BattleScene.kt"
 }, {
-"base": "Node2D",
-"class": "character_ober_OberNode",
-"language": "Kotlin",
-"path": "res://scripts/character/ober/OberNode.kt"
-}, {
-"base": "Node",
-"class": "game_GameManager",
-"language": "Kotlin",
-"path": "res://scripts/game/GameManager.kt"
-}, {
 "base": "Camera2D",
 "class": "graphics_camera_BattleCamera",
 "language": "Kotlin",
@@ -43,6 +33,11 @@ _global_script_classes=[ {
 "class": "ui_PrimaryUI",
 "language": "Kotlin",
 "path": "res://scripts/ui/PrimaryUI.kt"
+}, {
+"base": "Node2D",
+"class": "ui_battle_ActionArrow",
+"language": "Kotlin",
+"path": "res://scripts/ui/battle/ActionArrow.kt"
 }, {
 "base": "Label",
 "class": "ui_battle_DamageNumber",
@@ -66,12 +61,11 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "battle_BattleScene": "",
-"character_ober_OberNode": "",
-"game_GameManager": "",
 "graphics_camera_BattleCamera": "",
 "graphics_camera_SmoothCamera": "",
 "ui_PregameMenu": "",
 "ui_PrimaryUI": "",
+"ui_battle_ActionArrow": "",
 "ui_battle_DamageNumber": "",
 "ui_battle_EntityOverlay": "",
 "ui_battle_Healthbar": "",

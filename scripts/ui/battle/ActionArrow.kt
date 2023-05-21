@@ -25,8 +25,6 @@ class ActionArrow : Node2D() {
 
     @RegisterFunction
     override fun _input(event: InputEvent) {
-        if (event is InputEventMouseButton && event.buttonIndex == BUTTON_LEFT && event.pressed == false) {
-            queueFree()
-        }
+        if (event is InputEventMouseButton && event.buttonIndex == BUTTON_LEFT && !event.pressed) queueFree()
     }
 }

@@ -1,18 +1,10 @@
 package ui.battle
 
 import battle.entity.AbstractEntity
-import character.AbstractCharacter
-import character.AbstractCharacterNode
-import godot.ColorRect
-import godot.Texture
-import godot.TextureRect
+import battle.entity.character.AbstractCharacter
+import battle.entity.character.AbstractCharacterNode
 import godot.annotation.RegisterClass
 import godot.annotation.RegisterFunction
-import godot.core.Vector2
-import godot.global.GD
-import godot.global.GD.load
-import utils.helpers.instantiateScene
-import utils.helpers.set
 
 @RegisterClass
 class PlayerOverlay : EntityOverlay() {

@@ -1,9 +1,7 @@
 package ui
 
 import EngineSingletons.getManager
-import EngineSingletons.singleton
 import battle.BattleScene
-import game.GameManager
 import godot.Button
 import godot.Control
 import godot.annotation.RegisterClass
@@ -30,17 +28,17 @@ class PrimaryUI : Control() {
 
     @RegisterFunction
     fun onFn1Pressed() {
-        battleScene.characters.forEach { it.node.overlay.updateAll() }
-        battleScene.enemies.forEach { it.node.overlay.updateAll() }
+        battleScene.characters.values.forEach { it.node.overlay.updateAll() }
+        battleScene.enemies.values.forEach { it.node.overlay.updateAll() }
     }
 
     @RegisterFunction
     fun onFn2Pressed() {
-        battleScene.characters.forEach { it.health = Random.nextDouble() * it.maxHealth }
+        battleScene.characters.values.forEach { it.health = Random.nextDouble() * it.maxHealth }
     }
 
     @RegisterFunction
     fun onFn3Pressed() {
-        battleScene.characters.first().sustainDamage(Random.nextDouble() * 5)
+        battleScene.characters.values.first().sustainDamage(Random.nextDouble() * 5)
     }
 }
