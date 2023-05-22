@@ -93,7 +93,7 @@ open class EntityOverlay : Control(), DragDrop {
 	internal fun spawnDamageNumber(number: Double) {
 		val label: DamageNumber = instantiateScene("res://scenes/ui/battle/DamageNumber.tscn")
 		label.text = number.toInt().toString()
-		label.rectRotation = Random.nextDouble() * 60 - 30
+		label.rectRotation = Random.nextDouble() * 40 - 20
 		addChild(label)
 	}
 }

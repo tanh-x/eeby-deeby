@@ -14,7 +14,7 @@ class DamageNumber : Label() {
 	override fun _ready() {
 		addChild(Timer().apply {
 			connect("timeout", this@DamageNumber, "destruct_self")
-			waitTime = 1.5
+			waitTime = 2.0
 			oneShot = true
 			autostart = true
 		})

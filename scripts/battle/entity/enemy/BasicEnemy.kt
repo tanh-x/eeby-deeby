@@ -2,6 +2,7 @@ package battle.entity.enemy
 
 import battle.entity.Active
 import battle.entity.Vulnerable
+import utils.helpers.math.ramp
 
 class BasicEnemy(
 	entityName: String,
@@ -12,7 +13,17 @@ class BasicEnemy(
 ) : AbstractEnemy<BasicEnemyNode>(BasicEnemyNode(entityName)),
 	Vulnerable, Active {
 	override var health: Double = maxHealth
+		set(value) {
+			field = ramp(value)
+			node.overlay.updateAll()
+		}
+
 	override var shield: Double = maxShield
+		set(value) {
+			field = ramp(value)
+			node.overlay.updateAll()
+		}
+
 	override var isDisabled: Boolean = false
 
 	init {
