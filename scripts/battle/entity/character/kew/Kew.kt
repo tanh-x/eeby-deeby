@@ -6,8 +6,4 @@ import core.MemberCharacter
 /**
  *
  */
-internal class Kew : AbstractCharacter<KewNode>(MemberCharacter.KEW, KewNode()) {
-    override fun sustainDamage(damage: Double): Double {
-        return super.sustainDamage(damage)
-    }
-}
+internal class Kew : AbstractCharacter<KewNode>(MemberCharacter.KEW, KewNode())

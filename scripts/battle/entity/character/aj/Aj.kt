@@ -7,22 +7,17 @@ import battle.entity.character.AbstractCharacter
 import battle.entity.enemy.AbstractEnemy
 import battle.entity.enemy.AbstractEnemyNode
 import core.MemberCharacter
-import org.jetbrains.annotations.Contract
 import kotlin.random.Random
 
 /**
  * AYYYYYYYY ABEBARIBA
  */
 internal class Aj : AbstractCharacter<AjNode>(MemberCharacter.AJ, AjNode()) {
-    override fun offenseAction(action: Action, battleState: BattleManager) {
-        action.target as AbstractEnemy<out AbstractEnemyNode>
-        action.target as Vulnerable
+	override fun offenseAction(action: Action, battleState: BattleManager) {
+		action.target as AbstractEnemy<out AbstractEnemyNode>
+		action.target as Vulnerable
 
-        action.target.sustainDamage(this.power * Random.nextDouble(0.9, 1.1))
-    }
-
-    override fun sustainDamage(damage: Double): Double {
-        return super.sustainDamage(damage)
-    }
+		action.target.sustainDamage(this.power * Random.nextDouble(0.9, 1.1))
+	}
 }
 

@@ -8,11 +8,11 @@ import godot.annotation.RegisterFunction
 class TestScript : Node() {
 	@RegisterFunction
 	override fun _ready() {
-		
+
 	}
 
 	@RegisterFunction
 	override fun _process(delta: Double) {
-		
+
 	}
 }

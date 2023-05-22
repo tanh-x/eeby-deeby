@@ -6,8 +6,4 @@ import core.MemberCharacter
 /**
  *
  */
-internal class Jad : AbstractCharacter<JadNode>(MemberCharacter.JAD, JadNode()) {
-	override fun sustainDamage(damage: Double): Double {
-		return super.sustainDamage(damage)
-	}
-}
+internal class Jad : AbstractCharacter<JadNode>(MemberCharacter.JAD, JadNode())

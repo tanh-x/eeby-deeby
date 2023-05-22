@@ -16,8 +16,8 @@ internal fun Double.radianToVector2(): Vector2 = Vector2(cos(this), sin(this))
 internal fun ramp(x: Double): Double = max(0.0, x)
 
 internal fun linspace(start: Double, stop: Double, num: Int): List<Double> {
-    val d: Double = (stop - start) / (num - 1)
-    return (0 until num).map { i -> i * d + start }
+	val d: Double = (stop - start) / (num - 1)
+	return (0 until num).map { i -> i * d + start }
 }
 
 /**

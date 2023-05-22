@@ -1,9 +1,7 @@
 package battle.entity
 
-internal interface Attacking {
+internal interface Active {
 	var power: Double
 	var agility: Double
 	var isDisabled: Boolean
-
-
 }

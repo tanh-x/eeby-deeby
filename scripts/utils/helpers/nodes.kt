@@ -19,7 +19,7 @@ import kotlin.reflect.KClass
  */
 @Suppress("UNCHECKED_CAST")
 internal fun <T> Node.node(path: String): T = getNode(NodePath(path)) as T
-    ?: throw NoSuchPropertyException("Node path $path not found")
+	?: throw NoSuchPropertyException("Node path $path not found")
 
 /**
  * Gets an object's property and casts it into the type parameter [T]
@@ -33,7 +33,7 @@ internal fun <T> Node.node(path: String): T = getNode(NodePath(path)) as T
  */
 @Suppress("UNCHECKED_CAST")
 internal operator fun <T> Object.get(property: String): T = this.get(property) as T
-    ?: throw NoSuchPropertyException("Property $property doesn't exist on node $this")
+	?: throw NoSuchPropertyException("Property $property doesn't exist on node $this")
 
 
 /**
@@ -46,10 +46,10 @@ internal operator fun <T> Object.get(property: String): T = this.get(property) a
  * @throws NoSuchPropertyException if the property doesn't exist
  */
 internal operator fun Object.set(property: String, value: Any?) {
-    val clazz: KClass<*> =
-        this.get(property)?.let { it::class } ?: throw NoSuchPropertyException("Property $property not found")
-    if (!clazz.isInstance(value)) throw IllegalArgumentException("$value is incompatible to type $clazz of property $property")
-    this.set(property, value)
+	val clazz: KClass<*> =
+		this.get(property)?.let { it::class } ?: throw NoSuchPropertyException("Property $property not found")
+	if (!clazz.isInstance(value)) throw IllegalArgumentException("$value is incompatible to type $clazz of property $property")
+	this.set(property, value)
 }
 
 /**
@@ -64,9 +64,9 @@ internal operator fun Object.set(property: String, value: Any?) {
  */
 @Suppress("UNCHECKED_CAST")
 internal fun <T : Node> instantiateScene(path: String, noCache: Boolean = false): T {
-    val sceneResource: PackedScene = ResourceLoader.load(path, noCache = noCache) as PackedScene?
-        ?: throw NoSuchResourceException("Resource path $path doesn't exist")
-    return sceneResource.instance() as T? ?: throw InstantiationError("Failed to instantiate $path")
+	val sceneResource: PackedScene = ResourceLoader.load(path, noCache = noCache) as PackedScene?
+		?: throw NoSuchResourceException("Resource path $path doesn't exist")
+	return sceneResource.instance() as T? ?: throw InstantiationError("Failed to instantiate $path")
 }
 
 /**

@@ -45,7 +45,7 @@ class BattleScene : Node2D() {
 	/**
 	 * The [BattleManager] object that handles the core gameplay functionality of the battle.
 	 */
-	private lateinit var manager: BattleManager
+	private lateinit var battleManager: BattleManager
 
 	/**
 	 * The set of characters present during battle.
@@ -86,7 +86,7 @@ class BattleScene : Node2D() {
 		generateBattle()
 
 		// We are complete with the initialization.
-		manager = BattleManager(this, characters, enemies)
+		battleManager = BattleManager(this, characters, enemies)
 
 		// Reset the battle parameters back to null to prevent it from interfering with other things
 		this.params = null
@@ -134,6 +134,27 @@ class BattleScene : Node2D() {
 	fun playStartingAnimation() {
 		camera.playStartingAnimation()
 		initialTimer.queueFree()
+	}
+
+	/**
+	 * Adds a new action to the action queue, to be carried out when the turn ends. This method
+	 * is usually called when the drag-drop action is finalized in [ui.battle.EntityOverlay]
+	 *
+	 * @param action The action to enqueue
+	 * @see BattleManager
+	 */
+	internal fun queueAction(action: Action) {
+		battleManager.addPlayerAction(action)
+	}
+
+	/**
+	 * Finalizes the preparation phase of a turn, and tells the [BattleManager] to compute the
+	 * battle phase.
+	 *
+	 * @see BattleManager
+	 */
+	internal fun readyTurn() {
+		battleManager.computeTurn()
 	}
 
 	private fun addCharacter(character: AbstractCharacter<*>) {

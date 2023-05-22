@@ -2,6 +2,8 @@ package battle.core
 
 import battle.card.Card
 import battle.entity.AbstractEntity
+import battle.entity.Active
+import battle.entity.Vulnerable
 
 /**
  * Represents an action that an entity can carry out in one turn. This includes both
@@ -19,39 +21,44 @@ import battle.entity.AbstractEntity
  * @see BattleManager
  */
 internal data class Action internal constructor(
-    internal val actor: AbstractEntity<*>,
-    internal val target: AbstractEntity<*>,
-    internal val card: Card = Card.NONE,
-    internal val type: ActionType,
+	internal val actor: AbstractEntity<*>,
+	internal val target: AbstractEntity<*>,
+	internal val card: Card = Card.NONE,
+	internal val type: ActionType,
 ) {
-    init {
-        if (!validateAction()) throw IllegalArgumentException("Instantiated action is not valid")
-    }
+	init {
+		if (!validateAction()) throw IllegalArgumentException("Instantiated action is not valid")
+	}
 
-    /**
-     * @return Validates whether this action is valid.
-     */
-    private fun validateAction(): Boolean {
-        // Checks for validating actor/target relationship
-        when (type) {
-            ActionType.SELF    -> {
-                if (actor != target) return false
-            }
+	/**
+	 * @return Validates whether this action is valid.
+	 */
+	private fun validateAction(): Boolean {
+		if (actor !is Active) return false
+		if (target !is Vulnerable) return false
 
-            ActionType.SUPPORT -> {
-                if (actor == target ||
-                    actor.playerSide != target.playerSide
-                ) return false
-            }
+		// Checks for validating actor/target relationship
+		when (type) {
+			ActionType.SELF    -> {
+				if (actor != target) return false
+			}
 
-            ActionType.OFFENSE -> {
-                if (actor == target ||
-                    actor.playerSide == target.playerSide
-                ) return false
-            }
+			ActionType.SUPPORT -> {
+				if (actor == target ||
+					actor.playerSide != target.playerSide
+				) return false
+			}
 
-            ActionType.SPECIAL -> {}
-        }
-        return true
-    }
+			ActionType.OFFENSE -> {
+				if (actor == target ||
+					actor.playerSide == target.playerSide
+				) return false
+			}
+
+			ActionType.SPECIAL -> {}
+		}
+		return true
+	}
+
+	override fun toString(): String = "$actor |> $target: ${type.name}"
 }

@@ -14,6 +14,6 @@ import godot.global.GD.lerp
  * @param num The number of samples, including both endpoints
  */
 fun QuadraticBezier(v: Vector2, w: Vector2, p: Vector2, num: Int): List<Vector2> =
-    linspace(0.0, 1.0, num).map { t: Double ->
-        lerp(lerp(v, p, t), lerp(p, w, t), t)
-    }
+	linspace(0.0, 1.0, num).map { t: Double ->
+		lerp(lerp(v, p, t), lerp(p, w, t), t)
+	}

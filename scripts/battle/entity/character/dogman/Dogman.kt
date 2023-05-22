@@ -6,8 +6,4 @@ import core.MemberCharacter
 /**
  *
  */
-internal class Dogman : AbstractCharacter<DogmanNode>(MemberCharacter.DOGMAN, DogmanNode()) {
-	override fun sustainDamage(damage: Double): Double {
-		return super.sustainDamage(damage)
-	}
-}
+internal class Dogman : AbstractCharacter<DogmanNode>(MemberCharacter.DOGMAN, DogmanNode())

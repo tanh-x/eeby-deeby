@@ -1,7 +1,5 @@
 package utils.exception
 
-import java.lang.RuntimeException
-
 /**
  * This exception is thrown if a property path for a Godot [godot.Node] doesn't exist.
  *

@@ -1,31 +1,38 @@
 package battle.entity.enemy
 
 import godot.core.Vector2
+import kotlin.Double.Companion.NaN
 
 internal enum class EnemiesEnum(
 	val enemyName: String,
-	val health: Double,
-	val damage: Double,
-	val shield: Double,
+	val health: Double = NaN,
+	val damage: Double = NaN,
+	val shield: Double = NaN,
+	val power: Double = NaN,
+	val agility: Double = NaN,
 ) {
 	GRAPEMAN(
 		enemyName = "Grapeman",
 		health = 50.0,
 		damage = 4.0,
-		shield = 2.0
+		shield = 2.0,
+		power = 16.0,
+		agility = 2.0,
 	) {
 		override fun instantiate(): AbstractEnemy<out AbstractEnemyNode> = instantiateBasicEnemy()
 		override fun applyOnInit(ent: AbstractEnemy<out AbstractEnemyNode>) {
 			ent as BasicEnemy
 			ent.node.sprite.scale = Vector2(1.4, 1.4)
-			ent.node.sprite.offset = Vector2(-32, -260)  // Grapeman texture needs to be offset by this amount
+
+			// Grapeman texture needs to be offset by this amount
+			ent.node.sprite.offset = Vector2(-32, -260)
 		}
 	};
 
 	internal abstract fun instantiate(): AbstractEnemy<out AbstractEnemyNode>
 	internal open fun applyOnInit(ent: AbstractEnemy<out AbstractEnemyNode>) {}
 
-	protected fun instantiateBasicEnemy(): BasicEnemy = BasicEnemy(enemyName, health, shield)
+	protected fun instantiateBasicEnemy(): BasicEnemy = BasicEnemy(enemyName, health, shield, power, agility)
 
 	companion object {
 		@JvmStatic

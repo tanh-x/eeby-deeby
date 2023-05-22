@@ -4,7 +4,7 @@ extends Label
 
 #var timer = Timer.new()
 var frames = 0
-const FRAME_INTERVAL = 24
+const FRAME_INTERVAL = 48
 
 var jvm = load("res://scripts/utils/helpers/JvmFacade.kt").new()
 
