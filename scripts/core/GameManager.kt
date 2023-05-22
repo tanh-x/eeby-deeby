@@ -40,7 +40,8 @@ class GameManager : Node() {
     override fun _ready() {
         currentRoot = getTree()!!.root ?: throw UnknownError("Root not found")
 
-        currentScene = currentRoot.getChild(currentRoot.getChildCount() - 1) ?: throw NullPointerException("Root has no children")
+        currentScene = currentRoot.getChild(currentRoot.getChildCount() - 1)
+            ?: throw NullPointerException("Root has no children")
 
         initialPrint()
     }
@@ -99,10 +100,15 @@ class GameManager : Node() {
         updateCurrentScene(instantiateScene(path))
     }
 
+    /**
+     * Everything goes here.
+     */
     private fun updateCurrentScene(newScene: Node) {
+        EngineSingletons.clear()
         currentScene = newScene
         currentRoot.addChild(newScene)
         getTree()?.currentScene = newScene
+        System.gc()
     }
 
     companion object {
@@ -115,10 +121,10 @@ class GameManager : Node() {
             val status: String = if (godot.OS.isDebugBuild()) " [-] DEVELOPMENT" else " [-] PRODUCTION    "
             GD.print(
                 "┌──────────────────────┬────────────────────┐\n" +
-                        "│ EEBY DEEBY v0.00.06  │ build 2023-05-19   │\n" +
-                        "├──────────────────────┴────────────────────┤\n" +
-                        "│ ${status.padEnd(20)}                      │\n" +
-                        "└───────────────────────────────────────────┘"
+                "│ EEBY DEEBY v0.00.07  │ build 2023-05-22   │\n" +
+                "├──────────────────────┴────────────────────┤\n" +
+                "│ ${status.padEnd(20)}                      │\n" +
+                "└───────────────────────────────────────────┘"
             )
         }
     }

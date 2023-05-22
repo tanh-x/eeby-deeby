@@ -29,10 +29,6 @@ class PregameMenu : Control() {
 	 */
 	private lateinit var startButton: Button
 
-	init {
-		System.gc()
-	}
-
 	/**
 	 * On ready, we fetch the components that we access frequently
 	 */

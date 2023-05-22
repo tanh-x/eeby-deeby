@@ -28,7 +28,7 @@ abstract class AbstractEnemyNode : AbstractEntityNode {
 	override fun _ready() {
 		super._ready()
 
-		overlay = instantiateScene("res://scenes/ui/EntityOverlay.tscn")
+		overlay = instantiateScene("res://scenes/ui/battle/EntityOverlay.tscn")
 		addChild(overlay)
 	}
 

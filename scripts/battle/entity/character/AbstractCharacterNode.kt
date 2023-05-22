@@ -7,7 +7,6 @@ import godot.annotation.RegisterFunction
 import godot.core.Vector2
 import godot.global.GD
 import ui.battle.EntityOverlay
-import ui.battle.PlayerOverlay
 import utils.Constants.CHARACTER_ASSET_DIR
 import utils.helpers.instantiateScene
 
@@ -30,7 +29,7 @@ abstract class AbstractCharacterNode : AbstractEntityNode {
     override fun _ready() {
         super._ready()
 
-        overlay = instantiateScene("res://scenes/ui/PlayerOverlay.tscn")
+        overlay = instantiateScene("res://scenes/ui/battle/PlayerOverlay.tscn")
         addChild(overlay)
     }
 

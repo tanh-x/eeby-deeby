@@ -25,8 +25,6 @@ open class EntityOverlay : Control(), DragDrop {
 
     private lateinit var battleScene: BattleScene
 
-    private var entIsVulnerable: Boolean = false
-
     private lateinit var healthbar: Healthbar
 
     @RegisterFunction
@@ -39,7 +37,6 @@ open class EntityOverlay : Control(), DragDrop {
     override fun _hasPoint(point: Vector2): Boolean {
         val localPosition: Vector2 = point - rectGlobalPosition
         val rect: Vector2 = rectSize
-
         // May have problems if the Control node is scaled
         return localPosition.x.isWithin(0.0, rect.x) && localPosition.y.isWithin(0.0, rect.y)
     }
@@ -47,7 +44,7 @@ open class EntityOverlay : Control(), DragDrop {
     @RegisterFunction
     override fun gdGetDragData(position: Vector2): Dictionary<String, Int>? {
         if (!entity.playerSide) return null
-        getManager().currentRoot.addChild(ActionArrowPreview(entity, battleScene.enemiesList))
+        battleScene.addChild(ActionArrowPreview(entity, battleScene.enemiesList))
         return GodotDataFactory.newBattleAction(actor = entity)
     }
 
@@ -67,7 +64,6 @@ open class EntityOverlay : Control(), DragDrop {
         this.entity = entity
         if (entity is Vulnerable) {
             healthbar.entity = entity
-            entIsVulnerable = true
             healthbar.visible = true
         }
         updateAll()
@@ -75,11 +71,11 @@ open class EntityOverlay : Control(), DragDrop {
 
     @RegisterFunction
     open fun updateAll() {
-        if (entIsVulnerable) healthbar.rerender()
+        if (healthbar.visible) healthbar.rerender()
     }
 
     internal fun spawnDamageNumber(number: Double) {
-        val label: DamageNumber = instantiateScene("res://scenes/ui/DamageNumber.tscn")
+        val label: DamageNumber = instantiateScene("res://scenes/ui/battle/DamageNumber.tscn")
         label.text = number.toInt().toString()
         label.rectRotation = Random.nextDouble() * 60 - 30
         addChild(label)

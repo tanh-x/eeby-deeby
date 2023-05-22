@@ -1,9 +1,11 @@
 package core
 
 import battle.core.AbilityDescription
+import battle.core.AbilityDescription.Companion.emptyAbility
 import battle.entity.character.AbstractCharacter
 import battle.entity.character.AbstractCharacterNode
 import battle.entity.character.aj.Aj
+import battle.entity.character.bnuuy.Bnuuy
 import battle.entity.character.cyg.Cyg
 import battle.entity.character.dogman.Dogman
 import battle.entity.character.jad.Jad
@@ -63,12 +65,12 @@ internal enum class MemberCharacter(
     /**
      * The 4 possible [battle.core.ActionType] of a character
      */
-    internal val selfAbility: AbilityDescription = TODO(),
-    internal val offenseAbility: AbilityDescription = TODO(),
-    internal val supportAbility: AbilityDescription = TODO(),
-    internal val specialAbility: AbilityDescription = TODO(),
+    internal val selfAbility: AbilityDescription = emptyAbility(),
+    internal val offenseAbility: AbilityDescription = emptyAbility(),
+    internal val supportAbility: AbilityDescription = emptyAbility(),
+    internal val specialAbility: AbilityDescription = emptyAbility(),
 
-) {
+    ) {
     // Ordinal 0
     BNUUY(
         label = "Bnuuy",
@@ -79,7 +81,7 @@ internal enum class MemberCharacter(
         psijuPotency = 1660.0,
         psijuEfficacy = 0.5,
     ) {
-        override fun instantiate() = Aj()
+        override fun instantiate() = Bnuuy()
     },
 
     // Ordinal 1
@@ -94,14 +96,20 @@ internal enum class MemberCharacter(
 
         selfAbility = AbilityDescription(
             abilityName = "something something block",
-            description = "dsgmdfgkldflg",
+            description = "TODO",
         ),
         offenseAbility = AbilityDescription(
             abilityName = "Astral Strings",
             description = "tentacles go kill"
         ),
-        supportAbility = TODO(),
-        specialAbility = TODO(),
+        supportAbility = AbilityDescription(
+            abilityName = "something support",
+            description = "TODO"
+        ),
+        specialAbility = AbilityDescription(
+            abilityName = "big fucking black hole",
+            description = "TODO"
+        ),
     ) {
         override fun instantiate() = Aj()
     },

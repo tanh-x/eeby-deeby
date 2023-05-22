@@ -28,7 +28,7 @@ class ActionArrowPreview : Path2D {
 
     init {
         name = "ActionArrow"
-        selfModulate = Color.white
+        selfModulate = Palette.WHITE
     }
 
     private var source: AbstractEntity<out AbstractEntityNode>? = null
@@ -42,16 +42,6 @@ class ActionArrowPreview : Path2D {
         }
     private lateinit var targetOverlays: Collection<EntityOverlay>
     private lateinit var arrowTailPosition: Vector2
-
-    @RegisterFunction
-    override fun _ready() {
-
-    }
-
-    @RegisterFunction
-    override fun _process(delta: Double) {
-
-    }
 
     @RegisterFunction
     override fun _draw() {
