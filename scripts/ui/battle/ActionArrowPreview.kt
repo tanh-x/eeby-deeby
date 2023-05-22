@@ -10,9 +10,9 @@ import godot.annotation.RegisterClass
 import godot.annotation.RegisterFunction
 import godot.core.Color
 import godot.core.Vector2
+import utils.helpers.Palette
+import utils.helpers.alpha
 import utils.helpers.centroidGlobalPosition
-import utils.helpers.rgb
-import utils.helpers.rgba
 
 @RegisterClass
 class ActionArrowPreview : Path2D {
@@ -87,10 +87,10 @@ class ActionArrowPreview : Path2D {
 
     companion object {
         @JvmStatic
-        val COLOR_DFLT: Color = 0x1e89b3.rgba(0.8)
+        val COLOR_DFLT: Color = Palette.CYAN_800.alpha(0.76)
 
         @JvmStatic
-        val COLOR_TARGETED: Color = 0x48ffaf.rgba(0.8)
+        val COLOR_TARGETED: Color = Palette.TEAL_500.alpha(0.85)
 
         /**
          * The default width of the arrow.
