@@ -65,7 +65,7 @@ margin_right = 1920.0
 margin_bottom = 216.0
 size_flags_horizontal = 3
 
-[node name="Button" type="Button" parent="Footer/FooterRight"]
+[node name="ReadyButton" type="Button" parent="Footer/FooterRight"]
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
@@ -81,3 +81,4 @@ text = "Ready"
 [connection signal="pressed" from="VBoxContainer/DebugFn1" to="." method="on_fn1_pressed"]
 [connection signal="pressed" from="VBoxContainer/DebugFn2" to="." method="on_fn2_pressed"]
 [connection signal="pressed" from="VBoxContainer/DebugFn3" to="." method="on_fn3_pressed"]
+[connection signal="pressed" from="Footer/FooterRight/ReadyButton" to="." method="on_ready_pressed"]

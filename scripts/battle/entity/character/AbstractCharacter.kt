@@ -9,7 +9,6 @@ import battle.entity.Vulnerable
 import core.MemberCharacter
 import utils.helpers.math.ramp
 
-
 internal abstract class AbstractCharacter<N : AbstractCharacterNode>
 internal constructor(
 	factory: MemberCharacter,
@@ -65,7 +64,10 @@ internal constructor(
 	override var isDisabled: Boolean = false
 
 	override fun sustainDamage(damage: Double): Double {
-		return super.sustainDamage(damage).also { node.overlay.spawnDamageNumber(it) }
+		return super.sustainDamage(damage).also {
+			node.overlay.spawnDamageNumber(it)
+			println("$this took $it damage")
+		}
 	}
 
 	protected open fun selfAction(action: Action, battleState: BattleManager) {

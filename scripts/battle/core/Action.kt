@@ -60,5 +60,5 @@ internal data class Action internal constructor(
 		return true
 	}
 
-	override fun toString(): String = "$actor |> $target: ${type.name}"
+	override fun toString(): String = "$actor |${type.name}> $target"
 }

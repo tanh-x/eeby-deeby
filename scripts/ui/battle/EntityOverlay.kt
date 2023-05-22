@@ -1,10 +1,15 @@
 package ui.battle
 
 import EngineSingletons.singleton
+import battle.card.Card
+import battle.core.Action
+import battle.core.ActionType
 import battle.core.BattleScene
 import battle.entity.AbstractEntity
 import battle.entity.AbstractEntityNode
 import battle.entity.Vulnerable
+import battle.entity.character.AbstractCharacter
+import battle.entity.character.AbstractCharacterNode
 import gds.DragDrop
 import gds.GodotDataFactory
 import godot.Control
@@ -12,7 +17,6 @@ import godot.annotation.RegisterClass
 import godot.annotation.RegisterFunction
 import godot.core.Dictionary
 import godot.core.Vector2
-import godot.global.GD
 import utils.helpers.instantiateScene
 import utils.helpers.math.isWithin
 import utils.helpers.node
@@ -56,7 +60,20 @@ open class EntityOverlay : Control(), DragDrop {
 	@RegisterFunction
 	override fun gdDropData(position: Vector2, data: Any?) {
 		data as Dictionary<String, Int>
-		GD.print("#dropped")
+		val actor: AbstractCharacter<out AbstractCharacterNode> = battleScene.getCharacterById(data["actor"])!!
+		battleScene.queueAction(
+			Action(
+				actor = actor,
+				target = entity,
+				card = Card.NONE,
+				type = if (actor == entity)
+					ActionType.SELF
+				else if (entity.playerSide)
+					ActionType.SUPPORT
+				else
+					ActionType.OFFENSE
+			)
+		)
 	}
 
 	internal open fun attachEntity(entity: AbstractEntity<out AbstractEntityNode>) {

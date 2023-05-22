@@ -20,6 +20,9 @@ class BasicEnemy(
 	}
 
 	override fun sustainDamage(damage: Double): Double {
-		return super.sustainDamage(damage).also { node.overlay.spawnDamageNumber(it) }
+		return super.sustainDamage(damage).also {
+			node.overlay.spawnDamageNumber(it)
+			println("$this took $it damage")
+		}
 	}
 }

@@ -62,6 +62,16 @@ class BattleScene : Node2D() {
 		get() = enemies.values.toList()
 
 	/**
+	 * Gets an enemy by the ID key
+	 */
+	internal fun getEnemyById(id: Int): AbstractEnemy<out AbstractEnemyNode>? = enemies[id]
+
+	/**
+	 * Gets a character by the ID key
+	 */
+	internal fun getCharacterById(id: Int): AbstractCharacter<out AbstractCharacterNode>? = characters[id]
+
+	/**
 	 * The timer that runs when the generation is complete
 	 */
 	private val initialTimer: Timer = Timer().apply {
@@ -70,7 +80,6 @@ class BattleScene : Node2D() {
 		oneShot = true
 		autostart = false
 	}
-
 
 	@RegisterFunction
 	override fun _ready() {
@@ -106,7 +115,6 @@ class BattleScene : Node2D() {
 		// Create the characters and enemies from the lists of IDs in the given parameter set
 		params.characters.map(MemberCharacter::createCharacter).forEach(::addCharacter)
 		params.opponents.map(EnemiesEnum::get).forEach(::addEnemy)
-
 
 		// Carry out initialization operations on the characters
 		characters.forEach { (idx: Int, character: AbstractCharacter<out AbstractCharacterNode>) ->

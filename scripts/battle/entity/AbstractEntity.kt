@@ -8,5 +8,5 @@ abstract class AbstractEntity<N : AbstractEntityNode>(
 ) {
 	internal var battleId: Int by Delegates.notNull()
 
-	override fun toString(): String = "<${node.entityName}>"
+	override fun toString(): String = "(${if (playerSide) '+' else '-'}${node.entityName})"
 }

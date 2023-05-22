@@ -1,5 +1,6 @@
 package battle.core
 
+import battle.entity.Active
 import battle.entity.character.AbstractCharacter
 import battle.entity.character.AbstractCharacterNode
 import battle.entity.enemy.AbstractEnemy
@@ -17,8 +18,8 @@ internal class BattleManager internal constructor(
 	private val characters: LinkedHashMap<Int, AbstractCharacter<out AbstractCharacterNode>>,
 	private val enemies: LinkedHashMap<Int, AbstractEnemy<out AbstractEnemyNode>>,
 ) {
-	internal val playerActions: LinkedHashMap<AbstractCharacter<out AbstractCharacterNode>, Action> = LinkedHashMap()
-	internal val enemyActions: LinkedHashMap<AbstractEnemy<out AbstractEnemyNode>, Action> = LinkedHashMap()
+	internal val playerActions: LinkedHashMap<Active, Action> = LinkedHashMap()
+	internal val enemyActions: LinkedHashMap<Active, Action> = LinkedHashMap()
 
 	/**
 	 * Adds an action into the queue
@@ -44,6 +45,16 @@ internal class BattleManager internal constructor(
 	 * actions to calculate the outcome of this turn.
 	 */
 	internal fun computeTurn() {
+		val actions: List<Pair<Active, Action>> = (playerActions + enemyActions)
+			.toList()
+			.sortedByDescending { pair: Pair<Active, Action> -> pair.first.agility }
 
+		for ((actor: Active, action: Action) in actions) {
+			if (actor is AbstractCharacter<*>) {
+				actor.dispatchAction(action, this)
+			} else if (actor is AbstractEnemy<*>) {
+				TODO("Enemy actions")
+			}
+		}
 	}
 }
