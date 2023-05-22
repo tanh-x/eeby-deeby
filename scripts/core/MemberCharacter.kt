@@ -1,5 +1,6 @@
 package core
 
+import battle.core.AbilityDescription
 import battle.entity.character.AbstractCharacter
 import battle.entity.character.AbstractCharacterNode
 import battle.entity.character.aj.Aj
@@ -59,7 +60,15 @@ internal enum class MemberCharacter(
      */
     internal var psijuEfficacy: Double = NaN,
 
-    ) {
+    /**
+     * The 4 possible [battle.core.ActionType] of a character
+     */
+    internal val selfAbility: AbilityDescription = TODO(),
+    internal val offenseAbility: AbilityDescription = TODO(),
+    internal val supportAbility: AbilityDescription = TODO(),
+    internal val specialAbility: AbilityDescription = TODO(),
+
+) {
     // Ordinal 0
     BNUUY(
         label = "Bnuuy",
@@ -82,6 +91,17 @@ internal enum class MemberCharacter(
         agility = 3.0,
         psijuPotency = 325.0,
         psijuEfficacy = 6.0,
+
+        selfAbility = AbilityDescription(
+            abilityName = "something something block",
+            description = "dsgmdfgkldflg",
+        ),
+        offenseAbility = AbilityDescription(
+            abilityName = "Astral Strings",
+            description = "tentacles go kill"
+        ),
+        supportAbility = TODO(),
+        specialAbility = TODO(),
     ) {
         override fun instantiate() = Aj()
     },

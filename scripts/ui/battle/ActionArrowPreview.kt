@@ -87,7 +87,7 @@ class ActionArrowPreview : Path2D {
 
     companion object {
         @JvmStatic
-        val COLOR_DFLT: Color = Palette.CYAN_800.alpha(0.76)
+        val COLOR_DFLT: Color = Palette.TEAL_600.alpha(0.76)
 
         @JvmStatic
         val COLOR_TARGETED: Color = Palette.TEAL_500.alpha(0.85)

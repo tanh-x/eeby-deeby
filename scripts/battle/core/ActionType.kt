@@ -6,3 +6,4 @@ enum class ActionType {
     SUPPORT,  // An action that is targeted towards their ally
     SPECIAL,  // A special action, optional.
 }
+

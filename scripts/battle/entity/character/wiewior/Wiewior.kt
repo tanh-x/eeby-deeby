@@ -6,7 +6,7 @@ import core.MemberCharacter
 /**
  *
  */
-class Wiewior : AbstractCharacter<WiewiorNode>(MemberCharacter.WIEWIOR, WiewiorNode()) {
+internal class Wiewior : AbstractCharacter<WiewiorNode>(MemberCharacter.WIEWIOR, WiewiorNode()) {
     override fun sustainDamage(damage: Double): Double {
         return super.sustainDamage(damage)
     }
