@@ -9,8 +9,12 @@ import utils.helpers.math.ramp
 
 abstract class AbstractCharacter<N : AbstractCharacterNode>
 internal constructor(
-    factory: MemberCharacter, node: N, playerSide: Boolean = true
-) : AbstractEntity<N>(node, playerSide), Vulnerable, Attacking {
+    factory: MemberCharacter,
+    node: N,
+    playerSide: Boolean = true,
+) : AbstractEntity<N>(node, playerSide),
+    Vulnerable,
+    Attacking {
     override var maxHealth: Double = factory.health
         set(value) {
             field = ramp(value)

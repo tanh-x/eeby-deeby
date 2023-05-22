@@ -54,12 +54,16 @@ class BattleScene : Node2D() {
     /**
      * The set of characters present during battle.
      */
-    internal val characters: LinkedHashMap<Int, AbstractCharacter<out AbstractCharacterNode>> = LinkedHashMap()
+    private val characters: LinkedHashMap<Int, AbstractCharacter<out AbstractCharacterNode>> = LinkedHashMap()
+    internal val charactersList: List<AbstractCharacter<out AbstractCharacterNode>>
+        get() = characters.values.toList()
 
     /**
      * The set of enemies present during battle.
      */
-    internal val enemies: LinkedHashMap<Int, AbstractEnemy<out AbstractEnemyNode>> = LinkedHashMap()
+    private val enemies: LinkedHashMap<Int, AbstractEnemy<out AbstractEnemyNode>> = LinkedHashMap()
+    internal val enemiesList: List<AbstractEnemy<out AbstractEnemyNode>>
+        get() = enemies.values.toList()
 
     /**
      * The timer that runs when the generation is complete
@@ -100,35 +104,27 @@ class BattleScene : Node2D() {
      * [playStartingAnimation] after a certain amount of time upon completion
      */
     private fun generateBattle() {
-        // Constant to shadow the instance variable to prevent any trouble from multiple threads
-        val params: BattleParams = this.params ?: throw NullPointerException("Battle parameters was not instantiated")
+        // Constant to shadow the instance variable to use non-null type of mutable variable
+        val params: BattleParams = this.params ?: throw NullPointerException("Battle parameters were not instantiated")
 
-        val characterIds: Collection<Int> = params.characters.toList()
-        characterIds.forEachIndexed { idx: Int, characterId: Int ->
-            val character: AbstractCharacter<out AbstractCharacterNode> = MemberCharacter.createCharacter(characterId)
-
-            // Add the child to the scene immediately so _ready() is called before we adjust the node
-            addChild(character.node)
-
-            // Modify the scale and position of the battle.entity.character and distribute them to equally spaced positions
-            with(character.node) {
-                sprite.scale = DEFAULT_CHARACTER_SCALE
-                position = characterPlacements[characterIds.size][idx].toScreenSpace()
-            }
-
-            // Add them to the battle
-            addCharacter(character)
-        }
-
+        // Create the characters and enemies from the lists of IDs in the given parameter set
+        params.characters.map(MemberCharacter::createCharacter).forEach(::addCharacter)
         params.opponents.map(EnemiesEnum::get).forEach(::addEnemy)
+
+
+        // Carry out initialization operations on the characters
+        characters.forEach { (idx: Int, character: AbstractCharacter<out AbstractCharacterNode>) ->
+            with(character.node) {
+                // Modify the scale and position of the battle.entity.character
+                sprite.scale = DEFAULT_CHARACTER_SCALE
+
+                // Distribute them to equally spaced positions according to the number of characters
+                position = characterPlacements[characters.size][idx].toScreenSpace()
+            }
+        }
 
         // Takes out the list of nodes from the set of enemies, then distribute them.
         distributePlacement(enemies.map { it.value.node })
-
-        // Add everything as a child of the scene.
-        // Comment out cause already done this in @forEachIndexed/@AbstractCharacter<*>.also lambda above
-        // characters.forEach { ent -> addChild(ent.node) }
-        // opponents.forEach { ent -> addChild(ent.node) }
 
         characters.forEach { (_: Int, ent: AbstractCharacter<*>) -> ent.node.overlay.attachEntity(ent) }
         enemies.forEach { (_: Int, ent: AbstractEnemy<*>) -> if (ent is Vulnerable) ent.node.overlay.attachEntity(ent) }
@@ -145,13 +141,34 @@ class BattleScene : Node2D() {
     }
 
     private fun addCharacter(character: AbstractCharacter<*>) {
-        characters[characters.size] = character
+        character.battleId = characters.size
+
+        // This should never happen
+        if (character.battleId in characters)
+            throw IllegalStateException("Found illegal keys in character map: $characters while adding ${character.battleId}")
+
+        // Add it to the ID LinkedHashMap
+        characters[character.battleId] = character
+
+        // Add to scene tree
+        addChild(character.node)
     }
 
     private fun addEnemy(enemyEnum: EnemiesEnum) {
         val enemy: AbstractEnemy<out AbstractEnemyNode> = enemyEnum.instantiate()
+
+        enemy.battleId = enemies.size
+
+        // This should never happen
+        if (enemy.battleId in enemies)
+            throw IllegalStateException("Found illegal keys in enemy map: $enemies while adding ${enemy.battleId}")
+
+        // Add it to the ID LinkedHashMap
         enemies[enemies.size] = enemy
+
+        // Add to scene tree
         addChild(enemy.node)
+
         // Does whatever operation needed after initialization
         enemyEnum.applyOnInit(enemy)
     }

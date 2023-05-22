@@ -1,8 +1,12 @@
 package battle.entity
 
-import godot.Node2D
+import kotlin.properties.Delegates
 
-abstract class AbstractEntity<N : Node2D>(
+abstract class AbstractEntity<N : AbstractEntityNode>(
     internal val node: N,
-    internal val playerSide: Boolean
-)
+    internal val playerSide: Boolean,
+) {
+    internal var battleId: Int by Delegates.notNull()
+
+    override fun toString(): String = "<${node.entityName}>"
+}
