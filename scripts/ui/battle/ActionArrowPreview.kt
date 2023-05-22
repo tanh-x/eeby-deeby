@@ -11,22 +11,12 @@ import godot.annotation.RegisterFunction
 import godot.core.Color
 import godot.core.Vector2
 import utils.helpers.centroidGlobalPosition
+import utils.helpers.rgb
+import utils.helpers.rgba
 
 @RegisterClass
 class ActionArrowPreview : Path2D {
     constructor() : super()
-
-    private var source: AbstractEntity<out AbstractEntityNode>? = null
-        set(value) {
-            field = value?.also { ent -> arrowTailPosition = ent.node.overlay.centroidGlobalPosition() }
-        }
-    private var targets: Collection<AbstractEntity<out AbstractEntityNode>> = emptyList()
-        set(value) {
-            field = value
-            targetOverlayRects = value.map { ent -> ent.node.overlay }
-        }
-    private lateinit var targetOverlayRects: Collection<EntityOverlay>
-    private lateinit var arrowTailPosition: Vector2
 
     internal constructor(
         source: AbstractEntity<out AbstractEntityNode>,
@@ -36,10 +26,22 @@ class ActionArrowPreview : Path2D {
         this.targets = targets
     }
 
-
     init {
         name = "ActionArrow"
+        selfModulate = Color.white
     }
+
+    private var source: AbstractEntity<out AbstractEntityNode>? = null
+        set(value) {
+            field = value?.also { ent -> arrowTailPosition = ent.node.overlay.centroidGlobalPosition() }
+        }
+    private var targets: Collection<AbstractEntity<out AbstractEntityNode>> = emptyList()
+        set(value) {
+            field = value
+            targetOverlays = value.map { ent -> ent.node.overlay }
+        }
+    private lateinit var targetOverlays: Collection<EntityOverlay>
+    private lateinit var arrowTailPosition: Vector2
 
     @RegisterFunction
     override fun _ready() {
@@ -53,15 +55,24 @@ class ActionArrowPreview : Path2D {
 
     @RegisterFunction
     override fun _draw() {
-        source?.run {
-            val globalMousePosition: Vector2 = getGlobalMousePosition()
+        val globalMousePosition: Vector2 = getGlobalMousePosition()
 
+        val target: EntityOverlay? = targetOverlays.firstOrNull { it._hasPoint(globalMousePosition) }
+
+        if (target != null) {
             drawLine(
                 from = arrowTailPosition,
-                to = targetOverlayRects.firstOrNull { o -> o._hasPoint(globalMousePosition) }?.centroidGlobalPosition()
-                    ?: globalMousePosition,
-                color = DEFAULT_COLOR,
-                width = 12.0,
+                to = target.centroidGlobalPosition(),
+                color = COLOR_TARGETED,
+                width = WIDTH_TARGETED,
+                antialiased = true
+            )
+        } else {
+            drawLine(
+                from = arrowTailPosition,
+                to = globalMousePosition,
+                color = COLOR_DFLT,
+                width = WIDTH_DFLT,
                 antialiased = true
             )
         }
@@ -75,10 +86,20 @@ class ActionArrowPreview : Path2D {
     }
 
     companion object {
-        /**
-         * Doesn't actually work, not completely.
-         */
         @JvmStatic
-        val DEFAULT_COLOR: Color = Color(1.0, 1.0, 1.0, 1.0)
+        val COLOR_DFLT: Color = 0x1e89b3.rgba(0.8)
+
+        @JvmStatic
+        val COLOR_TARGETED: Color = 0x48ffaf.rgba(0.8)
+
+        /**
+         * The default width of the arrow.
+         */
+        const val WIDTH_DFLT: Double = 8.0
+
+        /**
+         * The default width of the arrow.
+         */
+        const val WIDTH_TARGETED: Double = 15.0
     }
 }

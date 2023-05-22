@@ -14,14 +14,13 @@ import battle.entity.character.AbstractCharacterNode
  *
  * @see BattleScene
  */
-internal class BattleManager(
+internal class BattleManager internal constructor(
     private val scene: BattleScene,
     private val characters: LinkedHashMap<Int, AbstractCharacter<out AbstractCharacterNode>>,
     private val enemies: LinkedHashMap<Int, AbstractEnemy<out AbstractEnemyNode>>,
 ) {
     internal val playerActions: LinkedHashMap<AbstractCharacter<out AbstractCharacterNode>, Action> = LinkedHashMap()
     internal val enemyActions: LinkedHashMap<AbstractEnemy<out AbstractEnemyNode>, Action> = LinkedHashMap()
-
 
     /**
      * Adds an action into the queue

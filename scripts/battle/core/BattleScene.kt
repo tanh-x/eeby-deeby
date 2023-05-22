@@ -26,6 +26,10 @@ import utils.helpers.toScreenSpace
  */
 @RegisterClass
 class BattleScene : Node2D() {
+    init {
+        System.gc()  // Suggests a garbage collection when we first instantiate a new battle.
+    }
+
     /**
      * The main camera that runs during a battle
      */
@@ -67,9 +71,6 @@ class BattleScene : Node2D() {
         autostart = false
     }
 
-    init {
-        System.gc()  // Suggests a garbage collection when we first instantiate a new battle.
-    }
 
     @RegisterFunction
     override fun _ready() {
