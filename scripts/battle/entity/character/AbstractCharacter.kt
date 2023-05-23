@@ -70,23 +70,7 @@ internal constructor(
 		}
 	}
 
-	protected open fun selfAction(action: Action, battleState: BattleManager) {
-
-	}
-
-	protected open fun offenseAction(action: Action, battleState: BattleManager) {
-
-	}
-
-	protected open fun supportAction(action: Action, battleState: BattleManager) {
-
-	}
-
-	protected open fun specialAction(action: Action, battleState: BattleManager) {
-
-	}
-
-	internal fun dispatchAction(action: Action, battleState: BattleManager) {
+	override fun dispatchAction(action: Action, battleState: BattleManager) {
 		when (action.type) {
 			SELF    -> selfAction(action, battleState)
 			OFFENSE -> offenseAction(action, battleState)

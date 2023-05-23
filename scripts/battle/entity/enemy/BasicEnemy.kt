@@ -1,10 +1,12 @@
 package battle.entity.enemy
 
+import battle.core.Action
+import battle.core.BattleManager
 import battle.entity.Active
 import battle.entity.Vulnerable
 import utils.helpers.math.ramp
 
-class BasicEnemy(
+internal class BasicEnemy(
 	entityName: String,
 	override var maxHealth: Double,
 	override var maxShield: Double,
@@ -35,5 +37,10 @@ class BasicEnemy(
 			node.overlay.spawnDamageNumber(it)
 			println("$this took $it damage")
 		}
+	}
+
+	override fun offenseAction(action: Action, battleState: BattleManager) {
+		action.target as Vulnerable
+		action.target.sustainDamage(power)
 	}
 }
