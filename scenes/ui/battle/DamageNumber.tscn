@@ -5,7 +5,7 @@
 
 [sub_resource type="DynamicFont" id=1]
 size = 128
-outline_size = 3
+outline_size = 6
 outline_color = Color( 0.67451, 0.411765, 0.0941176, 1 )
 use_filter = true
 extra_spacing_char = 6
@@ -69,7 +69,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id=4]
 resource_name = "InOut"
-length = 1.5
+length = 2.0
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:rect_scale")
 tracks/0/interp = 1
@@ -77,10 +77,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.185423, 1.4304, 1.5 ),
+"times": PoolRealArray( 0, 0.185423, 1.7, 2 ),
 "transitions": PoolRealArray( 0.450625, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 0, 0 ), Vector2( 0.5, 0.5 ), Vector2( 0.5, 0.5 ), Vector2( 0.05, 0.05 ) ]
+"values": [ Vector2( 0, 0 ), Vector2( 0.5, 0.5 ), Vector2( 0.5, 0.5 ), Vector2( 0, 0 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath(".:rect_pivot_offset")
@@ -89,7 +89,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 1.5 ),
+"times": PoolRealArray( 0, 2 ),
 "transitions": PoolRealArray( 0.307786, 1 ),
 "update": 0,
 "values": [ Vector2( 220, 130 ), Vector2( 220, -60 ) ]

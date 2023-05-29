@@ -1,7 +1,12 @@
 package utils.helpers
 
 import godot.AnimationTree
+import godot.PropertyTweener
 import godot.SceneTreeTween
+import godot.Tween.EaseType
+import godot.Tween.EaseType.EASE_OUT
+import godot.Tween.TransitionType
+import godot.Tween.TransitionType.TRANS_CUBIC
 import godot.core.Vector2
 
 /**
@@ -19,4 +24,9 @@ internal fun AnimationTree.setBlendPositionOf(space: String, vec: Vector2) {
 /**
  * Creates a new [SceneTreeTween]
  */
-internal fun godot.Node.SceneTreeTweener(): SceneTreeTween = getTree()!!.createTween()!!
+internal fun godot.Node.sceneTreeTweener(): SceneTreeTween = getTree()!!.createTween()!!
+
+internal fun PropertyTweener.setCurve(trans: TransitionType = TRANS_CUBIC, ease: EaseType = EASE_OUT) {
+	this.setTrans(trans.id)
+	this.setEase(ease.id)
+}
