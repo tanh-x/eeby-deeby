@@ -50,5 +50,6 @@ internal operator fun Vector2.plusAssign(v: Vector2) {
  * @param v The subtrahend vector
  */
 internal operator fun Vector2.minusAssign(v: Vector2) {
-
+	x -= v.x
+	y -= v.y
 }

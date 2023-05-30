@@ -7,7 +7,7 @@ import battle.entity.AbstractEntity
 import battle.entity.Active
 import java.util.*
 
-internal class RandomDecisionMaker : DecisionMaker {
+internal class RandomDecisionEngine : DecisionEngine {
 	val rng: Random = Random()
 
 	override fun decide(state: BattleState): Map<Active, Action> =

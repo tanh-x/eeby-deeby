@@ -18,7 +18,7 @@ import kotlin.reflect.KClass
  * @throws NoSuchPropertyException if the node path doesn't exist
  */
 @Suppress("UNCHECKED_CAST")
-internal fun <T> Node.node(path: String): T = getNode(NodePath(path)) as T
+internal fun <T : Node?> Node.node(path: String): T = getNode(NodePath(path)) as T
 	?: throw NoSuchPropertyException("Node path $path not found")
 
 /**
@@ -32,9 +32,8 @@ internal fun <T> Node.node(path: String): T = getNode(NodePath(path)) as T
  * @throws NoSuchPropertyException if the property doesn't exist
  */
 @Suppress("UNCHECKED_CAST")
-internal operator fun <T> Object.get(property: String): T = this.get(property) as T
+internal operator fun <T> godot.Object.get(property: String): T = this.get(property) as T
 	?: throw NoSuchPropertyException("Property $property doesn't exist on node $this")
-
 
 /**
  * Sets an object's property safely. Will throw a [IllegalArgumentException] instead of an
@@ -45,7 +44,7 @@ internal operator fun <T> Object.get(property: String): T = this.get(property) a
  *
  * @throws NoSuchPropertyException if the property doesn't exist
  */
-internal operator fun Object.set(property: String, value: Any?) {
+internal operator fun godot.Object.set(property: String, value: Any?) {
 	val clazz: KClass<*> =
 		this.get(property)?.let { it::class } ?: throw NoSuchPropertyException("Property $property not found")
 	if (!clazz.isInstance(value)) throw IllegalArgumentException("$value is incompatible to type $clazz of property $property")

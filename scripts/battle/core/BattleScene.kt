@@ -1,7 +1,7 @@
 package battle.core
 
 import EngineSingletons.getManager
-import battle.ai.RandomDecisionMaker
+import battle.ai.RandomDecisionEngine
 import battle.entity.AbstractEntityNode
 import battle.entity.Vulnerable
 import battle.entity.character.AbstractCharacter
@@ -175,7 +175,7 @@ class BattleScene : Node2D() {
 	 * and all animations have already been played out. Cleans up everything and prepares for a new turn.
 	 */
 	private fun startNewTurn() {
-		battleManager.computeEnemyDecisions(RandomDecisionMaker())
+		battleManager.computeEnemyDecisions(RandomDecisionEngine())
 	}
 
 	private fun addCharacter(character: AbstractCharacter<*>) {

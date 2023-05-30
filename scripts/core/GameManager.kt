@@ -122,7 +122,7 @@ class GameManager : Node() {
 			val status: String = if (godot.OS.isDebugBuild()) " [-] DEVELOPMENT" else " [-] PRODUCTION    "
 			GD.print(
 				"┌──────────────────────┬────────────────────┐\n" +
-				"│ EEBY DEEBY v0.00.07  │ build 2023-05-22   │\n" +
+				"│ EEBY DEEBY v0.00.08  │ build 2023-05-29   │\n" +
 				"├──────────────────────┴────────────────────┤\n" +
 				"│ ${status.padEnd(20)}                      │\n" +
 				"└───────────────────────────────────────────┘"

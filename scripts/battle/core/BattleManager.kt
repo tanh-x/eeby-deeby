@@ -1,12 +1,14 @@
 package battle.core
 
 import battle.ai.BattleState
-import battle.ai.DecisionMaker
+import battle.ai.DecisionEngine
 import battle.entity.Active
 import battle.entity.character.AbstractCharacter
 import battle.entity.character.AbstractCharacterNode
 import battle.entity.enemy.AbstractEnemy
 import battle.entity.enemy.AbstractEnemyNode
+import ui.battle.ActionArrow
+import utils.helpers.instantiateScene
 
 /**
  * Internally computes and manages everything related to the battle. Including stats calculations,
@@ -20,11 +22,13 @@ class BattleManager internal constructor(
 	private val characters: LinkedHashMap<Int, AbstractCharacter<out AbstractCharacterNode>>,
 	private val enemies: LinkedHashMap<Int, AbstractEnemy<out AbstractEnemyNode>>,
 ) {
-	internal val playerActions: LinkedHashMap<Active, Action> = LinkedHashMap()
-	internal val enemyActions: LinkedHashMap<Active, Action> = LinkedHashMap()
+	private val playerActions: LinkedHashMap<Active, Action> = LinkedHashMap()
+	private val enemyActions: LinkedHashMap<Active, Action> = LinkedHashMap()
+
+	private val actionArrows: HashMap<Action, ActionArrow> = HashMap()
 
 	/**
-	 * Adds an action into the queue
+	 * Adds an action into the queue. Also creates a graphical indicator corresponding to the action
 	 *
 	 * @throws IllegalArgumentException If the action was invalid
 	 */
@@ -33,6 +37,14 @@ class BattleManager internal constructor(
 		if (!action.actor.playerSide) throw IllegalArgumentException("Invalid action: actor not on player side.")
 
 		playerActions[action.actor] = action
+
+		val arrow: ActionArrow = instantiateScene<ActionArrow>(
+			path = "res://scenes/ui/battle/ActionArrow.tscn"
+		).withAction(action)
+
+		actionArrows[action] = arrow
+		scene.addChild(arrow)
+
 		println("Enqueued new player action: $action")
 	}
 
@@ -40,7 +52,7 @@ class BattleManager internal constructor(
 		println("Enqueued new enemy action: $action")
 	}
 
-	internal fun computeEnemyDecisions(engine: DecisionMaker) {
+	internal fun computeEnemyDecisions(engine: DecisionEngine) {
 		enemyActions.putAll(engine.decide(toStateData()))
 	}
 
@@ -54,7 +66,6 @@ class BattleManager internal constructor(
 		val actions: List<Pair<Active, Action>> = (playerActions + enemyActions)
 			.toList()
 			.sortedByDescending { pair: Pair<Active, Action> -> pair.first.agility }
-
 
 		for ((actor: Active, action: Action) in actions) {
 			println("Carrying out: $action")

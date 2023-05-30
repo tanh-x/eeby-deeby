@@ -13,6 +13,7 @@ import godot.core.Vector2
 import utils.helpers.Palette
 import utils.helpers.alpha
 import utils.helpers.centroidGlobalPosition
+import utils.helpers.saturate
 
 @RegisterClass
 class ActionArrowPreview : Path2D {
@@ -68,7 +69,6 @@ class ActionArrowPreview : Path2D {
 		}
 	}
 
-
 	@RegisterFunction
 	override fun _input(event: InputEvent) {
 		update()
@@ -77,7 +77,7 @@ class ActionArrowPreview : Path2D {
 
 	companion object {
 		@JvmStatic
-		val COLOR_DFLT: Color = Palette.TEAL_600.alpha(0.76)
+		val COLOR_DFLT: Color = Palette.TEAL_600.alpha(0.76).saturate(0.6)
 
 		@JvmStatic
 		val COLOR_TARGETED: Color = Palette.TEAL_500.alpha(0.85)

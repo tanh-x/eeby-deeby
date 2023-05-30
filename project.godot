@@ -94,6 +94,11 @@ _global_script_classes=[ {
 "language": "Kotlin",
 "path": "res://scripts/ui/PrimaryUI.kt"
 }, {
+"base": "Control",
+"class": "ui_battle_ActionArrow",
+"language": "Kotlin",
+"path": "res://scripts/ui/battle/ActionArrow.kt"
+}, {
 "base": "Path2D",
 "class": "ui_battle_ActionArrowPreview",
 "language": "Kotlin",
@@ -137,6 +142,7 @@ _global_script_class_icons={
 "graphics_camera_SmoothCamera": "",
 "ui_PregameMenu": "",
 "ui_PrimaryUI": "",
+"ui_battle_ActionArrow": "",
 "ui_battle_ActionArrowPreview": "",
 "ui_battle_DamageNumber": "",
 "ui_battle_EntityOverlay": "",

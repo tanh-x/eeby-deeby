@@ -4,8 +4,6 @@ import battle.entity.Vulnerable
 import godot.ColorRect
 import godot.Control
 import godot.ReferenceRect
-import godot.Tween.EaseType.EASE_OUT
-import godot.Tween.TransitionType.TRANS_CUBIC
 import godot.annotation.RegisterClass
 import godot.annotation.RegisterFunction
 import godot.core.NodePath
@@ -53,7 +51,7 @@ class Healthbar : Control() {
 				property = NodePath("margin_right"),
 				finalVal = newWidth,
 				duration = DFLT_ANIM_DURATION
-			)?.setCurve(TRANS_CUBIC, EASE_OUT)
+			)?.setCurve()
 		} else {
 			damageRect["margin_right"] = newWidth
 			healRect["margin_left"] = currentWidth - newWidth
@@ -62,7 +60,7 @@ class Healthbar : Control() {
 				property = NodePath("margin_left"),
 				finalVal = 0.0,
 				duration = DFLT_ANIM_DURATION
-			)?.setCurve(TRANS_CUBIC, EASE_OUT)
+			)?.setCurve()
 		}
 
 		val shieldWidth: Double = ramp(entity.shield / entity.maxShield * healthBarWidth)
@@ -86,6 +84,6 @@ class Healthbar : Control() {
 	}
 
 	companion object {
-		const val DFLT_ANIM_DURATION: Double = 1.25
+		const val DFLT_ANIM_DURATION: Double = 1.3333
 	}
 }
