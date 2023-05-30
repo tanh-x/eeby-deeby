@@ -26,7 +26,7 @@ internal fun Color.saturate(deltaS: Double) = Color(this).apply { this.s += delt
  */
 internal fun Int.rgb(): Color = Color(
 	r = (this shr 16		) / 255.0,
-	g = (this shr 8  and 2) / 255.0,
+	g = (this shr 8  and 255) / 255.0,
 	b = (this 		 and 255) / 255.0
 )
 

@@ -28,7 +28,7 @@ class ActionArrowPreview : Path2D {
 	}
 
 	init {
-		name = "ActionArrow"
+		name = "ActionArrowPreview"
 		selfModulate = Palette.WHITE
 	}
 
@@ -77,7 +77,7 @@ class ActionArrowPreview : Path2D {
 
 	companion object {
 		@JvmStatic
-		val COLOR_DFLT: Color = Palette.TEAL_600.alpha(0.76).saturate(0.6)
+		val COLOR_DFLT: Color = Palette.TEAL_600.alpha(0.76)
 
 		@JvmStatic
 		val COLOR_TARGETED: Color = Palette.TEAL_500.alpha(0.85)

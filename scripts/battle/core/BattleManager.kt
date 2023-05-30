@@ -33,8 +33,11 @@ class BattleManager internal constructor(
 	 * @throws IllegalArgumentException If the action was invalid
 	 */
 	internal fun addPlayerAction(action: Action) {
-		if (action.actor !is AbstractCharacter<*>) throw IllegalArgumentException("Invalid action: actor is not a character")
-		if (!action.actor.playerSide) throw IllegalArgumentException("Invalid action: actor not on player side.")
+		if (action.actor !is AbstractCharacter<*>)
+			throw IllegalArgumentException("Invalid action: actor is not a character")
+
+		if (!action.actor.playerSide)
+			throw IllegalArgumentException("Invalid action: actor not on player side.")
 
 		playerActions[action.actor] = action
 
@@ -49,6 +52,8 @@ class BattleManager internal constructor(
 	}
 
 	internal fun addEnemyAction(action: Action) {
+		if (action.actor.playerSide)
+			throw IllegalArgumentException("Invalid action: actor not opponent player side.")
 		println("Enqueued new enemy action: $action")
 	}
 
@@ -67,10 +72,10 @@ class BattleManager internal constructor(
 			.toList()
 			.sortedByDescending { pair: Pair<Active, Action> -> pair.first.agility }
 
-		for ((actor: Active, action: Action) in actions) {
-			println("Carrying out: $action")
+		actions.forEach { (actor: Active, action: Action) ->
 			if (actor is AbstractCharacter<*>) {
 				actor.dispatchAction(action, this)
+
 			} else if (actor is AbstractEnemy<*>) {
 				actor.dispatchAction(action, this)
 			}

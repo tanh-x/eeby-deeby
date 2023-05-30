@@ -3,7 +3,6 @@ package utils.helpers.math
 import godot.core.Vector2
 import godot.global.GD.lerp
 
-
 /**
  * Evaluates and returns a list of [Vector2] representing a quadratic Bézier curve.
  * Can be optimized by doing lerp on the components instead of the whole vector.

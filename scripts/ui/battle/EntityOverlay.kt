@@ -30,6 +30,8 @@ open class EntityOverlay : Control(), DragDrop {
 
 	private lateinit var healthbar: Healthbar
 
+	private var arrowPreview: ActionArrowPreview? = null
+
 	@RegisterFunction
 	override fun _ready() {
 		healthbar = node("Healthbar")
@@ -47,7 +49,8 @@ open class EntityOverlay : Control(), DragDrop {
 	@RegisterFunction
 	override fun gdGetDragData(position: Vector2): Dictionary<String, Int>? {
 		if (!entity.playerSide) return null
-		battleScene.addChild(ActionArrowPreview(entity, battleScene.enemiesList))
+		arrowPreview = ActionArrowPreview(entity, battleScene.enemiesList)
+		battleScene.addChild(arrowPreview!!)
 		return GodotDataFactory.newBattleAction(actor = entity)
 	}
 
@@ -56,22 +59,23 @@ open class EntityOverlay : Control(), DragDrop {
 		return data is Dictionary<*, *> && data.containsKey("actor")
 	}
 
-	@Suppress("UNCHECKED_CAST")
 	@RegisterFunction
 	override fun gdDropData(position: Vector2, data: Any?) {
+		arrowPreview?.queueFree()
+
+		@Suppress("UNCHECKED_CAST")
 		data as Dictionary<String, Int>
+
 		val actor: AbstractCharacter<out AbstractCharacterNode> = battleScene.getCharacterById(data["actor"])!!
 		battleScene.queueAction(
 			Action(
 				actor = actor,
 				target = entity,
 				card = Card.NONE,
-				type = if (actor == entity)
-					ActionType.SELF
-				else if (entity.playerSide)
-					ActionType.SUPPORT
-				else
-					ActionType.OFFENSE
+				type = if (entity.playerSide)
+					if (actor == entity) ActionType.SELF
+					else ActionType.SUPPORT
+				else ActionType.OFFENSE
 			)
 		)
 	}

@@ -1,9 +1,7 @@
 package utils.helpers.math
 
 import godot.core.Vector2
-import kotlin.math.cos
-import kotlin.math.max
-import kotlin.math.sin
+import kotlin.math.*
 
 /**
  * Converts a radian value to its corresponding unit vector
@@ -26,10 +24,56 @@ internal fun linspace(start: Double, stop: Double, num: Int, includeStop: Boolea
 /**
  * @return Whether the given number is within the range (exclusive on both ends)
  */
-internal fun Double.isWithin(lowerBound: Double, upperBound: Double): Boolean =
-	this > lowerBound && this < upperBound
+internal fun Double.isWithin(lowerBound: Double, upperBound: Double): Boolean = this > lowerBound && this < upperBound
 
 /**
  * Converts the [Boolean] into 0 or 1
  */
 internal fun Boolean.toInt(): Int = if (this) 1 else 0
+
+internal val DEFAULT_PREFIXES: Array<String> = arrayOf(
+	"", "k", "M", "B", "T"
+)
+
+/**
+ * Converts a [Double] into a metric format
+ */
+internal fun Double.formatted(
+	threshold: Double = 10000.0,
+	digits: Int = 2,
+	prefixes: Array<String> = DEFAULT_PREFIXES,
+	offset: Int = 0,
+	base: Double = 10.0
+): String {
+	// Then simply round and pad zeros
+	if (this < threshold) return "%.${digits}f".format(this)
+
+	/*
+	* Integer divide the result by 3 to snap to increments of 3, then multiply back.
+	* This is done because we want the result in increments (thousands, millions, billions)
+	* instead of the pure log10 value.
+	* */
+	val exponent: Int = log(this, base).toInt() / 3 + offset
+
+	// Return the scientific notation truncated to some number of digits
+	if (exponent >= prefixes.size) return "%.${digits}e".format(this)
+
+	val significand: Double = this / base.pow(exponent * 3.0)
+	return "%.${digits}f".format(significand) + prefixes[exponent]
+}
+
+internal fun Long.formatted(
+	threshold: Double = 10000.0,
+	digits: Int = 2,
+	prefixes: Array<String> = DEFAULT_PREFIXES,
+	offset: Int = 0,
+	base: Double = 10.0
+): String = this.toDouble().formatted(threshold, digits, prefixes, offset, base)
+
+internal fun Int.formatted(
+	threshold: Double = 10000.0,
+	digits: Int = 2,
+	prefixes: Array<String> = DEFAULT_PREFIXES,
+	offset: Int = 0,
+	base: Double = 10.0
+): String = this.toDouble().formatted(threshold, digits, prefixes, offset, base)
