@@ -17,6 +17,8 @@ import godot.annotation.RegisterFunction
 import godot.core.Vector2
 import graphics.camera.BattleCamera
 import ui.PrimaryUI
+import ui.battle.ActionArrow
+import utils.helpers.instantiateScene
 import utils.helpers.node
 import utils.helpers.toScreenSpace
 
@@ -61,6 +63,8 @@ class BattleScene : Node2D() {
 	private val enemies: LinkedHashMap<Int, AbstractEnemy<out AbstractEnemyNode>> = LinkedHashMap()
 	internal val enemiesList: List<AbstractEnemy<out AbstractEnemyNode>>
 		get() = enemies.values.toList()
+
+	private val actionArrows: HashMap<Action, ActionArrow> = HashMap()
 
 	/**
 	 * Gets an enemy by the ID key
@@ -157,6 +161,13 @@ class BattleScene : Node2D() {
 	 */
 	internal fun queueAction(action: Action) {
 		battleManager.addPlayerAction(action)
+
+		val arrow: ActionArrow = instantiateScene<ActionArrow>(
+			path = "res://scenes/ui/battle/ActionArrow.tscn"
+		).withAction(action)
+
+		actionArrows[action] = arrow
+		addChild(arrow)
 	}
 
 	/**
@@ -166,6 +177,9 @@ class BattleScene : Node2D() {
 	 * @see BattleManager
 	 */
 	internal fun readyTurn() {
+		actionArrows.forEach { (_: Action, arrow: ActionArrow) -> arrow.queueFree() }
+		actionArrows.clear()
+
 		battleManager.computeTurn()
 		startNewTurn()
 	}

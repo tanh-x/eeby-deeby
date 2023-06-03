@@ -329,4 +329,3 @@ object Palette {
 	val ROSE_900: Color 	= 0x881337.rgb()
 	val ROSE_950: Color 	= 0x4c0519.rgb()
 }
-// @formatter:on

@@ -5,13 +5,13 @@ import battle.core.Action
 import battle.core.ActionType
 import battle.entity.AbstractEntity
 import battle.entity.Active
-import java.util.*
+import java.util.Random
 
 internal class RandomDecisionEngine : DecisionEngine {
 	val rng: Random = Random()
 
-	override fun decide(state: BattleState): Map<Active, Action> =
-		state.enemies.filterIsInstance<Active>().associateWith { ent ->
+	override fun decide(state: BattleState): Map<Active, Action> {
+		return state.enemies.filterIsInstance<Active>().associateWith { ent ->
 			Action(
 				actor = ent as AbstractEntity<*>,
 				target = state.characters.random() as AbstractEntity<*>,
@@ -19,4 +19,5 @@ internal class RandomDecisionEngine : DecisionEngine {
 				type = ActionType.OFFENSE
 			)
 		}
+	}
 }

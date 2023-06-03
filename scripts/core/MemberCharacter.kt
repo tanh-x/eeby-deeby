@@ -1,7 +1,7 @@
 package core
 
 import battle.core.AbilityDescription
-import battle.core.AbilityDescription.Companion.emptyAbility
+import battle.core.ActionType
 import battle.entity.character.AbstractCharacter
 import battle.entity.character.AbstractCharacterNode
 import battle.entity.character.aj.Aj
@@ -58,19 +58,19 @@ internal enum class MemberCharacter(
 
 	/**
 	 * How often can psiju actions be used. Can be used to facilitate other battle.entity.character's psiju actions.
-	 * Average is around 15-20, high variance. Inversely proportional to potency
+	 * Average is around 15, high variance. Inversely proportional to potency
 	 */
 	internal var psijuEfficacy: Double = NaN,
 
 	/**
-	 * The 4 possible [battle.core.ActionType] of a character
+	 * The descriptions for the abilities of a character
 	 */
-	internal val selfAbility: AbilityDescription = emptyAbility(),
-	internal val offenseAbility: AbilityDescription = emptyAbility(),
-	internal val supportAbility: AbilityDescription = emptyAbility(),
-	internal val specialAbility: AbilityDescription = emptyAbility(),
+	internal val abilityDescription: LinkedHashMap<ActionType, AbilityDescription> = LinkedHashMap(
+		ActionType.values()
+			.associateWith { AbilityDescription.emptyAbility() }
+	)
 
-	) {
+) {
 	// Ordinal 0
 	BNUUY(
 		label = "Bnuuy",
@@ -91,25 +91,27 @@ internal enum class MemberCharacter(
 		shield = 64.0,
 		power = 15.0,
 		agility = 3.0,
-		psijuPotency = 325.0,
+		psijuPotency = 315.0,
 		psijuEfficacy = 6.0,
 
-		selfAbility = AbilityDescription(
-			abilityName = "something something block",
-			description = "TODO",
-		),
-		offenseAbility = AbilityDescription(
-			abilityName = "Astral Strings",
-			description = "tentacles go kill"
-		),
-		supportAbility = AbilityDescription(
-			abilityName = "something support",
-			description = "TODO"
-		),
-		specialAbility = AbilityDescription(
-			abilityName = "big fucking black hole",
-			description = "TODO"
-		),
+		abilityDescription = linkedMapOf(
+			ActionType.OFFENSE to AbilityDescription(
+				abilityName = "Astral Strings",
+				description = "tentacles go kill"
+			),
+			ActionType.SUPPORT to AbilityDescription(
+				abilityName = "something support",
+				description = "TODO"
+			),
+			ActionType.SELF to AbilityDescription(
+				abilityName = "something something block",
+				description = "TODO",
+			),
+			ActionType.SPECIAL to AbilityDescription(
+				abilityName = "big fucking black hole",
+				description = "TODO"
+			)
+		)
 	) {
 		override fun instantiate() = Aj()
 	},
@@ -122,7 +124,7 @@ internal enum class MemberCharacter(
 		power = 13.0,
 		agility = 3.5,
 		psijuPotency = 200.0,
-		psijuEfficacy = 25.0,
+		psijuEfficacy = 20.0,
 	) {
 		override fun instantiate() = Maves()
 	},
@@ -148,7 +150,7 @@ internal enum class MemberCharacter(
 		power = 12.0,
 		agility = 11.5,
 		psijuPotency = 80.0,
-		psijuEfficacy = 22.0,
+		psijuEfficacy = 21.0,
 
 		) {
 		override fun instantiate() = Cyg()
@@ -162,7 +164,7 @@ internal enum class MemberCharacter(
 		power = 22.0,
 		agility = 4.5,
 		psijuPotency = 140.0,
-		psijuEfficacy = 20.0,
+		psijuEfficacy = 14.0,
 	) {
 		override fun instantiate() = Jad()
 	},
@@ -170,7 +172,7 @@ internal enum class MemberCharacter(
 	// Ordinal 6
 	KEW(
 		label = "Kew",
-		health = 36.00,
+		health = 36.0,
 		shield = 16.0,
 		power = 24.0,
 		agility = 5.0,
@@ -188,7 +190,7 @@ internal enum class MemberCharacter(
 		power = 16.0,
 		agility = 6.2,
 		psijuPotency = 100.0,
-		psijuEfficacy = 14.0,
+		psijuEfficacy = 10.0,
 	) {
 		override fun instantiate() = Wiewior()
 	},
@@ -201,7 +203,7 @@ internal enum class MemberCharacter(
 		power = 9.0,
 		agility = 4.0,
 		psijuPotency = 167.0,
-		psijuEfficacy = 18.0,
+		psijuEfficacy = 15.0,
 	) {
 		override fun instantiate() = Ober()
 	},
@@ -214,7 +216,7 @@ internal enum class MemberCharacter(
 		power = 17.0,
 		agility = 5.5,
 		psijuPotency = 126.0,
-		psijuEfficacy = 16.0,
+		psijuEfficacy = 13.0,
 	) {
 		override fun instantiate() = Dogman()
 	};
@@ -227,7 +229,6 @@ internal enum class MemberCharacter(
 	}
 
 	protected abstract fun instantiate(): AbstractCharacter<out AbstractCharacterNode>
-
 
 	companion object {
 		@JvmStatic
