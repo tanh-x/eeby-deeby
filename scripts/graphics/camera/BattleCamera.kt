@@ -13,7 +13,7 @@ class BattleCamera : SmoothCamera() {
 	@RegisterFunction
 	override fun _ready() {
 		super._ready()
-		zoom = Vector2(2.45, 2.45)
+		zoom = Vector2(2.65, 2.65)
 		targetZoom = zoom
 	}
 

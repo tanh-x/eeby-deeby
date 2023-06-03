@@ -22,10 +22,10 @@ internal enum class EnemiesEnum(
 		override fun instantiate(): AbstractEnemy<out AbstractEnemyNode> = instantiateBasicEnemy()
 		override fun applyOnInit(ent: AbstractEnemy<out AbstractEnemyNode>) {
 			ent as BasicEnemy
-			ent.node.sprite.scale = Vector2(1.4, 1.4)
-
+			
 			// Grapeman texture needs to be offset by this amount
 			ent.node.sprite.offset = Vector2(-32, -260)
+			ent.node.sprite.scale = Vector2(1.3, 1.3)
 		}
 	};
 

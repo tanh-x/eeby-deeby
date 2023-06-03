@@ -33,6 +33,6 @@ open class SmoothCamera : Camera2D() {
 		/**
 		 * Same as above, but for zooming.
 		 */
-		const val ZOOM_INTERP_FACTOR: Double = 0.100
+		const val ZOOM_INTERP_FACTOR: Double = 0.0925
 	}
 }

@@ -18,3 +18,4 @@ margin_right = 70.0
 margin_bottom = 300.0
 
 [node name="DragDropAdapter" parent="." instance=ExtResource( 1 )]
+editor_only = true

@@ -64,7 +64,7 @@ class ActionArrow : Path2D() {
 				y = 0.5 * (actorPosition.y + targetPosition.y),
 			) - Vector2(0.0, 0.35).toScreenSpace(),
 			numPoints = 48,
-			color = Palette.ORANGE_400,
+			color = action.type.arrowColor,
 			lineWidth = 8.0
 		)
 	}
