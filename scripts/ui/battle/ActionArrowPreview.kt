@@ -10,10 +10,11 @@ import godot.annotation.RegisterClass
 import godot.annotation.RegisterFunction
 import godot.core.Color
 import godot.core.Vector2
+import graphics.artist.Artist2D
+import graphics.artist.Artist2D.Companion.artist2D
 import utils.helpers.Palette
 import utils.helpers.alpha
 import utils.helpers.centroidGlobalPosition
-import utils.helpers.saturate
 
 @RegisterClass
 class ActionArrowPreview : Path2D {
@@ -32,6 +33,8 @@ class ActionArrowPreview : Path2D {
 		selfModulate = Palette.WHITE
 	}
 
+	private val artist: Artist2D = artist2D().set(c = COLOR_DFLT, lw = WIDTH_DFLT, ls = "-")
+
 	private var source: AbstractEntity<out AbstractEntityNode>? = null
 		set(value) {
 			field = value?.also { ent -> arrowTailPosition = ent.node.overlay.centroidGlobalPosition() }
@@ -47,24 +50,19 @@ class ActionArrowPreview : Path2D {
 	@RegisterFunction
 	override fun _draw() {
 		val globalMousePosition: Vector2 = getGlobalMousePosition()
-
 		val target: EntityOverlay? = targetOverlays.firstOrNull { it._hasPoint(globalMousePosition) }
 
-		if (target != null) {
-			drawLine(
+		if (target == null) {
+			artist.drawLine(
+				from = arrowTailPosition,
+				to = globalMousePosition
+			)
+		} else {
+			artist.drawLine(
 				from = arrowTailPosition,
 				to = target.centroidGlobalPosition(),
 				color = COLOR_TARGETED,
 				width = WIDTH_TARGETED,
-				antialiased = true
-			)
-		} else {
-			drawLine(
-				from = arrowTailPosition,
-				to = globalMousePosition,
-				color = COLOR_DFLT,
-				width = WIDTH_DFLT,
-				antialiased = true
 			)
 		}
 	}
