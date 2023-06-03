@@ -20,6 +20,7 @@ import kotlin.Double.Companion.NaN
  * Stores the stats of each player battle.entity.character. Will mutate over the course of gameplay outside of
  * battles, and is immutable within battles.
  */
+@Suppress("SpellCheckingInspection")
 internal enum class MemberCharacter(
 	/**
 	 * The display name of the battle.entity.character.

@@ -60,7 +60,7 @@ internal fun Long.rgba(): Color = Color(
 /**
  * Color shades from [Tailwind CSS](https://tailwindcss.com/docs/background-color)
  */
-@Suppress("UNUSED")
+@Suppress("Unused")
 object Palette {
 	val WHITE: Color 		= 0xffffff.rgb()
 	val BLACK: Color 		= 0x000000.rgb()
