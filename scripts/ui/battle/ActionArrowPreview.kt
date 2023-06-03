@@ -14,7 +14,7 @@ import graphics.artist.Artist2D
 import graphics.artist.Artist2D.Companion.artist2D
 import utils.helpers.Palette
 import utils.helpers.alpha
-import utils.helpers.centroidGlobalPosition
+import utils.helpers.centroid
 
 @RegisterClass
 class ActionArrowPreview : Path2D {
@@ -33,18 +33,21 @@ class ActionArrowPreview : Path2D {
 		selfModulate = Palette.WHITE
 	}
 
-	private val artist: Artist2D = artist2D().set(c = COLOR_DFLT, lw = WIDTH_DFLT, ls = "-")
+	private val artist: Artist2D = artist2D().set(c = COLOR_DFLT, lw = WIDTH_DFLT)
 
 	private var source: AbstractEntity<out AbstractEntityNode>? = null
 		set(value) {
-			field = value?.also { ent -> arrowTailPosition = ent.node.overlay.centroidGlobalPosition() }
+			field = value?.also { ent -> arrowTailPosition = ent.node.overlay.centroid() }
 		}
+
 	private var targets: Collection<AbstractEntity<out AbstractEntityNode>> = emptyList()
 		set(value) {
 			field = value
 			targetOverlays = value.map { ent -> ent.node.overlay }
 		}
+
 	private lateinit var targetOverlays: Collection<EntityOverlay>
+
 	private lateinit var arrowTailPosition: Vector2
 
 	@RegisterFunction
@@ -60,9 +63,9 @@ class ActionArrowPreview : Path2D {
 		} else {
 			artist.drawLine(
 				from = arrowTailPosition,
-				to = target.centroidGlobalPosition(),
+				to = target.centroid(),
 				color = COLOR_TARGETED,
-				width = WIDTH_TARGETED,
+				lineWidth = WIDTH_TARGETED,
 			)
 		}
 	}

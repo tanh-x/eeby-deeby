@@ -73,4 +73,4 @@ internal fun <T : Node> instantiateScene(path: String, noCache: Boolean = false)
  *
  * @return The Vector2 representing the position of the centroid
  */
-internal fun Control.centroidGlobalPosition(): Vector2 = rectGlobalPosition + rectSize * 0.5
+internal fun Control.centroid(): Vector2 = rectGlobalPosition + rectSize * 0.5

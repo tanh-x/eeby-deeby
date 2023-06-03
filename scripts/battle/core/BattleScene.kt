@@ -64,7 +64,7 @@ class BattleScene : Node2D() {
 	internal val enemiesList: List<AbstractEnemy<out AbstractEnemyNode>>
 		get() = enemies.values.toList()
 
-	private val actionArrows: HashMap<Action, ActionArrow> = HashMap()
+	private val actionArrows: HashMap<AbstractCharacter<*>, ActionArrow> = HashMap()
 
 	/**
 	 * Gets an enemy by the ID key
@@ -162,11 +162,14 @@ class BattleScene : Node2D() {
 	internal fun queueAction(action: Action) {
 		battleManager.addPlayerAction(action)
 
+		action.actor as AbstractCharacter<*>
+
 		val arrow: ActionArrow = instantiateScene<ActionArrow>(
 			path = "res://scenes/ui/battle/ActionArrow.tscn"
 		).withAction(action)
 
-		actionArrows[action] = arrow
+		actionArrows[action.actor]?.queueFree()
+		actionArrows[action.actor] = arrow
 		addChild(arrow)
 	}
 
@@ -177,7 +180,7 @@ class BattleScene : Node2D() {
 	 * @see BattleManager
 	 */
 	internal fun readyTurn() {
-		actionArrows.forEach { (_: Action, arrow: ActionArrow) -> arrow.queueFree() }
+		actionArrows.forEach { (_: AbstractCharacter<*>, arrow: ActionArrow) -> arrow.queueFree() }
 		actionArrows.clear()
 
 		battleManager.computeTurn()
@@ -231,8 +234,20 @@ class BattleScene : Node2D() {
 	 * @param ents The list of entities to distribute.
 	 */
 	private fun distributePlacement(ents: List<AbstractEntityNode>) {
-		ents.forEach { n: AbstractEntityNode ->
-			n.position = Vector2(0.7, 0.7).toScreenSpace()
+//		ents.forEach { n: AbstractEntityNode ->
+//			n.position = Vector2(0.7, 0.7).toScreenSpace()
+//		}
+		when (ents.size) {
+			1    -> {
+				ents.first().position = Vector2(0.7, 0.7).toScreenSpace()
+			}
+
+			2    -> {
+				ents.first().position = Vector2(0.63, 0.6).toScreenSpace()
+				ents.last().position = Vector2(0.77, 0.8).toScreenSpace()
+			}
+
+			else -> TODO()
 		}
 	}
 
