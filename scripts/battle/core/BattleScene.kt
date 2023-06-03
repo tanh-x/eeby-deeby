@@ -192,6 +192,11 @@ class BattleScene : Node2D() {
 	 * and all animations have already been played out. Cleans up everything and prepares for a new turn.
 	 */
 	private fun startNewTurn() {
+		/*
+		* Enemy decisions are always determined at the start of a turn. This allows the players to peek
+		* into what enemies are planning, since the enemy's decision is purely a (probabilistic) function
+		* of the current state of the game.
+		* */
 		battleManager.computeEnemyDecisions(RandomDecisionEngine())
 	}
 
