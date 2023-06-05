@@ -10,7 +10,6 @@ import godot.annotation.RegisterFunction
 import godot.global.GD
 import utils.helpers.instantiateScene
 
-
 /**
  * This global singleton is autoloaded by the Godot engine and is persistent throughout the game.
  * This handles everything that cannot be localized to a node or scene, such as scene switching,
@@ -44,6 +43,7 @@ class GameManager : Node() {
 		currentScene = currentRoot.getChild(currentRoot.getChildCount() - 1)
 			?: throw NullPointerException("Root has no children")
 
+		System.gc()
 		initialPrint()
 	}
 

@@ -1,5 +1,6 @@
 package graphics.artist.animator
 
+import godot.Tween.EaseType
 import godot.Tween.TransitionType
 import godot.core.Vector2
 import graphics.artist.Artist2D
@@ -9,7 +10,6 @@ internal sealed class Animator2D protected constructor(
 	internal val artist: Artist2D,
 	internal val numFrames: Int
 ) {
-
 	var complete: Boolean = false
 		protected set(value) {
 			field = field || value
@@ -18,6 +18,7 @@ internal sealed class Animator2D protected constructor(
 	protected var elapsedFrames: Int = 0
 		private set
 
+	protected var easeFunction: EaseType = EaseType.EASE_OUT
 	protected var transitionFunction: TransitionType = TransitionType.TRANS_LINEAR
 		private set
 
@@ -27,6 +28,11 @@ internal sealed class Animator2D protected constructor(
 	}
 
 	companion object {
+		@JvmStatic
+		internal fun <T : Animator2D> T.easing(ease: EaseType): T = apply {
+			this.easeFunction = ease
+		}
+
 		@JvmStatic
 		internal fun <T : Animator2D> T.transition(trans: TransitionType): T = apply {
 			this.transitionFunction = trans

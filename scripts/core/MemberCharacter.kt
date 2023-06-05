@@ -188,7 +188,7 @@ internal enum class MemberCharacter(
 		label = "Wiewior",
 		health = 48.0,
 		shield = 20.0,
-		power = 16.0,
+		power = 17.0,
 		agility = 6.2,
 		psijuPotency = 100.0,
 		psijuEfficacy = 10.0,
