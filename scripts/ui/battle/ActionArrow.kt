@@ -6,7 +6,8 @@ import godot.Path2D
 import godot.annotation.RegisterClass
 import godot.annotation.RegisterFunction
 import godot.core.Vector2
-import graphics.artist.Artist2D
+import graphics.artist.Artist2D.Companion.artist2D
+import graphics.artist.animator.Animator2D
 import utils.helpers.Palette
 import utils.helpers.centroid
 import utils.helpers.node
@@ -25,6 +26,8 @@ class ActionArrow : Path2D() {
 	private lateinit var sourceEndpoint: Control
 	private lateinit var sinkEndpoint: Control
 
+	private lateinit var animator: Animator2D
+
 	internal fun withAction(action: Action): ActionArrow = apply {
 		println("[ActionArrow] Creating new arrow")
 		this.action = action
@@ -32,9 +35,6 @@ class ActionArrow : Path2D() {
 
 	@RegisterFunction
 	override fun _ready() {
-		sourceEndpoint = node("SourceEndpoint")
-		sinkEndpoint = node("SinkEndpoint")
-
 		if (!::action.isInitialized) {
 			throw UninitializedPropertyAccessException(
 				"Action property was not initialized. This is probably because the ActionArrow" +
@@ -43,29 +43,40 @@ class ActionArrow : Path2D() {
 			)
 		}
 
+		name = "ActionArrow $action"
+
+		/*
+		* We may want to add some visual effect on top of the entities later on,
+		* so we have nodes instead of assigning the position directly.
+		* */
+		sourceEndpoint = node("SourceEndpoint")
+		sinkEndpoint = node("SinkEndpoint")
 		sourceEndpoint.setGlobalPosition(action.actor.node.overlay.centroid())
 		sinkEndpoint.setGlobalPosition(action.target.node.overlay.centroid())
-		name = "ActionArrow $action"
-	}
 
-	@RegisterFunction
-	override fun _draw() {
 		val actorPosition: Vector2 = sourceEndpoint.rectGlobalPosition
 		val targetPosition: Vector2 = sinkEndpoint.rectGlobalPosition
 
-		println("Here?")
-
-		Artist2D.drawQuadraticBezier(
-			canvas = this,
+		animator = Animator2D.animateQuadraticBezier(
+			artist = artist2D().set(c = action.type.arrowColor, lw = 8.0),
+			numFrames = 15,
 			from = actorPosition,
 			to = targetPosition,
 			controlPoint = Vector2(
 				x = 0.5 * (actorPosition.x + targetPosition.x),
 				y = 0.5 * (actorPosition.y + targetPosition.y),
 			) - Vector2(0.0, 0.35).toScreenSpace(),
-			numPoints = 48,
-			color = action.type.arrowColor,
-			lineWidth = 8.0
+			numPoints = 32,
 		)
+	}
+
+	@RegisterFunction
+	override fun _physicsProcess(delta: Double) {
+		if (!animator.complete) update()
+	}
+
+	@RegisterFunction
+	override fun _draw() {
+		animator.redraw()
 	}
 }

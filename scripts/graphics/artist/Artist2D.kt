@@ -113,9 +113,10 @@ internal class Artist2D(
 		points: List<Vector2>,
 		color: Color = this.color,
 		lineWidth: Double = this.lineWidth,
-		cyclic: Boolean = false
+		cyclic: Boolean = false,
+		stopIndex: Int = Int.MAX_VALUE
 	) {
-		Companion.drawPath(canvas, points, color, lineWidth, antialiasing, cyclic)
+		Companion.drawPath(canvas, points, color, lineWidth, antialiasing, cyclic, stopIndex)
 	}
 
 	/**
@@ -159,9 +160,10 @@ internal class Artist2D(
 			color: Color,
 			lineWidth: Double,
 			antialiasing: Boolean,
-			cyclic: Boolean = false
+			cyclic: Boolean = false,
+			stopIndex: Int = Int.MAX_VALUE
 		) {
-			for (i: Int in 1 until points.size) {
+			for (i: Int in 1 until points.size.coerceAtMost(stopIndex)) {
 				canvas.drawLine(
 					from = points[i - 1],
 					to = points[i],

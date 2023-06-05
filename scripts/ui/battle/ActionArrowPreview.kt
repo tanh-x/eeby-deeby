@@ -25,7 +25,7 @@ class ActionArrowPreview : Path2D {
 		targets: Collection<AbstractEntity<out AbstractEntityNode>>
 	) : this() {
 		this.source = source
-		this.targets = targets
+		this.targets = targets.filter { it != source }
 	}
 
 	init {

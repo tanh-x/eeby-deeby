@@ -99,7 +99,7 @@ _global_script_classes=[ {
 "language": "Kotlin",
 "path": "res://scripts/ui/PrimaryUI.kt"
 }, {
-"base": "Control",
+"base": "Path2D",
 "class": "ui_battle_ActionArrow",
 "language": "Kotlin",
 "path": "res://scripts/ui/battle/ActionArrow.kt"

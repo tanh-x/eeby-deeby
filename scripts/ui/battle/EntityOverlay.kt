@@ -49,7 +49,7 @@ open class EntityOverlay : Control(), DragDrop {
 	@RegisterFunction
 	override fun gdGetDragData(position: Vector2): Dictionary<String, Int>? {
 		if (!entity.playerSide) return null
-		arrowPreview = ActionArrowPreview(entity, battleScene.enemiesList)
+		arrowPreview = ActionArrowPreview(entity, battleScene.enemiesList + battleScene.charactersList)
 		battleScene.addChild(arrowPreview!!)
 		return GodotDataFactory.newBattleAction(actor = entity)
 	}

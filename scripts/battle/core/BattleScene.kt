@@ -54,15 +54,15 @@ class BattleScene : Node2D() {
 	 * The set of characters present during battle.
 	 */
 	private val characters: LinkedHashMap<Int, AbstractCharacter<out AbstractCharacterNode>> = LinkedHashMap()
-	internal val charactersList: List<AbstractCharacter<out AbstractCharacterNode>>
-		get() = characters.values.toList()
+	internal lateinit var charactersList: List<AbstractCharacter<out AbstractCharacterNode>>
+		private set
 
 	/**
 	 * The set of enemies present during battle.
 	 */
 	private val enemies: LinkedHashMap<Int, AbstractEnemy<out AbstractEnemyNode>> = LinkedHashMap()
-	internal val enemiesList: List<AbstractEnemy<out AbstractEnemyNode>>
-		get() = enemies.values.toList()
+	internal lateinit var enemiesList: List<AbstractEnemy<out AbstractEnemyNode>>
+		private set
 
 	private val actionArrows: HashMap<AbstractCharacter<*>, ActionArrow> = HashMap()
 
@@ -123,6 +123,9 @@ class BattleScene : Node2D() {
 		// Create the characters and enemies from the lists of IDs in the given parameter set
 		params.characters.map(MemberCharacter::createCharacter).forEach(::addCharacter)
 		params.opponents.map(EnemiesEnum::get).forEach(::addEnemy)
+
+		charactersList = characters.values.toList()
+		enemiesList = enemies.values.toList()
 
 		// Carry out initialization operations on the characters
 		characters.forEach { (idx: Int, character: AbstractCharacter<out AbstractCharacterNode>) ->
