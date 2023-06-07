@@ -6,12 +6,12 @@ import battle.core.BattleManager
 import battle.entity.AbstractEntity
 import battle.entity.Active
 import battle.entity.Vulnerable
-import core.MemberCharacter
+import core.PlayerCharacter
 import utils.helpers.math.ramp
 
 internal abstract class AbstractCharacter<N : AbstractCharacterNode>
 internal constructor(
-	factory: MemberCharacter,
+	factory: PlayerCharacter,
 	node: N,
 	playerSide: Boolean = true,
 ) : AbstractEntity<N>(node, playerSide),

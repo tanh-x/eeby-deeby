@@ -1,12 +1,12 @@
 package battle.entity.character.aj
 
 import battle.entity.character.AbstractCharacterNode
-import core.MemberCharacter
+import core.PlayerCharacter
 import godot.annotation.RegisterClass
 import godot.annotation.RegisterFunction
 
 @RegisterClass
-class AjNode : AbstractCharacterNode(entityName = MemberCharacter.AJ.label) {
+class AjNode : AbstractCharacterNode(entityName = PlayerCharacter.AJ.label) {
 	@RegisterFunction
 	override fun _ready() {
 		super._ready()

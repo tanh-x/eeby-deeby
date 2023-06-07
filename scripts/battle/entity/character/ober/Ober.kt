@@ -1,6 +1,6 @@
 package battle.entity.character.ober
 
 import battle.entity.character.AbstractCharacter
-import core.MemberCharacter
+import core.PlayerCharacter
 
-internal class Ober : AbstractCharacter<OberNode>(MemberCharacter.OBER, OberNode())
+internal class Ober : AbstractCharacter<OberNode>(PlayerCharacter.OBER, OberNode())

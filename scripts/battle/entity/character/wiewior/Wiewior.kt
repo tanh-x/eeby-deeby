@@ -6,13 +6,13 @@ import battle.entity.Vulnerable
 import battle.entity.character.AbstractCharacter
 import battle.entity.enemy.AbstractEnemy
 import battle.entity.enemy.AbstractEnemyNode
-import core.MemberCharacter
+import core.PlayerCharacter
 import kotlin.random.Random
 
 /**
  *
  */
-internal class Wiewior : AbstractCharacter<WiewiorNode>(MemberCharacter.WIEWIOR, WiewiorNode()) {
+internal class Wiewior : AbstractCharacter<WiewiorNode>(PlayerCharacter.WIEWIOR, WiewiorNode()) {
 	override fun offenseAction(action: Action, battleState: BattleManager) {
 		action.target as AbstractEnemy<out AbstractEnemyNode>
 		action.target as Vulnerable

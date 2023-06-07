@@ -1,4 +1,4 @@
-package battle.entity.character.ober
+package battle.entity.character.murwan
 
 import battle.entity.character.AbstractCharacterNode
 import core.PlayerCharacter
@@ -6,10 +6,10 @@ import godot.annotation.RegisterClass
 import godot.annotation.RegisterFunction
 
 @RegisterClass
-class OberNode : AbstractCharacterNode(entityName = PlayerCharacter.OBER.label) {
+class MurwanNode: AbstractCharacterNode(entityName = PlayerCharacter.MURWAN.label) {
 	@RegisterFunction
 	override fun _ready() {
 		super._ready()
-		println("OberNode ready")
+		println("MurwanNode ready")
 	}
 }

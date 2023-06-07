@@ -11,6 +11,7 @@ import battle.entity.character.dogman.Dogman
 import battle.entity.character.jad.Jad
 import battle.entity.character.kew.Kew
 import battle.entity.character.maves.Maves
+import battle.entity.character.murwan.Murwan
 import battle.entity.character.ober.Ober
 import battle.entity.character.peek.Peek
 import battle.entity.character.wiewior.Wiewior
@@ -21,7 +22,7 @@ import kotlin.Double.Companion.NaN
  * battles, and is immutable within battles.
  */
 @Suppress("SpellCheckingInspection")
-internal enum class MemberCharacter(
+internal enum class PlayerCharacter(
 	/**
 	 * The display name of the battle.entity.character.
 	 */
@@ -67,8 +68,7 @@ internal enum class MemberCharacter(
 	 * The descriptions for the abilities of a character
 	 */
 	internal val abilityDescription: LinkedHashMap<ActionType, AbilityDescription> = LinkedHashMap(
-		ActionType.values()
-			.associateWith { AbilityDescription.emptyAbility() }
+		ActionType.values().associateWith { AbilityDescription.emptyAbility() }
 	)
 
 ) {
@@ -137,7 +137,7 @@ internal enum class MemberCharacter(
 		shield = 18.0,
 		power = 26.0,
 		agility = 5.8,
-		psijuPotency = 50.0,
+		psijuPotency = 64.0,
 		psijuEfficacy = 10.0
 	) {
 		override fun instantiate() = Peek()
@@ -148,7 +148,7 @@ internal enum class MemberCharacter(
 		label = "Cyg",
 		health = 45.0,
 		shield = 22.0,
-		power = 12.0,
+		power = 16.0,
 		agility = 11.5,
 		psijuPotency = 80.0,
 		psijuEfficacy = 21.0,
@@ -163,7 +163,7 @@ internal enum class MemberCharacter(
 		health = 43.0,
 		shield = 21.0,
 		power = 22.0,
-		agility = 4.5,
+		agility = 5.0,
 		psijuPotency = 140.0,
 		psijuEfficacy = 14.0,
 	) {
@@ -176,8 +176,8 @@ internal enum class MemberCharacter(
 		health = 36.0,
 		shield = 16.0,
 		power = 24.0,
-		agility = 5.0,
-		psijuPotency = 64.0,
+		agility = 4.5,
+		psijuPotency = 56.0,
 		psijuEfficacy = 32.0,
 	) {
 		override fun instantiate() = Kew()
@@ -220,6 +220,24 @@ internal enum class MemberCharacter(
 		psijuEfficacy = 13.0,
 	) {
 		override fun instantiate() = Dogman()
+	},
+
+	PLACEHOLDER_10(
+
+	) {
+		override fun instantiate() = TODO()
+	},
+
+	MURWAN(
+		label = "Murwan",
+		health = 21.0,
+		shield = 18.0,
+		power = 12.0,
+		agility = 13.0,
+		psijuPotency = 87.0,
+		psijuEfficacy = 12.0
+	) {
+		override fun instantiate() = Murwan()
 	};
 
 	/**
@@ -238,9 +256,9 @@ internal enum class MemberCharacter(
 		}
 
 		@JvmStatic
-		internal val characters: Array<MemberCharacter> = MemberCharacter.values()
+		internal val characters: Array<PlayerCharacter> = PlayerCharacter.values()
 
 		@JvmStatic
-		internal operator fun get(id: Int): MemberCharacter = characters[id]
+		internal operator fun get(id: Int): PlayerCharacter = characters[id]
 	}
 }

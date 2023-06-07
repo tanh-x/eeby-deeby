@@ -9,7 +9,7 @@ import battle.entity.character.AbstractCharacterNode
 import battle.entity.enemy.AbstractEnemy
 import battle.entity.enemy.AbstractEnemyNode
 import battle.entity.enemy.EnemiesEnum
-import core.MemberCharacter
+import core.PlayerCharacter
 import godot.Node2D
 import godot.Timer
 import godot.annotation.RegisterClass
@@ -121,7 +121,7 @@ class BattleScene : Node2D() {
 		val params: BattleParams = this.params ?: throw NullPointerException("Battle parameters were not instantiated")
 
 		// Create the characters and enemies from the lists of IDs in the given parameter set
-		params.characters.map(MemberCharacter::createCharacter).forEach(::addCharacter)
+		params.characters.map(PlayerCharacter::createCharacter).forEach(::addCharacter)
 		params.opponents.map(EnemiesEnum::get).forEach(::addEnemy)
 
 		charactersList = characters.values.toList()
