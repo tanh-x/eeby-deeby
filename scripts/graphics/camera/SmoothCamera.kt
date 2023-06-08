@@ -1,7 +1,6 @@
 package graphics.camera
 
 import godot.Camera2D
-import godot.Node2D
 import godot.annotation.RegisterClass
 import godot.annotation.RegisterFunction
 import godot.core.Vector2
@@ -11,14 +10,15 @@ import godot.core.Vector2
  */
 @RegisterClass
 open class SmoothCamera : Camera2D() {
-	protected var target: Node2D? = null
+
+	protected var targetPosition: Vector2? = null
 	internal var targetZoom: Vector2 = Vector2.ONE
 
 	@RegisterFunction
 	override fun _physicsProcess(delta: Double) {
 		zoom = zoom.linearInterpolate(targetZoom, ZOOM_INTERP_FACTOR)
-		target?.run {
-			position = position.linearInterpolate(position, INTERP_FACTOR)
+		targetPosition?.let {
+			this.position = this.position.linearInterpolate(it, INTERP_FACTOR)
 			forceUpdateScroll()
 		}
 	}
@@ -28,11 +28,11 @@ open class SmoothCamera : Camera2D() {
 		 * The interpolation factor for moving to a target position. The difference curve with respect
 		 * to time will decay at most as fast as the function exp(-at), where "a" is the factor.
 		 */
-		const val INTERP_FACTOR: Double = 0.082
+		const val INTERP_FACTOR: Double = 0.0451
 
 		/**
 		 * Same as above, but for zooming.
 		 */
-		const val ZOOM_INTERP_FACTOR: Double = 0.0925
+		const val ZOOM_INTERP_FACTOR: Double = 0.08375
 	}
 }

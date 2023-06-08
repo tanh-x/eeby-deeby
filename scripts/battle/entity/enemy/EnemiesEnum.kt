@@ -22,7 +22,7 @@ internal enum class EnemiesEnum(
 			ent as BasicEnemy
 
 			ent.node.sprite.offset = Vector2(-32, -260)
-			ent.node.sprite.scale = Vector2(1.3, 1.3)
+			ent.node.sprite.scale = Vector2.ONE * 1.21
 		}
 	},
 
@@ -37,7 +37,7 @@ internal enum class EnemiesEnum(
 			ent as BasicEnemy
 
 			ent.node.sprite.offset = Vector2(-60, -200)
-			ent.node.sprite.scale = Vector2(0.85, 0.85)
+			ent.node.sprite.scale = Vector2.ONE * 0.76
 		}
 	}
 	;

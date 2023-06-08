@@ -245,20 +245,10 @@ class BattleScene : Node2D() {
 	 * @param ents The list of entities to distribute.
 	 */
 	private fun distributePlacement(ents: List<AbstractEntityNode>) {
-//		ents.forEach { n: AbstractEntityNode ->
-//			n.position = Vector2(0.7, 0.7).toScreenSpace()
-//		}
-		when (ents.size) {
-			1    -> {
-				ents.first().position = Vector2(0.7, 0.7).toScreenSpace()
-			}
-
-			2    -> {
-				ents.first().position = Vector2(0.63, 0.6).toScreenSpace()
-				ents.last().position = Vector2(0.77, 0.8).toScreenSpace()
-			}
-
-			else -> TODO()
+		ents.forEachIndexed { i: Int, ent: AbstractEntityNode ->
+			ent.position = Vector2(characterPlacements[ents.size][i]).apply {
+				x = 1.0 - x
+			}.toScreenSpace()
 		}
 	}
 
@@ -271,7 +261,8 @@ class BattleScene : Node2D() {
 			/* For 0 characters:*/ arrayOf(),
 			/* 1: */ arrayOf(Vector2(0.28, 0.7)),
 			/* 2: */ arrayOf(Vector2(0.32, 0.6), Vector2(0.24, 0.8)),
-			/* 3: */ arrayOf(Vector2(0.33, 0.58), Vector2(0.23, 0.7), Vector2(0.305, 0.83))
+			/* 3: */ arrayOf(Vector2(0.33, 0.58), Vector2(0.23, 0.7), Vector2(0.305, 0.83)),
+			/* 4: */ arrayOf(Vector2(0.30, 0.51), Vector2(0.38, 0.7), Vector2(0.19, 0.7), Vector2(0.28, 0.87))
 		)
 	}
 }

@@ -11,7 +11,11 @@ internal interface Active {
 
 	fun selfAction(action: Action, battleState: BattleManager) {}
 
-	fun offenseAction(action: Action, battleState: BattleManager) {}
+	fun offenseAction(action: Action, battleState: BattleManager) {
+		action.target as Vulnerable
+
+		action.target.sustainDamage(this.power)
+	}
 
 	fun supportAction(action: Action, battleState: BattleManager) {}
 

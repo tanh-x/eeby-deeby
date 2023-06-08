@@ -1,11 +1,13 @@
 package battle.entity
 
+import godot.Label
 import godot.Node2D
 import godot.Sprite
 import godot.annotation.RegisterClass
 import godot.annotation.RegisterFunction
 import godot.core.Vector2
 import ui.battle.EntityOverlay
+import utils.helpers.node
 
 @RegisterClass
 abstract class AbstractEntityNode() : Node2D() {

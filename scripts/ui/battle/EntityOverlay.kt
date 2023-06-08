@@ -13,6 +13,7 @@ import battle.entity.character.AbstractCharacterNode
 import gds.DragDrop
 import gds.GodotDataFactory
 import godot.Control
+import godot.Label
 import godot.annotation.RegisterClass
 import godot.annotation.RegisterFunction
 import godot.core.Dictionary
@@ -82,6 +83,7 @@ open class EntityOverlay : Control(), DragDrop {
 
 	internal open fun attachEntity(entity: AbstractEntity<out AbstractEntityNode>) {
 		this.entity = entity
+		node<Label>("EntityNameLabel").text = entity.node.entityName
 		if (entity is Vulnerable) {
 			healthbar.entity = entity
 			healthbar.visible = true

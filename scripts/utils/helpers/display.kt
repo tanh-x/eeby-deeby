@@ -1,14 +1,20 @@
 package utils.helpers
 
+import godot.ProjectSettings.getSetting
 import godot.core.Vector2
 
-internal fun Vector2.toScreenSpace(): Vector2 = Vector2(
-	x = this.x * godot.ProjectSettings.getSetting("display/window/size/width") as Long,
-	y = this.y * godot.ProjectSettings.getSetting("display/window/size/height") as Long
+private const val WIDTH_SETTING_PATH: String = "display/window/size/width"
+private const val HEIGHT_SETTING_PATH: String = "display/window/size/height"
+
+val gameWindowSize: Vector2 = Vector2(
+	x = getSetting(WIDTH_SETTING_PATH) as Long,
+	y = getSetting(HEIGHT_SETTING_PATH) as Long
 )
 
+internal fun Vector2.toScreenSpace(): Vector2 = this * gameWindowSize
+
 internal fun toScreenSpace(x: Double, y: Double) = Vector2(
-	x = x * godot.ProjectSettings.getSetting("display/window/size/width") as Long,
-	y = y * godot.ProjectSettings.getSetting("display/window/size/height") as Long
+	x = x * gameWindowSize.x,
+	y = y * gameWindowSize.y
 )
 
