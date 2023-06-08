@@ -20,7 +20,7 @@ class Healthbar : Control() {
 	private lateinit var shieldRect: ReferenceRect
 
 	private var healthBarWidth: Double = 0.0
-	private var currentWidth: Double = 0.0
+	private var currentHealthBarWidth: Double = 0.0
 
 	@RegisterFunction
 	override fun _ready() {
@@ -31,21 +31,29 @@ class Healthbar : Control() {
 		healRect = healthRect.node("HealColorRect")
 
 		healthBarWidth = barRect.rectSize.x
-		currentWidth = 0.0
-		healthRect["margin_right"] = currentWidth
-		damageRect["margin_right"] = currentWidth
-		shieldRect["margin_right"] = currentWidth
+		currentHealthBarWidth = 0.0
+
+		healthRect["margin_right"] = currentHealthBarWidth
+		damageRect["margin_right"] = currentHealthBarWidth
 		healRect["margin_left"] = 0.0
+
+		shieldRect["margin_right"] = currentHealthBarWidth
 	}
 
 	@RegisterFunction
 	fun rerender() {
-		val newWidth: Double = ramp(entity.health / entity.maxHealth * healthBarWidth)
+		updateHealthBar()
 
+		shieldRect.visible = entity.maxShield > 0
+		if (shieldRect.visible) updateShieldBar()
+	}
+
+	private fun updateHealthBar() {
+		val newWidth: Double = ramp(entity.health / entity.maxHealth * healthBarWidth)
 		healthRect["margin_right"] = newWidth
 
-		if (newWidth <= currentWidth) {
-			damageRect["margin_right"] = currentWidth
+		if (newWidth <= currentHealthBarWidth) {
+			damageRect["margin_right"] = currentHealthBarWidth
 			sceneTreeTweener().tweenProperty(
 				_object = damageRect,
 				property = NodePath("margin_right"),
@@ -54,7 +62,7 @@ class Healthbar : Control() {
 			)?.setCurve()
 		} else {
 			damageRect["margin_right"] = newWidth
-			healRect["margin_left"] = currentWidth - newWidth
+			healRect["margin_left"] = currentHealthBarWidth - newWidth
 			sceneTreeTweener().tweenProperty(
 				_object = healRect,
 				property = NodePath("margin_left"),
@@ -63,6 +71,10 @@ class Healthbar : Control() {
 			)?.setCurve()
 		}
 
+		currentHealthBarWidth = newWidth
+	}
+
+	private fun updateShieldBar() {
 		val shieldWidth: Double = ramp(entity.shield / entity.maxShield * healthBarWidth)
 		sceneTreeTweener().tweenProperty(
 			_object = shieldRect,
@@ -70,6 +82,7 @@ class Healthbar : Control() {
 			finalVal = shieldWidth,
 			duration = DFLT_ANIM_DURATION
 		)?.setCurve()
+
 		if (shieldWidth <= 0) {
 			sceneTreeTweener().tweenProperty(
 				_object = shieldRect,
@@ -78,9 +91,6 @@ class Healthbar : Control() {
 				duration = DFLT_ANIM_DURATION
 			)
 		}
-
-
-		currentWidth = newWidth
 	}
 
 	companion object {

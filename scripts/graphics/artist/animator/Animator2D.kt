@@ -20,6 +20,7 @@ internal sealed class Animator2D protected constructor(
 
 	protected var easeFunction: EaseType = EaseType.EASE_OUT
 		private set
+
 	protected var transitionFunction: TransitionType = TransitionType.TRANS_LINEAR
 		private set
 

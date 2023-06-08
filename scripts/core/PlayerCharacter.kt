@@ -92,7 +92,7 @@ internal enum class PlayerCharacter(
 		shield = 64.0,
 		power = 15.0,
 		agility = 3.0,
-		psijuPotency = 315.0,
+		psijuPotency = 410.0,
 		psijuEfficacy = 6.0,
 
 		abilityDescription = linkedMapOf(
@@ -124,7 +124,7 @@ internal enum class PlayerCharacter(
 		shield = 17.0,
 		power = 13.0,
 		agility = 3.5,
-		psijuPotency = 200.0,
+		psijuPotency = 165.0,
 		psijuEfficacy = 20.0,
 	) {
 		override fun instantiate() = Maves()
@@ -160,9 +160,9 @@ internal enum class PlayerCharacter(
 	// Ordinal 5
 	JAD(
 		label = "Jad",
-		health = 43.0,
-		shield = 21.0,
-		power = 22.0,
+		health = 50.0,
+		shield = 20.0,
+		power = 24.0,
 		agility = 5.0,
 		psijuPotency = 140.0,
 		psijuEfficacy = 14.0,
@@ -173,12 +173,12 @@ internal enum class PlayerCharacter(
 	// Ordinal 6
 	KEW(
 		label = "Kew",
-		health = 36.0,
-		shield = 16.0,
+		health = 32.0,
+		shield = 24.0,
 		power = 24.0,
-		agility = 4.5,
+		agility = 4.18,
 		psijuPotency = 56.0,
-		psijuEfficacy = 32.0,
+		psijuEfficacy = 36.0,
 	) {
 		override fun instantiate() = Kew()
 	},
@@ -223,7 +223,13 @@ internal enum class PlayerCharacter(
 	},
 
 	PLACEHOLDER_10(
-
+		label = "Placeholder",
+		health = 18.0,
+		shield = 36.0,
+		power = 10.0,
+		agility = 8.5,
+		psijuPotency = 190.0,
+		psijuEfficacy = 24.0,
 	) {
 		override fun instantiate() = TODO()
 	},

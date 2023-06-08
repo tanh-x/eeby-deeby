@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/grapeman.png-a33f5a9b77ef8560ed21bfab8cb325f5.stex"
+path="res://.import/card-head.png-b8f55a311b8a2451525f6af91f4bb477.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/entity/enemy/grapeman/grapeman.png"
-dest_files=[ "res://.import/grapeman.png-a33f5a9b77ef8560ed21bfab8cb325f5.stex" ]
+source_file="res://assets/battle/cards/card-head.png"
+dest_files=[ "res://.import/card-head.png-b8f55a311b8a2451525f6af91f4bb477.stex" ]
 
 [params]
 

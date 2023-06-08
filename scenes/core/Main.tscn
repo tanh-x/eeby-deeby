@@ -16,7 +16,7 @@ __meta__ = {
 text = "{
 	\"stage_name\": \"debug\",
 	\"characters\": [1],
-	\"opponents\": [0]
+	\"opponents\": [0,1]
 }"
 
 [editable path="CanvasLayer/PregameMenu"]

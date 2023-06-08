@@ -25,8 +25,7 @@ class GameManager : Node() {
 	/**
 	 * The root of the scene tree.
 	 */
-	internal lateinit var currentRoot: Viewport
-		private set
+	private lateinit var currentRoot: Viewport
 
 	/**
 	 * For communication with [BattleScene]
@@ -122,7 +121,7 @@ class GameManager : Node() {
 			val status: String = if (godot.OS.isDebugBuild()) " [-] DEVELOPMENT" else " [-] PRODUCTION    "
 			GD.print(
 				"┌──────────────────────┬────────────────────┐\n" +
-				"│ EEBY DEEBY v0.00.09  │ build 2023-06-03   │\n" +
+				"│ EEBY DEEBY v0.00.10  │ build 2023-06-07   │\n" +
 				"├──────────────────────┴────────────────────┤\n" +
 				"│ ${status.padEnd(20)}                      │\n" +
 				"└───────────────────────────────────────────┘"

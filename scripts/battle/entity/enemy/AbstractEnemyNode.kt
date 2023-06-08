@@ -35,6 +35,6 @@ abstract class AbstractEnemyNode : AbstractEntityNode {
 	override fun createSprite(): Sprite = Sprite().apply {
 		val identifier: String = entityName.lowercase()
 		val assetDir: String = ENEMY_ASSET_DIR + identifier
-		texture = GD.load("$assetDir/$identifier.png")
+		texture = GD.load("$assetDir/default.png")
 	}
 }

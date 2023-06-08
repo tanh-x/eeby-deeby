@@ -6,6 +6,7 @@ internal enum class Card(
 ) {
 	NONE(label = "None")
 
+
 	;
 
 	companion object {
