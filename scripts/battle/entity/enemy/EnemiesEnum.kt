@@ -13,9 +13,9 @@ internal enum class EnemiesEnum(
 ) {
 	GRAPEMAN(
 		enemyName = "Grapeman",
-		health = 50.0,
-		shield = 2.0,
-		power = 8.0,
+		health = 90.0,
+		shield = 15.0,
+		power = 10.0,
 		agility = 2.0,
 	) {
 		override fun applyOnInit(ent: AbstractEnemy<out AbstractEnemyNode>) {
@@ -28,9 +28,9 @@ internal enum class EnemiesEnum(
 
 	GREENMAN(
 		enemyName = "Greenman",
-		health = 34.0,
+		health = 70.0,
 		shield = 0.0,
-		power = 6.0,
+		power = 5.0,
 		agility = 3.0,
 	) {
 		override fun applyOnInit(ent: AbstractEnemy<out AbstractEnemyNode>) {

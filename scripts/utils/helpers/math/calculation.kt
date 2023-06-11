@@ -36,6 +36,14 @@ internal val DEFAULT_PREFIXES: Array<String> = arrayOf(
 )
 
 /**
+ * Returns the standard deviation of a [Collection] of [Double]s
+ */
+internal fun Collection<Double>.stdev(): Double {
+	val mean: Double = this.average()
+	return sqrt((this.sumOf { (it - mean) * (it - mean) }) / (this.size - 1))
+}
+
+/**
  * Converts a [Double] into a metric format
  */
 internal fun Double.formatted(

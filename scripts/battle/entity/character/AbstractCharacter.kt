@@ -25,7 +25,7 @@ internal constructor(
 	 * The maximum health value of the character. Initializes to the value stored in [PlayerCharacter],
 	 * but may change during battle.
 	 */
-	override var maxHealth: Double = playerCharacter.health
+	override var maxHealth: Double = playerCharacter.stats.health
 		set(value) {
 			field = ramp(value)
 			if (node.isReady) node.overlay.updateAll()
@@ -34,7 +34,7 @@ internal constructor(
 	/**
 	 * The current health value of the character.
 	 */
-	override var health: Double = playerCharacter.health
+	override var health: Double = playerCharacter.stats.health
 		set(value) {
 			field = ramp(value)
 			if (node.isReady) node.overlay.updateAll()
@@ -44,7 +44,7 @@ internal constructor(
 	 * The maximum shield value of the character. Initializes the value stored in [PlayerCharacter],
 	 * but may change during battle.
 	 */
-	override var maxShield: Double = playerCharacter.shield
+	override var maxShield: Double = playerCharacter.stats.shield
 		set(value) {
 			field = ramp(value)
 			if (node.isReady) node.overlay.updateAll()
@@ -53,7 +53,7 @@ internal constructor(
 	/**
 	 * The current shield value of the character.
 	 */
-	override var shield: Double = playerCharacter.shield
+	override var shield: Double = playerCharacter.stats.shield
 		set(value) {
 			field = ramp(value)
 			if (node.isReady) node.overlay.updateAll()
@@ -62,7 +62,7 @@ internal constructor(
 	/**
 	 * The current power value of the character.
 	 */
-	override var power: Double = playerCharacter.power
+	override var power: Double = playerCharacter.stats.power
 		set(value) {
 			field = ramp(value)
 		}
@@ -70,7 +70,7 @@ internal constructor(
 	/**
 	 * The current agility value of the character.
 	 */
-	override var agility: Double = playerCharacter.agility
+	override var agility: Double = playerCharacter.stats.agility
 		set(value) {
 			field = ramp(value)
 		}
@@ -79,13 +79,13 @@ internal constructor(
 	 * The current Psiju potency value of the character. Will not be mutated during the battle,
 	 * except for potentially during initialization.
 	 */
-	internal val psijuPotency: Double = playerCharacter.psijuPotency
+	internal val psijuPotency: Double = playerCharacter.stats.psijuPotency
 
 	/**
 	 * The current Psiju efficacy value of the character. Will not be mutated during the battle,
 	 * except for potentially during initialization
 	 */
-	internal val psijuEfficacy: Double = playerCharacter.psijuEfficacy
+	internal val psijuEfficacy: Double = playerCharacter.stats.psijuEfficacy
 
 	/**
 	 * Whether the character is incapacitated

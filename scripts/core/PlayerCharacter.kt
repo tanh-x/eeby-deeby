@@ -15,7 +15,9 @@ import battle.entity.character.murwan.Murwan
 import battle.entity.character.ober.Ober
 import battle.entity.character.peek.Peek
 import battle.entity.character.wiewior.Wiewior
-import kotlin.Double.Companion.NaN
+import godot.global.GD
+import utils.helpers.math.formatted
+import utils.helpers.math.stdev
 
 /**
  * Stores the stats of each player battle.entity.character. Will mutate over the course of gameplay outside of
@@ -24,45 +26,14 @@ import kotlin.Double.Companion.NaN
 @Suppress("SpellCheckingInspection")
 internal enum class PlayerCharacter(
 	/**
-	 * The display name of the battle.entity.character.
+	 * The display name of the character.
 	 */
 	internal var label: String = "default",
 
 	/**
-	 * The health value.
-	 * Average is 35-40, low variance.
+	 * The stats values of this character
 	 */
-	internal var health: Double = NaN,
-
-	/**
-	 * The shield value.
-	 * Average is around 20, low variance.
-	 */
-	internal var shield: Double = NaN,
-
-	/**
-	 * The power, which will be used to as scaling for standard attacks.
-	 * Average is around 20, medium-low variance.
-	 */
-	internal var power: Double = NaN,
-
-	/**
-	 * The agility, which will affect attack order as well as certain actions.
-	 * Average is around 5, medium-high variance.
-	 */
-	internal var agility: Double = NaN,
-
-	/**
-	 * How powerful psiju actions are.
-	 * Average is 100, medium variance except for special cases.
-	 */
-	internal var psijuPotency: Double = NaN,
-
-	/**
-	 * How often can psiju actions be used. Can be used to facilitate other battle.entity.character's psiju actions.
-	 * Average is around 15, high variance. Inversely proportional to potency
-	 */
-	internal var psijuEfficacy: Double = NaN,
+	internal val stats: CharacterStats,
 
 	/**
 	 * The descriptions for the abilities of a character
@@ -75,12 +46,14 @@ internal enum class PlayerCharacter(
 	// Ordinal 0
 	BNUUY(
 		label = "Bnuuy",
-		health = 5.0,
-		shield = 2.0,
-		power = 3.0,
-		agility = 36.0,
-		psijuPotency = 1660.0,
-		psijuEfficacy = 0.5,
+		stats = CharacterStats(
+			health = 10.0,
+			shield = 2.0,
+			power = 3.0,
+			agility = 36.0,
+			psijuPotency = 1660.0,
+			psijuEfficacy = 0.5,
+		)
 	) {
 		override fun instantiate() = Bnuuy()
 	},
@@ -88,13 +61,14 @@ internal enum class PlayerCharacter(
 	// Ordinal 1
 	AJ(
 		label = "AJ",
-		health = 16.0,
-		shield = 64.0,
-		power = 15.0,
-		agility = 3.0,
-		psijuPotency = 410.0,
-		psijuEfficacy = 6.0,
-
+		stats = CharacterStats(
+			health = 24.0,
+			shield = 48.0,
+			power = 15.0,
+			agility = 3.0,
+			psijuPotency = 512.0,
+			psijuEfficacy = 5.0,
+		),
 		abilityDescription = linkedMapOf(
 			ActionType.OFFENSE to AbilityDescription(
 				abilityName = "Astral Strings",
@@ -120,12 +94,14 @@ internal enum class PlayerCharacter(
 	// Ordinal 2
 	MAVES(
 		label = "Maves",
-		health = 32.0,
-		shield = 17.0,
-		power = 13.0,
-		agility = 3.5,
-		psijuPotency = 165.0,
-		psijuEfficacy = 20.0,
+		stats = CharacterStats(
+			health = 52.0,
+			shield = 32.0,
+			power = 20.0,
+			agility = 3.5,
+			psijuPotency = 145.0,
+			psijuEfficacy = 16.0,
+		),
 	) {
 		override fun instantiate() = Maves()
 	},
@@ -133,12 +109,14 @@ internal enum class PlayerCharacter(
 	// Ordinal 3
 	PEEK(
 		label = "Peek",
-		health = 60.0,
-		shield = 18.0,
-		power = 26.0,
-		agility = 5.8,
-		psijuPotency = 64.0,
-		psijuEfficacy = 10.0
+		stats = CharacterStats(
+			health = 100.0,
+			shield = 12.0,
+			power = 27.0,
+			agility = 5.8,
+			psijuPotency = 56.0,
+			psijuEfficacy = 10.0
+		),
 	) {
 		override fun instantiate() = Peek()
 	},
@@ -146,12 +124,14 @@ internal enum class PlayerCharacter(
 	// Ordinal 4
 	CYG(
 		label = "Cyg",
-		health = 45.0,
-		shield = 22.0,
-		power = 16.0,
-		agility = 11.5,
-		psijuPotency = 80.0,
-		psijuEfficacy = 21.0,
+		stats = CharacterStats(
+			health = 72.0,
+			shield = 21.0,
+			power = 15.0,
+			agility = 11.5,
+			psijuPotency = 80.0,
+			psijuEfficacy = 21.0,
+		),
 
 		) {
 		override fun instantiate() = Cyg()
@@ -160,12 +140,14 @@ internal enum class PlayerCharacter(
 	// Ordinal 5
 	JAD(
 		label = "Jad",
-		health = 50.0,
-		shield = 20.0,
-		power = 24.0,
-		agility = 5.0,
-		psijuPotency = 140.0,
-		psijuEfficacy = 14.0,
+		stats = CharacterStats(
+			health = 65.0,
+			shield = 24.0,
+			power = 14.0,
+			agility = 5.0,
+			psijuPotency = 140.0,
+			psijuEfficacy = 16.0,
+		),
 	) {
 		override fun instantiate() = Jad()
 	},
@@ -173,12 +155,14 @@ internal enum class PlayerCharacter(
 	// Ordinal 6
 	KEW(
 		label = "Kew",
-		health = 32.0,
-		shield = 24.0,
-		power = 24.0,
-		agility = 4.18,
-		psijuPotency = 56.0,
-		psijuEfficacy = 36.0,
+		stats = CharacterStats(
+			health = 48.0,
+			shield = 32.0,
+			power = 24.0,
+			agility = 4.18,
+			psijuPotency = 56.0,
+			psijuEfficacy = 50.0,
+		),
 	) {
 		override fun instantiate() = Kew()
 	},
@@ -186,12 +170,14 @@ internal enum class PlayerCharacter(
 	// Ordinal 7
 	WIEWIOR(
 		label = "Wiewior",
-		health = 48.0,
-		shield = 20.0,
-		power = 17.0,
-		agility = 6.2,
-		psijuPotency = 100.0,
-		psijuEfficacy = 10.0,
+		stats = CharacterStats(
+			health = 83.0,
+			shield = 20.0,
+			power = 16.0,
+			agility = 6.2,
+			psijuPotency = 100.0,
+			psijuEfficacy = 10.0,
+		),
 	) {
 		override fun instantiate() = Wiewior()
 	},
@@ -199,12 +185,14 @@ internal enum class PlayerCharacter(
 	// Ordinal 8
 	OBER(
 		label = "Ober",
-		health = 35.0,
-		shield = 35.0,
-		power = 9.0,
-		agility = 4.0,
-		psijuPotency = 167.0,
-		psijuEfficacy = 15.0,
+		stats = CharacterStats(
+			health = 61.0,
+			shield = 35.0,
+			power = 8.0,
+			agility = 4.0,
+			psijuPotency = 155.0,
+			psijuEfficacy = 15.0,
+		),
 	) {
 		override fun instantiate() = Ober()
 	},
@@ -212,36 +200,42 @@ internal enum class PlayerCharacter(
 	// Ordinal 9
 	DOGMAN(
 		label = "Dogman",
-		health = 38.0,
-		shield = 36.0,
-		power = 17.0,
-		agility = 5.5,
-		psijuPotency = 126.0,
-		psijuEfficacy = 13.0,
+		stats = CharacterStats(
+			health = 61.0,
+			shield = 30.0,
+			power = 16.0,
+			agility = 5.5,
+			psijuPotency = 115.0,
+			psijuEfficacy = 14.0,
+		),
 	) {
 		override fun instantiate() = Dogman()
 	},
 
 	PLACEHOLDER_10(
 		label = "Placeholder",
-		health = 18.0,
-		shield = 36.0,
-		power = 10.0,
-		agility = 8.5,
-		psijuPotency = 190.0,
-		psijuEfficacy = 24.0,
+		stats = CharacterStats(
+			health = 40.0,
+			shield = 40.0,
+			power = 12.0,
+			agility = 9.0,
+			psijuPotency = 160.0,
+			psijuEfficacy = 17.0,
+		),
 	) {
 		override fun instantiate() = TODO()
 	},
 
 	MURWAN(
 		label = "Murwan",
-		health = 21.0,
-		shield = 18.0,
-		power = 12.0,
-		agility = 13.0,
-		psijuPotency = 87.0,
-		psijuEfficacy = 12.0
+		stats = CharacterStats(
+			health = 48.0,
+			shield = 24.0,
+			power = 16.0,
+			agility = 13.0,
+			psijuPotency = 87.0,
+			psijuEfficacy = 12.0
+		),
 	) {
 		override fun instantiate() = Murwan()
 	};
@@ -266,5 +260,36 @@ internal enum class PlayerCharacter(
 
 		@JvmStatic
 		internal operator fun get(id: Int): PlayerCharacter = characters[id]
+
+		@JvmStatic
+		internal fun printStatSheet() {
+			GD.print(
+				"┌───────────────────────────────────────────\n" +
+				"│ CHARACTER STAT BALANCING SHEET   \n" +
+				"├──────────────┬─────────────────┬──────────\n" +
+				"│ Character    │ Str.     z-score│ Psi.     z-score\n" +
+				"├──────────────┼─────────────────┼──────────"
+			)
+			val strHeuristics: List<Double> = characters.map { it.stats.calcStrengthHeuristic() }
+			val strMean: Double = strHeuristics.average()
+			val strStdev: Double = strHeuristics.stdev()
+
+			val psiHeuristics: List<Double> = characters.map { it.stats.calcPsijuHeuristic() }
+			val psiMean: Double = psiHeuristics.average()
+			val psiStdev: Double = psiHeuristics.stdev()
+
+			// @formatter:off
+			PlayerCharacter.characters.forEachIndexed { i: Int, ch: PlayerCharacter ->
+				if (i == 0) return@forEachIndexed
+				GD.print(
+					"| ${ch.label.padEnd(12)} " +
+					"| ${strHeuristics[i].formatted().padEnd(7)} " +
+						"${((strHeuristics[i] - strMean) / strStdev).formatted(digits = 4).padStart(7)}σ" +
+					"| ${psiHeuristics[i].formatted().padEnd(7)} " +
+						"${((psiHeuristics[i] - psiMean) / psiStdev).formatted(digits = 4).padStart(7)}σ" +
+					"| ${strHeuristics[i] + psiHeuristics[i]}"
+				)
+			}
+		}
 	}
 }

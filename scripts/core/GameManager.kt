@@ -9,6 +9,7 @@ import godot.annotation.RegisterClass
 import godot.annotation.RegisterFunction
 import godot.global.GD
 import utils.helpers.instantiateScene
+import utils.helpers.math.formatted
 
 /**
  * This global singleton is autoloaded by the Godot engine and is persistent throughout the game.
@@ -49,15 +50,15 @@ class GameManager : Node() {
 	/**
 	 * Not a lot of functionality goes in here, except for certain global keybinds
 	 */
-//	@RegisterFunction
-//	override fun _process(delta: Double) {
-//
-//	}
+	@RegisterFunction
+	override fun _process(delta: Double) {
 
-//	@RegisterFunction
-//	override fun _physicsProcess(delta: Double) {
-//
-//	}
+	}
+
+	@RegisterFunction
+	override fun _physicsProcess(delta: Double) {
+
+	}
 
 	/**
 	 * Only from the "Main" scene, the method switches to a battle, specified by the [battleParams] parameter.
@@ -122,11 +123,13 @@ class GameManager : Node() {
 			val status: String = if (godot.OS.isDebugBuild()) " [-] DEVELOPMENT" else " [-] PRODUCTION    "
 			GD.print(
 				"┌──────────────────────┬────────────────────┐\n" +
-				"│ EEBY DEEBY v0.00.10  │ build 2023-06-07   │\n" +
+				"│ EEBY DEEBY v0.00.11  │ build 2023-06-11   │\n" +
 				"├──────────────────────┴────────────────────┤\n" +
 				"│ ${status.padEnd(20)}                      │\n" +
 				"└───────────────────────────────────────────┘"
 			)
+
+			PlayerCharacter.printStatSheet()
 		}
 	}
 }
