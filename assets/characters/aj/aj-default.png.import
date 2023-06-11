@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/default.png-cc0204967b72481f5e1cd547def7062b.stex"
+path="res://.import/aj-default.png-4fe8a73a32f4d6a0e00d638ce58debee.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/characters/wiewior/default.png"
-dest_files=[ "res://.import/default.png-cc0204967b72481f5e1cd547def7062b.stex" ]
+source_file="res://assets/characters/aj/aj-default.png"
+dest_files=[ "res://.import/aj-default.png-4fe8a73a32f4d6a0e00d638ce58debee.stex" ]
 
 [params]
 

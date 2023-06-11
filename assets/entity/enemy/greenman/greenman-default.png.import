@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/default.png-eb6c6415b4f62ef0dd1ad7cfb80711e9.stex"
+path="res://.import/greenman-default.png-62838199088b820eccd10c567c440236.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/entity/enemy/grapeman/default.png"
-dest_files=[ "res://.import/default.png-eb6c6415b4f62ef0dd1ad7cfb80711e9.stex" ]
+source_file="res://assets/entity/enemy/greenman/greenman-default.png"
+dest_files=[ "res://.import/greenman-default.png-62838199088b820eccd10c567c440236.stex" ]
 
 [params]
 

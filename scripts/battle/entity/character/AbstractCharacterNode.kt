@@ -36,7 +36,7 @@ abstract class AbstractCharacterNode : AbstractEntityNode {
 	override fun createSprite(): Sprite = Sprite().apply {
 		val identifier: String = entityName.lowercase()
 		val assetDir: String = CHARACTER_ASSET_DIR + identifier
-		texture = GD.load("$assetDir/default.png")
+		texture = GD.load("$assetDir/$identifier-default.png")
 
 		offset = Vector2(0, -650.0)  // Place the feet of the sprite at the node's center
 	}
