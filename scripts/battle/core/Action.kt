@@ -56,6 +56,8 @@ internal data class Action internal constructor(
 			}
 
 			ActionType.SPECIAL -> {}
+
+			ActionType.PSIONIC -> {}
 		}
 		return true
 	}

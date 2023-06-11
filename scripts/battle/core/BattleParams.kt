@@ -2,6 +2,7 @@ package battle.core
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import utils.helpers.duplicated
 
 /**
  * Every parameter needed to completely communicate the initial state of the battle.
@@ -14,7 +15,10 @@ data class BattleParams(
 	@SerialName("characters") val characters: Array<Int>,
 	@SerialName("opponents") val opponents: Array<Int>,
 ) {
-	fun isValid(): Boolean = true
+	fun isValid(): Boolean =
+		characters.size in 1..MAX_NUM_CHARACTERS &&
+		opponents.size in 1..MAX_NUM_ENEMIES &&
+		!characters.duplicated()
 
 	override fun equals(other: Any?): Boolean {
 		if (this === other) return true
@@ -27,11 +31,22 @@ data class BattleParams(
 		return opponents.contentEquals(other.opponents)
 	}
 
-	override fun hashCode(): Int {
-		var result = stageName.hashCode()
-		result = 31 * result + characters.contentHashCode()
-		result = 31 * result + opponents.contentHashCode()
-		return result
-	}
+	override fun hashCode(): Int =
+		961 * stageName.hashCode() +
+		31 * characters.contentHashCode() +
+		opponents.contentHashCode()
 
+	companion object {
+		/**
+		 *
+		 * @see BattleScene.Companion.characterPlacements
+		 */
+		const val MAX_NUM_CHARACTERS: Int = 4
+
+		/**
+		 *
+		 * @see BattleScene.distributePlacement
+		 */
+		const val MAX_NUM_ENEMIES: Int = 4
+	}
 }

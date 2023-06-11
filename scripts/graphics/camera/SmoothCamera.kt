@@ -26,7 +26,7 @@ open class SmoothCamera : Camera2D() {
 	companion object {
 		/**
 		 * The interpolation factor for moving to a target position. The difference curve with respect
-		 * to time will decay at most as fast as the function exp(-at), where "a" is the factor.
+		 * to time t will decay as fast the function (1 - a)^t, where "a" is the factor.
 		 */
 		const val INTERP_FACTOR: Double = 0.0451
 

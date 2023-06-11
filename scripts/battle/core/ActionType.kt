@@ -3,8 +3,11 @@ package battle.core
 import godot.core.Color
 import utils.helpers.Palette
 
+/**
+ *
+ */
 enum class ActionType(
-	internal val arrowColor: Color = Palette.AMBER_100
+	internal val arrowColor: Color
 ) {
 	/**
 	 * An action that is targeted towards their opponent
@@ -24,6 +27,11 @@ enum class ActionType(
 	/**
 	 * A special action, optional.
 	 */
-	SPECIAL(Palette.VIOLET_400)
+	SPECIAL(Palette.VIOLET_400),
+
+	/**
+	 * An "ultimate", psiju-based ability.
+	 */
+	PSIONIC(Palette.AMBER_100)
 }
 

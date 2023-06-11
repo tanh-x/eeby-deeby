@@ -67,6 +67,7 @@ class GameManager : Node() {
 	 * generates more or less the same battle).
 	 */
 	fun switchToBattle(battleParams: BattleParams) {
+		if (!battleParams.isValid()) throw IllegalArgumentException("Bad parameters were given for this battle, rejecting.")
 		this.battleParams = battleParams
 		if (currentScene.name != "Main") throw IllegalStateException("Invalid call source")  // TODO: Dangerous
 		callDeferred("initialize_battle_scene")  // Deferred call to free the current scene

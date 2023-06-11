@@ -5,8 +5,13 @@ import battle.core.Action
 import battle.core.ActionType
 import battle.entity.AbstractEntity
 import battle.entity.Active
-import java.util.Random
+import java.util.*
 
+/**
+ * Outputs a completely random decision for each enemy entity.
+ *
+ * @see	DecisionEngine
+ */
 internal class RandomDecisionEngine : DecisionEngine {
 	val rng: Random = Random()
 

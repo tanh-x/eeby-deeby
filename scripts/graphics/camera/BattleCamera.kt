@@ -60,6 +60,6 @@ class BattleCamera : SmoothCamera() {
 		const val CAMERA_FOLLOW_FACTOR: Double = 0.004
 		const val ZOOM_INCREMENT: Double = 0.015
 		const val MAX_ZOOM: Double = 2.0
-		const val MIN_ZOOM: Double = 0.333
+		const val MIN_ZOOM: Double = 0.5
 	}
 }

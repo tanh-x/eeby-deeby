@@ -62,10 +62,12 @@ class BattleManager internal constructor(
 			.sortedByDescending { pair: Pair<Active, Action> -> pair.first.agility }
 
 		actions.forEach { (actor: Active, action: Action) ->
-			if (actor is AbstractCharacter<*>) {
-				actor.dispatchAction(action, this)
-			} else if (actor is AbstractEnemy<*>) {
-				actor.dispatchAction(action, this)
+			when (action.type) {
+				ActionType.SELF    -> actor.selfAction(action, this)
+				ActionType.OFFENSE -> actor.offenseAction(action, this)
+				ActionType.SUPPORT -> actor.supportAction(action, this)
+				ActionType.SPECIAL -> actor.specialAction(action, this)
+				ActionType.PSIONIC -> actor.psionicAction(action, this)
 			}
 		}
 

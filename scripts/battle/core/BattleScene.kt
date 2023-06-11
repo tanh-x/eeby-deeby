@@ -206,6 +206,9 @@ class BattleScene : Node2D() {
 		battleManager.computeEnemyDecisions(RandomDecisionEngine())
 	}
 
+	/**
+	 * Adds a new character into the battle, which includes the character map and the scene tree
+	 */
 	private fun addCharacter(character: AbstractCharacter<*>) {
 		character.battleId = characters.size
 
@@ -256,6 +259,9 @@ class BattleScene : Node2D() {
 		@JvmStatic
 		val DEFAULT_CHARACTER_SCALE: Vector2 = Vector2(0.285, 0.285)
 
+		/**
+		 * Defines the position of each character.
+		 */
 		@JvmStatic
 		val characterPlacements: Array<Array<Vector2>> = arrayOf(
 			/* For 0 characters:*/ arrayOf(),

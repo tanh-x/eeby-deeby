@@ -1,81 +1,101 @@
 package battle.entity.character
 
-import battle.core.Action
-import battle.core.ActionType.*
-import battle.core.BattleManager
 import battle.entity.AbstractEntity
 import battle.entity.Active
 import battle.entity.Vulnerable
 import core.PlayerCharacter
 import utils.helpers.math.ramp
 
+/**
+ * A [AbstractCharacter] represents a character in battle. The stats are loaded from the
+ * [PlayerCharacter] enum data class. Changing the stat values in this object has no effect
+ * on the [PlayerCharacter] data, which is the persistent stat storage of the game.
+ *
+ * @param playerCharacter The corresponding enum entry in [PlayerCharacter]
+ * @param node The character's Node that lives in the scene
+ */
 internal abstract class AbstractCharacter<N : AbstractCharacterNode>
 internal constructor(
-	factory: PlayerCharacter,
+	playerCharacter: PlayerCharacter,
 	node: N,
-	playerSide: Boolean = true,
-) : AbstractEntity<N>(node, playerSide),
+) : AbstractEntity<N>(node, true),
 	Vulnerable,
 	Active {
-	override var maxHealth: Double = factory.health
+	/**
+	 * The maximum health value of the character. Initializes to the value stored in [PlayerCharacter],
+	 * but may change during battle.
+	 */
+	override var maxHealth: Double = playerCharacter.health
 		set(value) {
 			field = ramp(value)
 			if (node.isReady) node.overlay.updateAll()
 		}
 
-	override var health: Double = factory.health
+	/**
+	 * The current health value of the character.
+	 */
+	override var health: Double = playerCharacter.health
 		set(value) {
 			field = ramp(value)
 			if (node.isReady) node.overlay.updateAll()
 		}
 
-	override var shield: Double = factory.shield
+	/**
+	 * The maximum shield value of the character. Initializes the value stored in [PlayerCharacter],
+	 * but may change during battle.
+	 */
+	override var maxShield: Double = playerCharacter.shield
 		set(value) {
 			field = ramp(value)
 			if (node.isReady) node.overlay.updateAll()
 		}
 
-	override var maxShield: Double = factory.shield
+	/**
+	 * The current shield value of the character.
+	 */
+	override var shield: Double = playerCharacter.shield
 		set(value) {
 			field = ramp(value)
 			if (node.isReady) node.overlay.updateAll()
 		}
 
-	override var power: Double = factory.power
+	/**
+	 * The current power value of the character.
+	 */
+	override var power: Double = playerCharacter.power
 		set(value) {
 			field = ramp(value)
 		}
 
-	override var agility: Double = factory.agility
+	/**
+	 * The current agility value of the character.
+	 */
+	override var agility: Double = playerCharacter.agility
 		set(value) {
 			field = ramp(value)
 		}
 
-	internal var psijuPotency: Double = factory.psijuPotency
-		set(value) {
-			field = ramp(value)
-		}
+	/**
+	 * The current Psiju potency value of the character. Will not be mutated during the battle,
+	 * except for potentially during initialization.
+	 */
+	internal val psijuPotency: Double = playerCharacter.psijuPotency
 
-	internal var psijuEfficacy: Double = factory.psijuEfficacy
-		set(value) {
-			field = ramp(value)
-		}
+	/**
+	 * The current Psiju efficacy value of the character. Will not be mutated during the battle,
+	 * except for potentially during initialization
+	 */
+	internal val psijuEfficacy: Double = playerCharacter.psijuEfficacy
 
+	/**
+	 * Whether the character is incapacitated
+	 */
 	override var isDisabled: Boolean = false
 
 	override fun sustainDamage(damage: Double): Double {
 		return super.sustainDamage(damage).also {
 			node.overlay.spawnDamageNumber(it)
 			println("$this took $it damage")
-		}
-	}
-
-	override fun dispatchAction(action: Action, battleState: BattleManager) {
-		when (action.type) {
-			SELF    -> selfAction(action, battleState)
-			OFFENSE -> offenseAction(action, battleState)
-			SUPPORT -> supportAction(action, battleState)
-			SPECIAL -> specialAction(action, battleState)
 		}
 	}
 }
