@@ -18,7 +18,7 @@ internal interface Active {
 
 	fun supportAction(action: Action, battleState: BattleManager) {}
 
-	fun specialAction(action: Action, battleState: BattleManager) {}
 
 	fun psionicAction(action: Action, battleState: BattleManager) {}
+	fun specialAction(action: Action, battleState: BattleManager) {}
 }

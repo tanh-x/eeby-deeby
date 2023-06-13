@@ -4,8 +4,8 @@ import EngineSingletons.getManager
 import battle.ai.RandomDecisionEngine
 import battle.entity.AbstractEntityNode
 import battle.entity.Vulnerable
-import battle.entity.character.AbstractCharacter
-import battle.entity.character.AbstractCharacterNode
+import battle.entity.characters.AbstractCharacter
+import battle.entity.characters.AbstractCharacterNode
 import battle.entity.enemy.AbstractEnemy
 import battle.entity.enemy.AbstractEnemyNode
 import battle.entity.enemy.EnemiesEnum

@@ -2,33 +2,35 @@ package core
 
 import battle.core.AbilityDescription
 import battle.core.ActionType
-import battle.entity.character.AbstractCharacter
-import battle.entity.character.AbstractCharacterNode
-import battle.entity.character.aj.Aj
-import battle.entity.character.bnuuy.Bnuuy
-import battle.entity.character.cyg.Cyg
-import battle.entity.character.dogman.Dogman
-import battle.entity.character.jad.Jad
-import battle.entity.character.kew.Kew
-import battle.entity.character.maves.Maves
-import battle.entity.character.murwan.Murwan
-import battle.entity.character.ober.Ober
-import battle.entity.character.peek.Peek
-import battle.entity.character.wiewior.Wiewior
+import battle.entity.characters.AbstractCharacter
+import battle.entity.characters.AbstractCharacterNode
+import battle.entity.characters.aeliza.Aeliza
+import battle.entity.characters.aj.Aj
+import battle.entity.characters.bnuuy.Bnuuy
+import battle.entity.characters.cyg.Cyg
+import battle.entity.characters.dogman.Dogman
+import battle.entity.characters.jad.Jad
+import battle.entity.characters.kew.Kew
+import battle.entity.characters.maves.Maves
+import battle.entity.characters.murwan.Murwan
+import battle.entity.characters.ober.Ober
+import battle.entity.characters.peek.Peek
+import battle.entity.characters.wiewior.Wiewior
 import godot.global.GD
 import utils.helpers.math.formatted
 import utils.helpers.math.stdev
 
 /**
  * Stores the stats of each player battle.entity.character. Will mutate over the course of gameplay outside of
- * battles, and is immutable within battles.
+ * battles, and is immutable within battles. If a save file is present, the data stored there will replace
+ * the stats defined below.
  */
 @Suppress("SpellCheckingInspection")
 internal enum class PlayerCharacter(
 	/**
 	 * The display name of the character.
 	 */
-	internal var label: String = "default",
+	internal var label: String,
 
 	/**
 	 * The stats values of this character
@@ -62,10 +64,10 @@ internal enum class PlayerCharacter(
 	AJ(
 		label = "AJ",
 		stats = CharacterStats(
-			health = 24.0,
-			shield = 48.0,
-			power = 15.0,
-			agility = 3.0,
+			health = 33.0,
+			shield = 36.0,
+			power = 14.0,
+			agility = 4.0,
 			psijuPotency = 512.0,
 			psijuEfficacy = 5.0,
 		),
@@ -212,6 +214,7 @@ internal enum class PlayerCharacter(
 		override fun instantiate() = Dogman()
 	},
 
+	// Ordinal 10
 	PLACEHOLDER_10(
 		label = "Placeholder",
 		stats = CharacterStats(
@@ -226,6 +229,7 @@ internal enum class PlayerCharacter(
 		override fun instantiate() = TODO()
 	},
 
+	// Ordinal 11
 	MURWAN(
 		label = "Murwan",
 		stats = CharacterStats(
@@ -238,7 +242,23 @@ internal enum class PlayerCharacter(
 		),
 	) {
 		override fun instantiate() = Murwan()
-	};
+	},
+
+	// Ordinal 12
+	AELIZA(
+		label = "Aeliza",
+		stats = CharacterStats(
+			health = 9.0,
+			shield = 72.0,
+			power = 15.0,
+			agility = 8.0,
+			psijuPotency = 182.0,
+			psijuEfficacy = 12.0,
+		)
+	) {
+		override fun instantiate() = Aeliza()
+	},
+	;
 
 	/**
 	 * Loads the stats from a save file state.
@@ -286,8 +306,8 @@ internal enum class PlayerCharacter(
 					"| ${strHeuristics[i].formatted().padEnd(7)} " +
 						"${((strHeuristics[i] - strMean) / strStdev).formatted(digits = 4).padStart(7)}σ" +
 					"| ${psiHeuristics[i].formatted().padEnd(7)} " +
-						"${((psiHeuristics[i] - psiMean) / psiStdev).formatted(digits = 4).padStart(7)}σ" +
-					"| ${strHeuristics[i] + psiHeuristics[i]}"
+						"${((psiHeuristics[i] - psiMean) / psiStdev).formatted(digits = 4).padStart(7)}σ"
+//					+ "| ${strHeuristics[i] + psiHeuristics[i]}"
 				)
 			}
 		}

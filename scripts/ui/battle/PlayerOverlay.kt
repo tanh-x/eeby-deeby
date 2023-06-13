@@ -2,8 +2,8 @@ package ui.battle
 
 import battle.entity.AbstractEntity
 import battle.entity.AbstractEntityNode
-import battle.entity.character.AbstractCharacter
-import battle.entity.character.AbstractCharacterNode
+import battle.entity.characters.AbstractCharacter
+import battle.entity.characters.AbstractCharacterNode
 import godot.annotation.RegisterClass
 import godot.annotation.RegisterFunction
 

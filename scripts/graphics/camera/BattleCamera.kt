@@ -34,7 +34,7 @@ class BattleCamera : SmoothCamera() {
 
 		targetPosition = viewport.getMousePosition().linearInterpolate(
 			v = windowCenter,
-			t = 1 - CAMERA_FOLLOW_FACTOR - 0.005 * targetZoom.x.pow(-4.25)
+			t = 1 - CAMERA_FOLLOW_FACTOR - 0.004 * targetZoom.x.pow(-4.25)
 		)
 	}
 
@@ -57,9 +57,9 @@ class BattleCamera : SmoothCamera() {
 
 	companion object {
 		const val DFLT_ZOOM_FACTOR: Double = 0.8333
-		const val CAMERA_FOLLOW_FACTOR: Double = 0.004
+		const val CAMERA_FOLLOW_FACTOR: Double = 0.003
 		const val ZOOM_INCREMENT: Double = 0.015
 		const val MAX_ZOOM: Double = 2.0
-		const val MIN_ZOOM: Double = 0.5
+		const val MIN_ZOOM: Double = 0.4
 	}
 }

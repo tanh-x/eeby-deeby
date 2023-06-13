@@ -8,8 +8,8 @@ import battle.core.BattleScene
 import battle.entity.AbstractEntity
 import battle.entity.AbstractEntityNode
 import battle.entity.Vulnerable
-import battle.entity.character.AbstractCharacter
-import battle.entity.character.AbstractCharacterNode
+import battle.entity.characters.AbstractCharacter
+import battle.entity.characters.AbstractCharacterNode
 import gds.DragDrop
 import gds.GodotDataFactory
 import godot.Control

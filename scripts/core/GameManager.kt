@@ -9,7 +9,6 @@ import godot.annotation.RegisterClass
 import godot.annotation.RegisterFunction
 import godot.global.GD
 import utils.helpers.instantiateScene
-import utils.helpers.math.formatted
 
 /**
  * This global singleton is autoloaded by the Godot engine and is persistent throughout the game.
