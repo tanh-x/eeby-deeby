@@ -3,6 +3,7 @@ package battle.entity.characters
 import battle.entity.AbstractEntity
 import battle.entity.Active
 import battle.entity.Vulnerable
+import battle.entity.characternodes.AbstractCharacterNode
 import core.PlayerCharacter
 import utils.helpers.math.ramp
 

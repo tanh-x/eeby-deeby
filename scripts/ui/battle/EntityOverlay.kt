@@ -9,7 +9,7 @@ import battle.entity.AbstractEntity
 import battle.entity.AbstractEntityNode
 import battle.entity.Vulnerable
 import battle.entity.characters.AbstractCharacter
-import battle.entity.characters.AbstractCharacterNode
+import battle.entity.characternodes.AbstractCharacterNode
 import gds.DragDrop
 import gds.GodotDataFactory
 import godot.Control

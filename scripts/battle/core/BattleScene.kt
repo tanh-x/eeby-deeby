@@ -5,7 +5,7 @@ import battle.ai.RandomDecisionEngine
 import battle.entity.AbstractEntityNode
 import battle.entity.Vulnerable
 import battle.entity.characters.AbstractCharacter
-import battle.entity.characters.AbstractCharacterNode
+import battle.entity.characternodes.AbstractCharacterNode
 import battle.entity.enemy.AbstractEnemy
 import battle.entity.enemy.AbstractEnemyNode
 import battle.entity.enemy.EnemiesEnum
@@ -257,7 +257,7 @@ class BattleScene : Node2D() {
 
 	companion object {
 		@JvmStatic
-		val DEFAULT_CHARACTER_SCALE: Vector2 = Vector2(0.285, 0.285)
+		val DEFAULT_CHARACTER_SCALE: Vector2 = Vector2.ONE * 0.225
 
 		/**
 		 * Defines the position of each character.

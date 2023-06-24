@@ -3,7 +3,7 @@ package ui.battle
 import battle.entity.AbstractEntity
 import battle.entity.AbstractEntityNode
 import battle.entity.characters.AbstractCharacter
-import battle.entity.characters.AbstractCharacterNode
+import battle.entity.characternodes.AbstractCharacterNode
 import godot.annotation.RegisterClass
 import godot.annotation.RegisterFunction
 

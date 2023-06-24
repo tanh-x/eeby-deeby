@@ -25,8 +25,7 @@ internal sealed class Animator2D protected constructor(
 		private set
 
 	internal open fun redraw() {
-		if (complete) return
-		elapsedFrames++
+		if (!complete) elapsedFrames++
 	}
 
 	companion object {

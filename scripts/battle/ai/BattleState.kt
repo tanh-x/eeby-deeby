@@ -1,7 +1,7 @@
 package battle.ai
 
 import battle.entity.characters.AbstractCharacter
-import battle.entity.characters.AbstractCharacterNode
+import battle.entity.characternodes.AbstractCharacterNode
 import battle.entity.enemy.AbstractEnemy
 import battle.entity.enemy.AbstractEnemyNode
 
